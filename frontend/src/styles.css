@@ -1,0 +1,185 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Desi Muse — Dark Luxury Gold Design System */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-gold-dark: var(--gold-dark);
+  --color-ivory: var(--ivory);
+  --color-onyx: var(--onyx);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --icon-color: var(--muted-foreground);
+}
+
+:root {
+  --radius: 1.25rem;
+
+  /* Onyx black base */
+  --background: oklch(0.14 0.005 60);
+  --foreground: oklch(0.96 0.01 80);
+
+  --card: oklch(0.17 0.006 60);
+  --card-foreground: oklch(0.96 0.01 80);
+
+  --popover: oklch(0.17 0.006 60);
+  --popover-foreground: oklch(0.96 0.01 80);
+
+  /* Champagne gold primary */
+  --primary: oklch(0.78 0.11 82);
+  --primary-foreground: oklch(0.14 0.005 60);
+
+  --secondary: oklch(0.22 0.008 60);
+  --secondary-foreground: oklch(0.96 0.01 80);
+
+  --muted: oklch(0.2 0.006 60);
+  --muted-foreground: oklch(0.68 0.015 80);
+
+  --accent: oklch(0.24 0.012 70);
+  --accent-foreground: oklch(0.96 0.01 80);
+
+  --destructive: oklch(0.6 0.22 27);
+  --destructive-foreground: oklch(0.98 0 0);
+
+  --border: oklch(0.28 0.008 70 / 60%);
+  --input: oklch(0.24 0.008 70);
+  --ring: oklch(0.78 0.11 82);
+
+  --gold: oklch(0.82 0.13 82);
+  --gold-soft: oklch(0.88 0.08 85);
+  --gold-dark: oklch(0.62 0.12 75);
+  --ivory: oklch(0.96 0.015 82);
+  --onyx: oklch(0.1 0.005 60);
+
+  --sidebar: oklch(0.12 0.005 60);
+  --sidebar-foreground: oklch(0.9 0.01 80);
+  --sidebar-primary: oklch(0.78 0.11 82);
+  --sidebar-primary-foreground: oklch(0.14 0.005 60);
+  --sidebar-accent: oklch(0.2 0.008 60);
+  --sidebar-accent-foreground: oklch(0.96 0.01 80);
+  --sidebar-border: oklch(0.28 0.008 70 / 60%);
+  --sidebar-ring: oklch(0.78 0.11 82);
+
+  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --icon-color: var(--muted-foreground);
+
+  --button-gradient-start: var(--gold-soft);
+  --button-gradient-end: var(--gold-dark);
+  --button-foreground: var(--onyx);
+
+  --gradient-gold: linear-gradient(
+    135deg,
+    var(--button-gradient-start),
+    var(--button-gradient-end)
+  );
+  --gradient-hero: linear-gradient(180deg, oklch(0.14 0.005 60 / 0), oklch(0.1 0.005 60 / 0.9));
+  --shadow-gold: 0 10px 40px -12px color-mix(in srgb, var(--gold) 35%, transparent);
+  --shadow-luxe: 0 20px 60px -20px oklch(0 0 0 / 0.6);
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    min-height: 100vh;
+  }
+  svg:not([class*="text-"]) {
+    color: var(--icon-color);
+  }
+  button svg,
+  a svg {
+    color: currentColor;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--onyx);
+  }
+}
+
+@utility text-gold-gradient {
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold-gradient {
+  background: var(--gradient-gold);
+  color: var(--button-foreground) !important;
+}
+
+@utility text-button-foreground {
+  color: var(--button-foreground);
+}
+
+@utility hairline {
+  border-top: 1px solid var(--color-border);
+}
+
+@utility card-luxe {
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-luxe);
+}

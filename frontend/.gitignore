@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next/
+/out/
+
+# production
+/dist/
+/build/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# env files (keep NEXT_PUBLIC_ vars in an allowed file if needed)
+.env*.local
+
+# typescript
+*.tsbuildinfo
+# OpenNext
+.open-next
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
