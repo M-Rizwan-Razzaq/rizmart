@@ -21,7 +21,7 @@ import {
 } from "../schemas/product.schema";
 
 export class CreateProductDto {
-  @ApiProperty({ example: "Aurea Solitaire Ring" })
+  @ApiProperty({ example: "Premium Laptop Backpack" })
   @IsString()
   @IsNotEmpty()
   name: string;
@@ -43,7 +43,7 @@ export class CreateProductDto {
   @Type(() => Number)
   discountPrice?: number;
 
-  @ApiPropertyOptional({ type: [String], example: ["/uploads/ring.jpg"] })
+  @ApiPropertyOptional({ type: [String], example: ["/uploads/backpack.jpg"] })
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
@@ -78,13 +78,13 @@ export class CreateProductDto {
   description: string;
 
   @ApiPropertyOptional({
-    example: { Metal: "18K Gold", Stone: "0.6ct Diamond" },
+    example: { Material: "Leather", Capacity: "20L" },
   })
   @IsOptional()
   @IsObject()
   specifications?: Record<string, string>;
 
-  @ApiPropertyOptional({ type: [String], example: ["diamond", "gold"] })
+  @ApiPropertyOptional({ type: [String], example: ["backpack", "leather"] })
   @IsOptional()
   @IsArray()
   @IsString({ each: true })

@@ -1,7 +1,7 @@
-export const BRAND = "Desi Muse";
+export const BRAND = "RizMart";
 
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/desimuse.pk/",
+  instagram: "https://www.instagram.com/rizmart.pk/",
   facebook: "https://www.facebook.com/profile.php?id=61591588391481",
   whatsapp: "923104229928",
 };

@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "@/lib/router";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Truck, Gem, RotateCcw } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck, Package, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
 const heroImg1 = "/BG.png";
 import { ProductCard } from "@/features/shop/components/ProductCard";
@@ -73,13 +73,15 @@ export default function HomePage() {
   const getCategoryImage = (name: string) => {
     const normalized = name.trim().toLowerCase();
     const imagePath =
-      normalized === "rings"
+      normalized.includes("laptop")
         ? brand?.homeCategoryImageRings
-        : normalized === "necklaces"
+        : normalized.includes("backpack") || normalized.includes("school")
           ? brand?.homeCategoryImageNecklaces
-          : normalized === "braceletes" || normalized === "bracelets"
+          : normalized.includes("travel")
             ? brand?.homeCategoryImageBraceletes
-            : normalized === "earrings"
+            : normalized.includes("hand") ||
+              normalized.includes("shoulder") ||
+              normalized.includes("crossbody")
               ? brand?.homeCategoryImageEarrings
               : "";
 
@@ -94,7 +96,7 @@ export default function HomePage() {
         {!brandLoading && (
           <img
             src={heroFailed ? heroImg1 : dynamicHero || heroImg1}
-            alt={dynamicHero ? "Luxury jewelry" : ""}
+            alt="RizMart bags hero image"
             width={1600}
             height={1200}
             onLoad={() => setHeroLoaded(true)}
@@ -117,19 +119,19 @@ export default function HomePage() {
               Collection · {new Date().getFullYear()}
             </div>
             <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[0.95] mb-4 sm:mb-6">
-              Forged in <span className="text-gold-gradient">Gold</span>,<br /> Made to Last.
+              Carry More.<br />Move Better.
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg max-w-lg mb-6 sm:mb-8">
-              DesiMuse is Pakistan's destination for fine jewellery — gold, silver and
-              rose-gold rings, necklaces, bracelets and watches, designed in-house and
-              finished by hand.
+              RizMart is Pakistan's destination for premium bags - laptop bags, backpacks,
+              school bags, travel bags and crossbody styles designed for work, study and everyday
+              life.
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link
                 to="/shop"
                 className="group inline-flex items-center gap-3 bg-gold-gradient text-onyx px-6 sm:px-8 py-3 sm:py-4 text-xs tracking-[0.25em] uppercase font-medium rounded-[20px]"
               >
-                Shop Collection{" "}
+                Shop Bags{" "}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
               </Link>
               <Link
@@ -148,8 +150,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
           {[
             { icon: Truck, label: "Insured Shipping" },
-            { icon: ShieldCheck, label: "Lifetime Warranty" },
-            { icon: Gem, label: "Ethically Sourced" },
+            { icon: ShieldCheck, label: "Built to Last" },
+            { icon: Package, label: "Smart Compartments" },
             { icon: RotateCcw, label: "30-Day Returns" },
           ].map((f, i) => (
             <div
@@ -171,7 +173,7 @@ export default function HomePage() {
           <SectionHeading
             eyebrow="The Collection"
             title="Shop by Category"
-            description="Curated categories, each a study in craft."
+            description="Curated bags for work, study, travel and everyday carry."
           />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {categories.slice(0, 4).map((c) => {
@@ -207,7 +209,7 @@ export default function HomePage() {
 
       {/* FEATURED */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
-        <SectionHeading eyebrow="Signature" title="Featured Pieces" />
+        <SectionHeading eyebrow="Signature" title="Featured Bags" />
         {fl ? (
           <PageSpinner />
         ) : (
@@ -224,13 +226,13 @@ export default function HomePage() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center">
           <div className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">Craftsmanship</div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-6xl leading-tight mb-6 sm:mb-8">
-            "Every piece begins as a sketch and ends in the hands of a single master jeweler."
+            "Every bag begins with a carry need and ends up in daily rotation."
           </h2>
           <Link
             to="/about"
             className="inline-flex items-center gap-2 text-gold hover:text-gold-soft transition text-sm tracking-[0.2em] uppercase"
           >
-            Discover our atelier <ArrowRight className="h-4 w-4" />
+            Discover our collection <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
@@ -274,7 +276,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Membership"
           title="Join the Circle"
-          description="First access to new arrivals, private events and gifts. No noise, ever."
+          description="First access to new arrivals, restocks and private offers. No noise, ever."
         />
         <form
           onSubmit={handleSubscribe}

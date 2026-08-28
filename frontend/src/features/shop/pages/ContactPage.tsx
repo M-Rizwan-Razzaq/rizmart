@@ -56,7 +56,7 @@ export default function ContactPage() {
           {[
             { i: Mail, t: "Email", v: contactEmail },
             { i: Phone, t: "Phone", v: contactPhone },
-            { i: MapPin, t: "Atelier", v: atelier },
+            { i: MapPin, t: "Studio", v: atelier },
           ].map((c) => (
             <div key={c.t} className="flex items-start gap-4 border border-border/60 p-5 sm:p-6">
               <c.i className="h-5 w-5 text-gold mt-1 shrink-0" />

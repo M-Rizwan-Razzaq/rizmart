@@ -63,7 +63,7 @@ type NotificationOrder = {
 export class NotificationService {
   private readonly logger = new Logger(NotificationService.name);
   private transporter?: Transporter;
-  private readonly brandName = "Desi Muse";
+  private readonly brandName = "RizMart";
 
   constructor(private readonly configService: ConfigService) {}
 
@@ -305,7 +305,7 @@ export class NotificationService {
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "User-Agent": "Desi Muse Backend",
+        "User-Agent": "RizMart Backend",
       },
       body: JSON.stringify({
         from,

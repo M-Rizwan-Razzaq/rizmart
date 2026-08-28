@@ -18,6 +18,18 @@ import { useGetCategoriesQuery } from "@/store/services/categoriesApi";
 import api from "@/lib/api";
 import { getImageUrl } from "@/lib/constants";
 
+const BAG_MATERIAL_OPTIONS = [
+  "leather",
+  "faux-leather",
+  "canvas",
+  "nylon",
+  "polyester",
+  "suede",
+  "vegan-leather",
+] as const;
+
+const LEGACY_MATERIAL_OPTIONS = ["gold", "silver", "rose-gold", "black"] as const;
+
 type Props = {
   open: boolean;
   onOpenChange: (v: boolean) => void;
@@ -65,7 +77,7 @@ function toForm(p: ApiProduct | null, defaultCategoryId: string): FormState {
       discountPrice: "",
       category: defaultCategoryId,
       gender: "unisex",
-      material: "gold",
+      material: "leather",
       style: "luxury",
       stock: 0,
       description: "",
@@ -393,9 +405,12 @@ export function ProductFormModal({ open, onOpenChange, product }: Props) {
               value={form.material}
               onChange={(e) => set("material", e.target.value as ApiProduct["material"])}
             >
-              {["gold", "silver", "rose-gold", "black"].map((m) => (
+              {[...BAG_MATERIAL_OPTIONS, ...LEGACY_MATERIAL_OPTIONS].map((m) => (
                 <option key={m} value={m}>
-                  {m}
+                  {m
+                    .split("-")
+                    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+                    .join(" ")}
                 </option>
               ))}
             </Select>
@@ -417,20 +432,20 @@ export function ProductFormModal({ open, onOpenChange, product }: Props) {
             <TextInput
               value={form.tags}
               onChange={(e) => set("tags", e.target.value)}
-              placeholder="gold, ring, engagement"
+              placeholder="leather, backpack, travel"
             />
           </Field>
 
           <div className="md:col-span-2">
             <div className="flex items-center justify-between gap-3 mb-3">
               <div>
-                <div className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
-                  Specifications
+                  <div className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+                    Specifications
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    Add custom key/value details like material, capacity, compartment count, or size.
+                  </p>
                 </div>
-                <p className="text-xs text-muted-foreground">
-                  Add custom key/value details like metal type, stone, or size.
-                </p>
-              </div>
               <button
                 type="button"
                 onClick={addSpecification}

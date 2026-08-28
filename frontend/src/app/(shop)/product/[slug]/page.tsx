@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: product.name,
     description:
       product.description ||
-      `Buy ${product.name} online in Pakistan — crafted by Desi Muse with complimentary insured shipping and lifetime warranty.`,
+      `Buy ${product.name} online in Pakistan — crafted by RizMart with complimentary insured shipping and a lifetime quality promise.`,
     path: `/product/${product.slug}`,
     image: getImageUrl(product.images[0]),
     type: "product",
@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: { canonical: seo.url },
     robots: { index: true, follow: true },
     openGraph: {
-      siteName: "Desi Muse",
+      siteName: "RizMart",
       title: seo.title,
       description: seo.description,
       url: seo.url,
@@ -63,7 +63,7 @@ export default async function Page({ params }: Props) {
       image: [image],
       description: product.description,
       sku: product.sku,
-      brand: { "@type": "Brand", name: "Desi Muse" },
+      brand: { "@type": "Brand", name: "RizMart" },
       offers: {
         "@type": "Offer",
         url: `${SITE_URL}/product/${product.slug}`,

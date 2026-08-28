@@ -7,42 +7,42 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.desimuse.store"),
-  title: "Desi Muse — Jewellery Store in Pakistan | Buy Gold & Silver Jewellery Online",
+  metadataBase: new URL("https://www.rizmart.store"),
+  title: "RizMart — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online",
   description:
-    "Desi Muse is a Pakistani jewellery store selling fine gold, silver and rose-gold rings, necklaces, bracelets and watches online. Complimentary insured shipping across Pakistan and a lifetime craftsmanship warranty.",
-  icons: "/DesiMuseIcon.png",
+    "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.",
+  icons: "/rizmart-icon.svg",
   alternates: {
-    canonical: "https://www.desimuse.store/",
+    canonical: "https://www.rizmart.store/",
   },
   openGraph: {
-    siteName: "Desi Muse",
+    siteName: "RizMart",
     type: "website",
-    title: "Desi Muse — Jewellery Store in Pakistan | Buy Gold & Silver Jewellery Online",
+    title: "RizMart — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online",
     description:
-      "Desi Muse is a Pakistani jewellery store selling fine gold, silver and rose-gold rings, necklaces, bracelets and watches online. Complimentary insured shipping across Pakistan and a lifetime craftsmanship warranty.",
-    url: "https://www.desimuse.store/",
+      "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.",
+    url: "https://www.rizmart.store/",
     locale: "en_US",
-    images: ["/og-image.png"],
+    images: ["/og-image.svg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Desi Muse — Jewellery Store in Pakistan | Buy Gold & Silver Jewellery Online",
+    title: "RizMart — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online",
     description:
-      "Desi Muse is a Pakistani jewellery store selling fine gold, silver and rose-gold rings, necklaces, bracelets and watches online. Complimentary insured shipping across Pakistan and a lifetime craftsmanship warranty.",
-    images: ["/og-image.png"],
+      "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.",
+    images: ["/og-image.svg"],
   },
 };
 
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Desi Muse",
-  alternateName: "DesiMuse",
-  url: "https://www.desimuse.store",
-  logo: "https://www.desimuse.store/og-image.png",
+  name: "RizMart",
+  alternateName: "RizMart",
+  url: "https://www.rizmart.store",
+  logo: "https://www.rizmart.store/rizmart-icon.svg",
   sameAs: [
-    "https://www.instagram.com/desimuse.pk/",
+    "https://www.instagram.com/rizmart.pk/",
     "https://www.facebook.com/profile.php?id=61591588391481",
   ],
 };

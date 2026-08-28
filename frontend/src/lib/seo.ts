@@ -2,11 +2,11 @@ import { BRAND } from "@/lib/constants";
 
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "https://www.desimuse.store";
+  "https://www.rizmart.store";
 
 export const SITE_NAME = BRAND;
 
-export const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;
+export const DEFAULT_IMAGE = `${SITE_URL}/og-image.svg`;
 
 export type SeoJsonLd = Record<string, unknown>;
 
@@ -27,10 +27,10 @@ export function buildSeo(input: SeoInput = {}) {
   const url = `${SITE_URL}${path}`;
   const title = input.title
     ? `${input.title} | ${SITE_NAME}`
-    : `${SITE_NAME} — Jewellery Store in Pakistan | Buy Gold & Silver Jewellery Online`;
+    : `${SITE_NAME} — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online`;
   const description =
     input.description ??
-    "Desi Muse is a Pakistani jewellery store selling fine gold, silver and rose-gold rings, necklaces, bracelets and watches online. Complimentary insured shipping across Pakistan and a lifetime craftsmanship warranty.";
+    "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.";
   const image = input.image || DEFAULT_IMAGE;
 
   return {

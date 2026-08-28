@@ -22,12 +22,12 @@ export default function WishlistPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-20 sm:py-32 text-center">
         <h1 className="font-display text-4xl sm:text-5xl mb-4">Your wishlist is empty</h1>
-        <p className="text-muted-foreground mb-8">Save the pieces you love for later.</p>
+        <p className="text-muted-foreground mb-8">Save the bags you love for later.</p>
         <Link
           to="/shop"
           className="inline-block bg-gold-gradient text-onyx px-8 py-4 text-xs tracking-[0.25em] uppercase font-medium"
         >
-          Shop Collection
+          Shop Bags
         </Link>
       </div>
     );

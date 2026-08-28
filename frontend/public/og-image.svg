@@ -1,0 +1,52 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RizMart social preview">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F1EA" />
+      <stop offset="1" stop-color="#EEDFC8" />
+    </linearGradient>
+    <linearGradient id="gold" x1="240" y1="120" x2="520" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F0D7A0" />
+      <stop offset="0.55" stop-color="#D8B46B" />
+      <stop offset="1" stop-color="#B98D3F" />
+    </linearGradient>
+    <filter id="shadow" x="180" y="70" width="380" height="490" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feOffset dy="24" />
+      <feGaussianBlur stdDeviation="22" />
+      <feColorMatrix values="0 0 0 0 0.47 0 0 0 0 0.37 0 0 0 0 0.23 0 0 0 0.18 0" />
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <circle cx="1060" cy="120" r="176" fill="#D8B46B" opacity="0.08" />
+  <circle cx="132" cy="552" r="140" fill="#B98D3F" opacity="0.08" />
+  <g filter="url(#shadow)">
+    <rect x="116" y="110" width="380" height="380" rx="64" fill="#FFF9F2" />
+  </g>
+  <rect x="116" y="110" width="380" height="380" rx="64" stroke="#DCC9B2" stroke-width="2" />
+  <path d="M228 195C228 156.399 259.399 125 298 125H314C352.601 125 384 156.399 384 195V206H354V195C354 173.461 336.539 156 315 156H297C275.461 156 258 173.461 258 195V206H228V195Z" fill="url(#gold)" />
+  <path d="M210 214C210 202.954 218.954 194 230 194H386C397.046 194 406 202.954 406 214V334C406 367.137 379.137 394 346 394H270C236.863 394 210 367.137 210 334V214Z" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linejoin="round" />
+  <path d="M242 252H360" stroke="#D8B46B" stroke-width="8" stroke-linecap="round" opacity="0.6" />
+  <path d="M242 294H360" stroke="#D8B46B" stroke-width="8" stroke-linecap="round" opacity="0.36" />
+  <path d="M242 336H326" stroke="#D8B46B" stroke-width="8" stroke-linecap="round" opacity="0.22" />
+  <text x="298" y="318" text-anchor="middle" fill="#B98D3F" font-family="Cormorant Garamond, Georgia, serif" font-size="96" font-weight="600" letter-spacing="6">RM</text>
+  <text x="298" y="378" text-anchor="middle" fill="#7B6043" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="7">RIZMART</text>
+
+  <text x="592" y="178" fill="#7B6043" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600" letter-spacing="8">PAKISTAN BAGS STORE</text>
+  <text x="592" y="260" fill="#241F19" font-family="Cormorant Garamond, Georgia, serif" font-size="88" font-weight="600">Carry More.</text>
+  <text x="592" y="338" fill="#241F19" font-family="Cormorant Garamond, Georgia, serif" font-size="88" font-weight="600">Move Better.</text>
+  <text x="592" y="396" fill="#5E4C3A" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="400">
+    Laptop bags, backpacks, travel bags, handbags and crossbody styles.
+  </text>
+
+  <g>
+    <rect x="592" y="450" width="166" height="42" rx="21" fill="#FFF9F2" stroke="#D8B46B" stroke-width="1.5" />
+    <text x="675" y="477" text-anchor="middle" fill="#7B6043" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Work</text>
+    <rect x="774" y="450" width="176" height="42" rx="21" fill="#FFF9F2" stroke="#D8B46B" stroke-width="1.5" />
+    <text x="862" y="477" text-anchor="middle" fill="#7B6043" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Travel</text>
+    <rect x="966" y="450" width="150" height="42" rx="21" fill="#FFF9F2" stroke="#D8B46B" stroke-width="1.5" />
+    <text x="1041" y="477" text-anchor="middle" fill="#7B6043" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="600">Daily</text>
+  </g>
+
+  <text x="592" y="550" fill="#241F19" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="500">
+    Complimentary insured shipping across Pakistan
+  </text>
+</svg>

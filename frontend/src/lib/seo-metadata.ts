@@ -38,7 +38,7 @@ export function toMetadata(input: SeoInput = {}): Metadata {
   };
 }
 
-const SITE_NAME = "Desi Muse";
+const SITE_NAME = "RizMart";
 
 // Route-level metadata for pages that must remain `"use client"` (client-only
 // libs/state), so they can't export `metadata` themselves. Each route's server
@@ -52,14 +52,14 @@ export const accountMetadata: Metadata = toMetadata({
 export const loginMetadata: Metadata = toMetadata({
   title: "Sign In",
   description:
-    "Sign in to your Desi Muse account to track orders, save favorites and manage your details.",
+    "Sign in to your RizMart account to track orders, save favorites and manage your details.",
   path: "/login",
 });
 
 export const registerMetadata: Metadata = toMetadata({
   title: "Create Account",
   description:
-    "Join Desi Muse — create an account for first access to new arrivals, private events and faster checkout.",
+    "Join RizMart — create an account for first access to new arrivals, private offers and faster checkout.",
   path: "/register",
 });
 

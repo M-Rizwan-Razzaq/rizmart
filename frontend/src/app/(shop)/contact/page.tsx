@@ -4,7 +4,7 @@ import { toMetadata } from "@/lib/seo-metadata";
 export const metadata: Metadata = toMetadata({
   title: "Contact Us",
   description:
-    "Contact the Desi Muse jewellery store in Pakistan — questions about orders, custom gold and silver commissions and our lifetime craftsmanship warranty.",
+    "Contact the RizMart bags store in Pakistan — questions about orders, custom bags and our lifetime quality promise.",
   path: "/contact",
 });
 

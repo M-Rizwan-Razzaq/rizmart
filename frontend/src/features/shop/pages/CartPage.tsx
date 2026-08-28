@@ -24,13 +24,13 @@ export default function CartPage() {
       <div className="mx-auto max-w-2xl px-4 sm:px-6 py-20 sm:py-32 text-center">
         <h1 className="font-display text-4xl sm:text-5xl mb-4">Your bag is empty</h1>
         <p className="text-muted-foreground mb-8">
-          Explore the collection and find your next heirloom.
+          Explore the collection and find your next carry-all.
         </p>
         <Link
           to="/shop"
           className="inline-flex items-center gap-3 bg-gold-gradient text-onyx px-8 py-4 text-xs tracking-[0.25em] uppercase font-medium"
         >
-          Shop Collection <ArrowRight className="h-4 w-4" />
+          Shop Bags <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     );

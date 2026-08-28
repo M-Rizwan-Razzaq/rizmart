@@ -8,16 +8,16 @@ export class BrandSettings {
   @Prop({ required: true, default: "global", unique: true })
   key: string;
 
-  @Prop({ required: false, default: "Desi Muse" })
+  @Prop({ required: false, default: "RizMart" })
   appName?: string;
 
-  @Prop({ required: false, default: "desimuse.pk@gmail.com" })
+  @Prop({ required: false, default: "rizmart.pk@gmail.com" })
   contactEmail?: string;
 
-  @Prop({ required: false, default: "+1 (212) 555-0143" })
+  @Prop({ required: false, default: "+92 310 4229928" })
   contactPhone?: string;
 
-  @Prop({ required: false, default: "18 Via Montenapoleone, Milan, Italy" })
+  @Prop({ required: false, default: "Karachi, Pakistan" })
   atelier?: string;
 
   @Prop({ required: false, default: "" })

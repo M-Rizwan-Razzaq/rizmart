@@ -27,20 +27,14 @@ export function Navbar() {
     color: "var(--muted-foreground)",
   } as const;
 
-  const navItems = [
-    { to: "/shop", label: "Shop" },
-    { to: "/shop?gender=women", label: "Women" },
-    { to: "/shop?gender=men", label: "Men" },
-    { to: "/about", label: "About" },
-    { to: "/contact", label: "Contact" },
-  ];
-
   const isActive = (to: string) => {
     const [path, query] = to.split("?");
     if (location.pathname !== path) return false;
     if (!query) return location.pathname === path;
     return location.search === `?${query}`;
   };
+
+  const primaryCategories = categories.slice(0, 3);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
@@ -49,7 +43,7 @@ export function Navbar() {
           className="mx-auto max-w-7xl px-6 py-2 text-center text-[11px] tracking-[0.25em] uppercase"
           style={{ color: "var(--muted-foreground)" }}
         >
-          Complimentary Insured Shipping · Lifetime Craftsmanship Warranty
+          Complimentary Insured Shipping · Built for the Journey
         </div>
       </div>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
@@ -68,20 +62,44 @@ export function Navbar() {
           {appName}
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-10 text-sm">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                `transition-colors ${
-                  isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"
-                }`
-              }
+        <nav className="hidden lg:flex items-center gap-6 text-sm">
+          <NavLink
+            to="/shop"
+            className={({ isActive }) =>
+              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
+            }
+          >
+            Shop
+          </NavLink>
+          {primaryCategories.map((category) => (
+            <Link
+              key={category._id}
+              to={`/shop?category=${category._id}`}
+              className={`transition-colors ${
+                isActive(`/shop?category=${category._id}`)
+                  ? "text-gold"
+                  : "hover:text-gold/90 text-foreground/90"
+              }`}
             >
-              {item.label}
-            </NavLink>
+              {category.name}
+            </Link>
           ))}
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
+            }
+          >
+            About
+          </NavLink>
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
+            }
+          >
+            Contact
+          </NavLink>
         </nav>
 
         <div className="flex items-center gap-4">
@@ -143,22 +161,28 @@ export function Navbar() {
                 {c.name}
               </Link>
             ))}
-            {navItems
-              .filter((item) => item.to === "/about" || item.to === "/contact")
-              .map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  onClick={() => setOpen(false)}
-                  className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
-                    isActive(item.to)
-                      ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
-                      : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
+            <Link
+              to="/about"
+              onClick={() => setOpen(false)}
+              className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
+                isActive("/about")
+                  ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
+                  : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
+              }`}
+            >
+              About
+            </Link>
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
+                isActive("/contact")
+                  ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
+                  : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
+              }`}
+            >
+              Contact
+            </Link>
           </nav>
         </div>
       )}

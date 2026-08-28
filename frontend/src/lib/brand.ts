@@ -12,10 +12,10 @@ export type BrandSettings = {
 };
 
 export const DEFAULT_BRAND_FORM: BrandSettings = {
-  appName: "Desi Muse",
-  contactEmail: "desimuse.pk@gmail.com",
-  contactPhone: "+1 (212) 555-0143",
-  atelier: "18 Via Montenapoleone, Milan, Italy",
+  appName: "RizMart",
+  contactEmail: "rizmart.pk@gmail.com",
+  contactPhone: "+92 310 4229928",
+  atelier: "Karachi, Pakistan",
   homeMainImage: "",
   homeCategoryImageRings: "",
   homeCategoryImageNecklaces: "",
@@ -46,7 +46,7 @@ export const THEME_BRAND_FIELDS: Array<{
   },
   {
     key: "atelier",
-    label: "Atelier",
+    label: "Studio Address",
     description: "Displayed on the contact page and about page.",
   },
 ];
@@ -63,23 +63,23 @@ export const THEME_BRAND_IMAGE_FIELDS: Array<{
   },
   {
     key: "homeCategoryImageRings",
-    label: "Home Category Image - Rings",
-    description: "Shown in the Rings category card on the homepage.",
+    label: "Home Category Image - Laptop Bags",
+    description: "Shown in the Laptop Bags category card on the homepage.",
   },
   {
     key: "homeCategoryImageNecklaces",
-    label: "Home Category Image - Necklaces",
-    description: "Shown in the Necklaces category card on the homepage.",
+    label: "Home Category Image - Backpacks",
+    description: "Shown in the Backpacks category card on the homepage.",
   },
   {
     key: "homeCategoryImageBraceletes",
-    label: "Home Category Image - Braceletes",
-    description: "Shown in the Braceletes category card on the homepage.",
+    label: "Home Category Image - Travel Bags",
+    description: "Shown in the Travel Bags category card on the homepage.",
   },
   {
     key: "homeCategoryImageEarrings",
-    label: "Home Category Image - Earrings",
-    description: "Shown in the Earrings category card on the homepage.",
+    label: "Home Category Image - Hand Bags",
+    description: "Shown in the Hand Bags category card on the homepage.",
   },
   {
     key: "aboutUsImage",

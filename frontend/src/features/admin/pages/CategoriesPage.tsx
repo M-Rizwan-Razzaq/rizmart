@@ -53,7 +53,7 @@ export default function CategoriesPage() {
               <tr>
                 <th className="p-4">Name</th>
                 <th className="p-4">Slug</th>
-                <th className="p-4">Gender</th>
+                <th className="p-4">Audience</th>
                 <th className="p-4">Status</th>
                 <th className="p-4 text-right">Actions</th>
               </tr>

@@ -245,7 +245,7 @@ export default function ProductPage() {
                     <div>
                       <h3 className="font-display text-xl">Write a review</h3>
                       <p className="text-sm text-muted-foreground">
-                        Share your experience with this piece.
+                        Share your experience with this bag.
                       </p>
                     </div>
                     <Button
@@ -328,7 +328,7 @@ export default function ProductPage() {
                             onChange={(e) => setReviewComment(e.target.value)}
                             rows={4}
                             className="mt-1 w-full rounded-xl border border-border bg-input px-4 py-3 text-sm focus:outline-none focus:border-gold"
-                            placeholder="Share your experience with this product..."
+                            placeholder="Share your experience with this bag..."
                           />
                         </label>
                         <div className="flex justify-end">
@@ -370,7 +370,7 @@ export default function ProductPage() {
 
       {related.length > 0 && (
         <section className="mt-16 sm:mt-24">
-          <h2 className="font-display text-2xl sm:text-3xl mb-6 sm:mb-8">You May Also Love</h2>
+          <h2 className="font-display text-2xl sm:text-3xl mb-6 sm:mb-8">You May Also Like</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             {related.map((p) => (
               <ProductCard key={p._id} product={p} />

@@ -50,8 +50,8 @@ export function Footer() {
             {appName}
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Timeless jewelry crafted with obsession. Each piece is designed in-house and finished by
-            hand.
+            Premium bags designed for work, travel and everyday carry. Each piece is built with
+            thoughtful structure and lasting detail.
           </p>
           <div className="flex gap-3 mt-6">
             <a
@@ -79,17 +79,20 @@ export function Footer() {
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
               <Link to="/shop" className="hover:text-gold">
-                All Jewelry
+                All Bags
               </Link>
             </li>
             <li>
-              <Link to="/shop">Rings</Link>
+              <Link to="/shop">Laptop Bags</Link>
             </li>
             <li>
-              <Link to="/shop">Necklaces</Link>
+              <Link to="/shop">Backpacks</Link>
             </li>
             <li>
-              <Link to="/shop">Watches</Link>
+              <Link to="/shop">Travel Bags</Link>
+            </li>
+            <li>
+              <Link to="/shop">Hand Bags</Link>
             </li>
           </ul>
         </div>
@@ -138,7 +141,7 @@ export function Footer() {
         <div>
           <h4 className="text-sm tracking-[0.2em] uppercase text-gold mb-4">Newsletter</h4>
           <p className="text-sm text-muted-foreground mb-3">
-            First access to new arrivals and private events.
+            First access to new arrivals and private offers.
           </p>
           <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
             <div className="flex gap-2">

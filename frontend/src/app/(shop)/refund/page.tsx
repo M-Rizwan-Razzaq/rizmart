@@ -3,7 +3,7 @@ import { toMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = toMetadata({
   title: "Refund Policy",
-  description: "Desi Muse refund and return policy — unworn pieces may be returned within 30 days.",
+  description: "RizMart refund and return policy — unused bags may be returned within 30 days.",
   path: "/refund",
 });
 

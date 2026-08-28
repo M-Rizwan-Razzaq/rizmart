@@ -8,7 +8,7 @@ export class SendPromotionDto {
   @MinLength(3)
   subject: string;
 
-  @ApiProperty({ example: "Enjoy 15% off selected jewelry this weekend." })
+  @ApiProperty({ example: "Enjoy 15% off selected bags this weekend." })
   @IsString()
   @IsNotEmpty()
   @MinLength(10)

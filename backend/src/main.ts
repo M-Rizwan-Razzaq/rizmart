@@ -19,12 +19,6 @@ async function bootstrap() {
     origin: [
       "http://localhost:5173",
       "http://localhost:3001",
-      "https://desimuse.vercel.app",
-      "https://luxora-jewel-hub-frontend.onrender.com",
-      "https://www.desimuse.store",
-      "https://desimuse.store",
-      "https://luxora-jewel-hub-1.onrender.com",
-      "https://luxora-jewel-hub.ar2148085.workers.dev",
     ],
     credentials: true,
   });
@@ -53,9 +47,9 @@ async function bootstrap() {
 
   // Swagger API documentation
   const swaggerConfig = new DocumentBuilder()
-    .setTitle("Desi Muse API")
+    .setTitle("RizMart API")
     .setDescription(
-      "REST API for Desi Muse Jewelry E-commerce — authentication, products, orders, reviews, wishlist & admin dashboard",
+      "REST API for RizMart Bags E-commerce — authentication, products, orders, reviews, wishlist & admin dashboard",
     )
     .setVersion("1.0")
     .addBearerAuth()
@@ -79,7 +73,7 @@ async function bootstrap() {
   });
 
   await app.listen(port);
-  console.log(`🚀 Desi Muse API running on http://localhost:${port}/api`);
+  console.log(`🚀 RizMart API running on http://localhost:${port}/api`);
   console.log(`📚 Swagger docs  → http://localhost:${port}/api/docs`);
 }
 

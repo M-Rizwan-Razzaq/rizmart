@@ -8,7 +8,7 @@ import { useGetBrandSettingsQuery } from "@/store/services/brandApi";
 const buildFaqs = (appName: string) => [
   {
     q: "What is your return policy?",
-    a: "You may return any unworn piece within 30 days for a full refund. Custom orders are final sale.",
+    a: "You may return any unused bag within 30 days for a full refund. Custom or monogrammed orders are final sale.",
   },
   {
     q: "Is shipping insured?",
@@ -16,15 +16,15 @@ const buildFaqs = (appName: string) => [
   },
   {
     q: "Do you offer a warranty?",
-    a: `Every ${appName} piece carries a lifetime craftsmanship warranty covering manufacturing defects.`,
+    a: `Every ${appName} bag carries a lifetime workmanship warranty covering stitching, seams and hardware defects.`,
   },
   {
     q: "Are your materials ethically sourced?",
-    a: "We use 100% recycled precious metals and conflict-free stones from partners we've worked with for decades.",
+    a: "We use durable materials like leather, canvas, nylon and reinforced linings selected for everyday carry.",
   },
   {
-    q: "Can I request a custom piece?",
-    a: "Yes. Contact our concierge to begin a bespoke commission.",
+    q: "Can I request a custom bag?",
+    a: "Yes. Contact our team to discuss monogramming, bulk orders or custom sizing.",
   },
   {
     q: "What payment methods do you accept?",

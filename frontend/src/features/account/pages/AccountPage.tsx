@@ -302,7 +302,7 @@ export default function AccountPage() {
                 {wishlistIds.length === 0 ? (
                   <div className="text-center py-12">
                     <Heart className="h-10 w-10 text-gold mx-auto mb-4" />
-                    <p className="text-muted-foreground mb-4">You haven't saved any pieces yet.</p>
+                    <p className="text-muted-foreground mb-4">You haven't saved any bags yet.</p>
                     <Link
                       to="/shop"
                       className="bg-gold-gradient text-onyx px-6 py-3 text-xs tracking-[0.25em] uppercase font-medium"

@@ -10,6 +10,14 @@ export enum ProductGender {
 }
 
 export enum ProductMaterial {
+  LEATHER = "leather",
+  FAUX_LEATHER = "faux-leather",
+  CANVAS = "canvas",
+  NYLON = "nylon",
+  POLYESTER = "polyester",
+  SUEDE = "suede",
+  VEGAN_LEATHER = "vegan-leather",
+  // Legacy materials kept for compatibility with existing records.
   GOLD = "gold",
   SILVER = "silver",
   ROSE_GOLD = "rose-gold",

@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Desi Muse — Dark Luxury Gold Design System */
+/* RizMart — Premium Bags Design System */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

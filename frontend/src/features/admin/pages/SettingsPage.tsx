@@ -266,7 +266,7 @@ export default function SettingsPage() {
             </p>
             <h3 className="font-display text-2xl sm:text-3xl">{brandForm.appName}</h3>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Luxury jewelry deserves typography that feels editorial, refined, and modern.
+              Premium bags deserve typography that feels editorial, refined, and modern.
             </p>
           </div>
         </section>

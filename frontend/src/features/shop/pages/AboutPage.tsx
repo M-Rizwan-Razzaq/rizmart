@@ -22,7 +22,7 @@ export default function AboutPage() {
       <section className="relative h-[50vh] sm:h-[60vh] min-h-[360px] sm:min-h-[400px] overflow-hidden">
         <img
           src={aboutImage}
-          alt="Atelier"
+          alt="RizMart studio"
           className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-background/60" />
@@ -44,9 +44,9 @@ export default function AboutPage() {
       <section className="border-t border-border/60 py-16 sm:py-24">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12 text-center">
           {[
-            { n: "20+", l: "Years of Craft" },
-            { n: "100%", l: "Recycled Gold" },
-            { n: "Lifetime", l: "Warranty" },
+            { n: "4+", l: "Core Bag Families" },
+            { n: "100%", l: "Quality Checked" },
+            { n: "Nationwide", l: "Delivery" },
           ].map((s) => (
             <div key={s.l}>
               <div className="font-display text-4xl sm:text-5xl text-gold-gradient mb-2">{s.n}</div>

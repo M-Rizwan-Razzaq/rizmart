@@ -4,7 +4,7 @@ import { toMetadata } from "@/lib/seo-metadata";
 export const metadata: Metadata = toMetadata({
   title: "Our Story",
   description:
-    "Discover the Desi Muse atelier — a Pakistani fine jewellery house where every ring, necklace and bracelet is designed in-house and finished by hand to last a lifetime.",
+    "Discover the RizMart studio — a Pakistani bags brand where every laptop bag, backpack and travel bag is designed in-house to support your daily carry.",
   path: "/about",
 });
 

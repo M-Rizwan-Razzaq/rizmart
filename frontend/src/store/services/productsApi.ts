@@ -19,8 +19,8 @@ export interface ApiProduct {
   images: string[];
   category: ApiCategory | string;
   gender: "men" | "women" | "unisex";
-  material: "gold" | "silver" | "rose-gold" | "black";
-  style: "luxury" | "minimal" | "vintage" | "goth" | "casual";
+  material: string;
+  style: string;
   sku: string;
   stock: number;
   description: string;

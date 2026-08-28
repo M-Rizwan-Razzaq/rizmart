@@ -18,7 +18,7 @@ import { useGetCategoriesQuery } from "@/store/services/categoriesApi";
 import type { ProductQuery } from "@/store/services/productsApi";
 
 const GENDERS = ["all", "women", "men", "unisex"] as const;
-const MATERIALS = ["all", "gold", "silver", "rose-gold", "black"] as const;
+const MATERIALS = ["all", "leather", "faux-leather", "canvas", "nylon", "polyester", "suede"] as const;
 const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
   { label: "Newest", value: "newest" },
@@ -34,7 +34,7 @@ export default function ShopPage() {
   const [material, setMaterial] = useState<string>("all");
   const [category, setCategory] = useState<string>(searchParams.get("category") ?? "all");
   const [sortBy, setSortBy] = useState<ProductQuery["sortBy"]>("newest");
-  const [max, setMax] = useState(5000);
+  const [max, setMax] = useState(50000);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
@@ -61,6 +61,13 @@ export default function ShopPage() {
 
   const products = data?.data ?? [];
   const totalPages = data?.totalPages ?? 1;
+  const formatChipLabel = (value: string) =>
+    value === "all"
+      ? "All"
+      : value
+          .split("-")
+          .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+          .join(" ");
 
   const filterPanel = (
     <div className="space-y-8">
@@ -82,10 +89,10 @@ export default function ShopPage() {
           setSearch(e.target.value);
           setPage(1);
         }}
-        placeholder="Search jewelry…"
+        placeholder="Search bags…"
         className="w-full bg-input border border-border px-3 py-2 text-sm focus:outline-none focus:border-gold"
       />
-      <FilterGroup title="Gender">
+      <FilterGroup title="Audience">
         {GENDERS.map((g) => (
           <Chip
             key={g}
@@ -95,7 +102,7 @@ export default function ShopPage() {
               setPage(1);
             }}
           >
-            {g}
+            {formatChipLabel(g)}
           </Chip>
         ))}
       </FilterGroup>
@@ -107,7 +114,7 @@ export default function ShopPage() {
             setPage(1);
           }}
         >
-          all
+          All
         </Chip>
         {categories.map((c) => (
           <Chip
@@ -132,7 +139,7 @@ export default function ShopPage() {
               setPage(1);
             }}
           >
-            {m}
+            {formatChipLabel(m)}
           </Chip>
         ))}
       </FilterGroup>
@@ -143,7 +150,7 @@ export default function ShopPage() {
         <input
           type="range"
           min={200}
-          max={5000}
+          max={50000}
           step={50}
           value={max}
           onChange={(e) => {
@@ -160,7 +167,7 @@ export default function ShopPage() {
     <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16">
       <div className="text-center mb-8 sm:mb-12">
         <div className="text-[11px] tracking-[0.3em] uppercase text-gold mb-3">The Collection</div>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl">All Jewelry</h1>
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl">All Bags</h1>
       </div>
 
       <div className="grid lg:grid-cols-[260px_1fr] gap-6 lg:gap-10">
@@ -174,7 +181,7 @@ export default function ShopPage() {
               >
                 <SlidersHorizontal className="h-4 w-4" /> Filters
               </button>
-              <div className="text-sm text-muted-foreground">{data?.total ?? 0} pieces</div>
+              <div className="text-sm text-muted-foreground">{data?.total ?? 0} bags</div>
             </div>
             <Select
               value={sortBy === "newest" ? "featured" : sortBy}
@@ -207,7 +214,7 @@ export default function ShopPage() {
               </div>
               {products.length === 0 && (
                 <div className="text-center py-24 text-muted-foreground">
-                  No pieces match your filters.
+                  No bags match your filters.
                 </div>
               )}
               {totalPages > 1 && (

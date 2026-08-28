@@ -45,7 +45,7 @@ export type ThemePreset = {
   name: string;
   description: string;
   colors: ThemeColors;
-  category: "Dark Luxury" | "Soft Elegant" | "Bold Jewel" | "Cool Modern";
+  category: "Dark Luxury" | "Soft Elegant" | "Bold Luxe" | "Cool Modern";
 };
 
 export const THEME_FONT_OPTIONS = {
@@ -284,7 +284,7 @@ export const THEME_PRESETS: ThemePreset[] = [
   {
     id: "champagne-rose",
     name: "Champagne Rose",
-    description: "Creamy ivory with blush taupe and warm jewelry gold.",
+    description: "Creamy ivory with blush taupe and warm champagne gold.",
     category: "Soft Elegant",
     colors: {
       background: "#f8f1e7",
@@ -469,7 +469,7 @@ export const THEME_PRESETS: ThemePreset[] = [
     id: "emerald-luxe",
     name: "Emerald Luxe",
     description: "Elegant emerald tones with gold highlights.",
-    category: "Bold Jewel",
+    category: "Bold Luxe",
     colors: {
       background: "#101815",
       foreground: "#f2efe8",
@@ -513,7 +513,7 @@ export const THEME_PRESETS: ThemePreset[] = [
     id: "burgundy-royal",
     name: "Burgundy Royal",
     description: "Rich burgundy with regal gold contrast.",
-    category: "Bold Jewel",
+    category: "Bold Luxe",
     colors: {
       background: "#1b1216",
       foreground: "#f7efe9",
@@ -822,7 +822,7 @@ export const THEME_PRESETS: ThemePreset[] = [
 export const THEME_PRESET_CATEGORIES: Array<ThemePreset["category"]> = [
   "Dark Luxury",
   "Soft Elegant",
-  "Bold Jewel",
+  "Bold Luxe",
   "Cool Modern",
 ];
 

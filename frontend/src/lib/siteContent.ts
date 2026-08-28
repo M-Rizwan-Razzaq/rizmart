@@ -21,25 +21,25 @@ export const DEFAULT_SITE_CONTENT: Record<SiteContentSlug, SiteContentDraft> = {
     slug: "about",
     title: "About Us",
     contentHtml:
-      '<p class="mb-4">Founded in a quiet Milanese atelier, Desi Muse was built on a single belief: fine jewelry should be worn, not stored.</p><p class="mb-4">Every piece begins as a sketch on paper. It is then hand-modeled in wax, cast in recycled precious metals, and finished by a single master jeweler - from stone-setting to final polish. We refuse mass production. We refuse shortcuts.</p><p>Our stones are ethically sourced through partnerships built over decades. Our gold is 100% recycled. Our warranty is for life, because a piece worth making is a piece worth keeping.</p>',
+      '<p class="mb-4">RizMart was built for people who move through the day with purpose. We design bags that work as hard as you do, from the first commute of the morning to the last trip home at night.</p><p class="mb-4">Every bag begins with a real carry need. We refine the structure, choose durable materials, test the zippers and straps, and shape the pockets so laptops, books, chargers and daily essentials all have a proper place.</p><p>Our focus is simple: thoughtful design, reliable construction and a bag you will actually reach for every day. We do not chase clutter or gimmicks. We build practical pieces that feel premium, look clean and last.</p>',
   },
   "privacy-policy": {
     slug: "privacy-policy",
     title: "Privacy Policy",
     contentHtml:
-      '<p class="mb-4">Desi Muse respects your privacy. We collect only the information required to fulfill your orders and improve your experience. We never sell your data.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Information We Collect</h2><p class="mb-4">Contact details, shipping addresses, and order history. Payment information is processed by our secure providers and never stored on our servers.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Cookies</h2><p class="mb-4">We use essential cookies for cart persistence and analytics cookies to understand site usage.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Your Rights</h2><p>You may request access, correction or deletion of your data at any time by contacting our support team.</p>',
+      '<p class="mb-4">RizMart respects your privacy. We collect only the information required to fulfill your orders and improve your experience. We never sell your data.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Information We Collect</h2><p class="mb-4">Contact details, shipping addresses, and order history. Payment information is processed by our secure providers and never stored on our servers.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Cookies</h2><p class="mb-4">We use essential cookies for cart persistence and analytics cookies to understand site usage.</p><h2 class="mt-6 mb-3 text-2xl font-display text-foreground">Your Rights</h2><p>You may request access, correction or deletion of your data at any time by contacting our support team.</p>',
   },
   "terms-of-service": {
     slug: "terms-of-service",
     title: "Terms & Conditions",
     contentHtml:
-      '<p class="mb-4">By accessing Desi Muse, you agree to these terms. All content, imagery and designs are the property of Desi Muse.</p><p class="mb-4">Prices are subject to change without notice. Orders are subject to availability and confirmation.</p><p>Ownership of goods transfers upon delivery. Risk of loss passes upon our handover to the shipping carrier.</p>',
+      '<p class="mb-4">By accessing RizMart, you agree to these terms. All content, imagery and designs are the property of RizMart.</p><p class="mb-4">Prices are subject to change without notice. Orders are subject to availability and confirmation.</p><p>Ownership of goods transfers upon delivery. Risk of loss passes upon our handover to the shipping carrier.</p>',
   },
   "refund-policy": {
     slug: "refund-policy",
     title: "Refund Policy",
     contentHtml:
-      '<p class="mb-4">Unworn pieces may be returned within 30 days of delivery for a full refund. Items must be in original condition with all packaging.</p><p class="mb-4">Custom or engraved pieces are final sale.</p><p>Refunds are processed within 5 business days of receiving the returned item.</p>',
+      '<p class="mb-4">Unused bags may be returned within 30 days of delivery for a full refund. Items must be in original condition with all packaging.</p><p class="mb-4">Custom, monogrammed or made-to-order bags are final sale.</p><p>Refunds are processed within 5 business days of receiving the returned item.</p>',
   },
 };
 

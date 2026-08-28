@@ -10,7 +10,7 @@ import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 import { Gender } from "../schemas/category.schema";
 
 export class CreateCategoryDto {
-  @ApiProperty({ example: "Rings" })
+  @ApiProperty({ example: "Laptop Bags" })
   @IsString()
   @IsNotEmpty()
   @Length(2, 50)

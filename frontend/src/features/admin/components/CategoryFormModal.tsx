@@ -72,7 +72,7 @@ export function CategoryFormModal({ open, onOpenChange, category }: Props) {
           <Field label="Name">
             <TextInput value={form.name ?? ""} onChange={(e) => set("name", e.target.value)} />
           </Field>
-          <Field label="Gender">
+          <Field label="Audience">
             <Select
               value={form.gender ?? "unisex"}
               onChange={(e) => set("gender", e.target.value as ApiCategory["gender"])}
