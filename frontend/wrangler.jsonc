@@ -1,7 +1,8 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"main": ".open-next/worker.js",
-	"name": "luxora-jewel-hub",
+	"name": "rizmart-frontend",
+	"workers_dev": true,
 	"compatibility_date": "2026-08-04",
 	"compatibility_flags": [
 		"nodejs_compat",
@@ -16,7 +17,7 @@
 			// Self-reference service binding, the service name must match the worker name
 			// see https://opennext.js.org/cloudflare/caching
 			"binding": "WORKER_SELF_REFERENCE",
-			"service": "luxora-jewel-hub"
+			"service": "rizmart-frontend"
 		}
 	],
 	"images": {

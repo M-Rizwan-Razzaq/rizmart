@@ -52,6 +52,6 @@ This repo has two separate apps:
 ## Important Notes
 
 - The backend currently still serves local `/uploads` files for the product image route.
-- The frontend root metadata still contains hardcoded old domain strings in `frontend/src/app/layout.tsx`.
-- The backend CORS allowlist is hardcoded in `backend/src/main.ts`.
-- If you change the production domain, those code paths may need a follow-up update in addition to the env files.
+- The frontend root metadata follows `NEXT_PUBLIC_SITE_URL`, so set that to the production storefront domain.
+- The backend CORS allowlist now follows `APP_URL` and `SITE_URL` in `backend/src/main.ts`.
+- If you change the production domain, update the frontend and backend env values together.

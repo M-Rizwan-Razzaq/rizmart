@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles.css";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import Providers from "./providers";
 
 export const viewport: Viewport = {
@@ -7,21 +8,21 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.rizmart.store"),
+  metadataBase: new URL(SITE_URL),
   title: "RizMart — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online",
   description:
     "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.",
   icons: "/rizmart-icon.svg",
   alternates: {
-    canonical: "https://www.rizmart.store/",
+    canonical: `${SITE_URL}/`,
   },
   openGraph: {
-    siteName: "RizMart",
+    siteName: SITE_NAME,
     type: "website",
     title: "RizMart — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online",
     description:
       "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.",
-    url: "https://www.rizmart.store/",
+    url: `${SITE_URL}/`,
     locale: "en_US",
     images: ["/og-image.svg"],
   },
@@ -37,10 +38,10 @@ export const metadata: Metadata = {
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "RizMart",
-  alternateName: "RizMart",
-  url: "https://www.rizmart.store",
-  logo: "https://www.rizmart.store/rizmart-icon.svg",
+  name: SITE_NAME,
+  alternateName: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/rizmart-icon.svg`,
   sameAs: [
     "https://www.instagram.com/rizmart.pk/",
     "https://www.facebook.com/profile.php?id=61591588391481",

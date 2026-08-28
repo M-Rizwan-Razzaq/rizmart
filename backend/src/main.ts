@@ -13,13 +13,20 @@ async function bootstrap() {
 
   const config = app.get(ConfigService);
   const port = config.get<number>("port") ?? 3000;
-
-  // CORS — allow the Vite dev server
-  app.enableCors({
-    origin: [
+  const frontendOrigins = new Set(
+    [
       "http://localhost:5173",
       "http://localhost:3001",
-    ],
+      "https://rizmart-frontend.ar2148085.workers.dev",
+      "https://www.rizmart.store",
+      config.get<string>("appUrl"),
+      config.get<string>("siteUrl"),
+    ].filter((origin): origin is string => Boolean(origin)),
+  );
+
+  // CORS — allow local dev and the configured frontend origin
+  app.enableCors({
+    origin: Array.from(frontendOrigins),
     credentials: true,
   });
 
