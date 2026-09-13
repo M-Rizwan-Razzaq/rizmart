@@ -14,7 +14,7 @@ export class BrandSettings {
   @Prop({ required: false, default: "rizmart.pk@gmail.com" })
   contactEmail?: string;
 
-  @Prop({ required: false, default: "+92 310 4229928" })
+  @Prop({ required: false, default: "+92 318 6592403" })
   contactPhone?: string;
 
   @Prop({ required: false, default: "Karachi, Pakistan" })

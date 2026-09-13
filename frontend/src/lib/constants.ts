@@ -3,7 +3,7 @@ export const BRAND = "RizMart";
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/rizmart.pk/",
   facebook: "https://www.facebook.com/profile.php?id=61591588391481",
-  whatsapp: "923104229928",
+  whatsapp: "923186592403",
 };
 
 /** Resolves a stored image path to a full URL.

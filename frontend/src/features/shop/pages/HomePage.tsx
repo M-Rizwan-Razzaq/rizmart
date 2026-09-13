@@ -5,7 +5,7 @@ import { Link } from "@/lib/router";
 import { motion } from "framer-motion";
 import { ArrowRight, ShieldCheck, Truck, Package, RotateCcw } from "lucide-react";
 import { toast } from "sonner";
-const heroImg1 = "/BG.png";
+const heroImg1 = "/herosection1.jpg";
 import { ProductCard } from "@/features/shop/components/ProductCard";
 import { SectionHeading } from "@/features/shop/components/SectionHeading";
 import PageSpinner from "@/components/PageSpinner";

@@ -1,6 +1,6 @@
 "use client";
 
-const heroImg1 = "/BG.png";
+const heroImg1 = "/herosection1.jpg";
 import { DEFAULT_BRAND_FORM } from "@/lib/brand";
 import { DEFAULT_SITE_CONTENT } from "@/lib/siteContent";
 import { useGetBrandSettingsQuery } from "@/store/services/brandApi";

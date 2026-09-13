@@ -32,9 +32,16 @@ import { HealthModule } from "./modules/health/health.module";
     // MongoDB via Mongoose
     MongooseModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        uri: config.get<string>("mongoUri"),
-      }),
+      useFactory: (config: ConfigService) => {
+        const uri = config.get<string>("mongoUri");
+        if (!uri) {
+          throw new Error(
+            "MONGODB_URI (or MONGO_URI) must be set when NODE_ENV=production.",
+          );
+        }
+
+        return { uri };
+      },
     }),
 
     // Feature modules

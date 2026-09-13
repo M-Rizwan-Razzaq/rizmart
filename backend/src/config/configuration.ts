@@ -2,7 +2,9 @@ export default () => ({
   mongoUri:
     process.env.MONGODB_URI ||
     process.env.MONGO_URI ||
-    "mongodb://localhost:27017/desi-muse",
+    (process.env.NODE_ENV === "production"
+      ? undefined
+      : "mongodb://localhost:27017/desi-muse"),
   jwtSecret: process.env.JWT_SECRET || "fallback-secret-change-in-production",
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
   resetTokenSecret:
@@ -13,6 +15,10 @@ export default () => ({
   uploadDir: process.env.UPLOAD_DIR || "uploads",
   appUrl: process.env.APP_URL || "http://localhost:3001",
   siteUrl: process.env.SITE_URL || "http://localhost:3001",
+  corsOrigins: (process.env.CORS_ORIGINS || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
   notifications: {
     adminEmail: process.env.ORDER_ADMIN_EMAIL || process.env.ADMIN_EMAIL || "",
     resend: {

@@ -14,7 +14,7 @@ export type BrandSettings = {
 export const DEFAULT_BRAND_FORM: BrandSettings = {
   appName: "RizMart",
   contactEmail: "rizmart.pk@gmail.com",
-  contactPhone: "+92 310 4229928",
+  contactPhone: "+92 318 6592403",
   atelier: "Karachi, Pakistan",
   homeMainImage: "",
   homeCategoryImageRings: "",

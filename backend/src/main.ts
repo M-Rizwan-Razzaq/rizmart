@@ -18,9 +18,11 @@ async function bootstrap() {
       "http://localhost:5173",
       "http://localhost:3001",
       "https://rizmart-frontend.ar2148085.workers.dev",
+      "https://rizmart.store",
       "https://www.rizmart.store",
       config.get<string>("appUrl"),
       config.get<string>("siteUrl"),
+      ...(config.get<string[]>("corsOrigins") ?? []),
     ].filter((origin): origin is string => Boolean(origin)),
   );
 
