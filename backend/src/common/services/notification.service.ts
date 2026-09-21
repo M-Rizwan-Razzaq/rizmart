@@ -112,7 +112,9 @@ export class NotificationService {
       [
         this.sendEmail({
           to: recipientEmail.trim(),
-          from: this.configService.get<string>("notifications.email.fromOrders"),
+          from: this.configService.get<string>(
+            "notifications.email.fromOrders",
+          ),
           subject: `Your ${this.brandName} order ${order.orderNumber} is now ${currentStatus}`,
           html: this.buildOrderStatusEmailHtml(
             order,
@@ -164,7 +166,9 @@ export class NotificationService {
       [
         this.sendEmail({
           to: to.trim().toLowerCase(),
-          from: this.configService.get<string>("notifications.email.fromOffers"),
+          from: this.configService.get<string>(
+            "notifications.email.fromOffers",
+          ),
           subject: campaign.subject,
           html: this.buildPromotionEmailHtml(campaign),
           text: this.buildPromotionEmailText(campaign),
@@ -513,8 +517,7 @@ export class NotificationService {
     if (order.shippingAddress) {
       const addr = order.shippingAddress;
       const fullName =
-        addr.name ||
-        `${addr.firstName ?? ""} ${addr.lastName ?? ""}`.trim();
+        addr.name || `${addr.firstName ?? ""} ${addr.lastName ?? ""}`.trim();
       lines.push(
         `Ship to: ${fullName}, ${addr.address}, ${addr.city}, ${addr.country}`,
       );

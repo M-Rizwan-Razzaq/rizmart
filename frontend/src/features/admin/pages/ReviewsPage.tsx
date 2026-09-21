@@ -164,10 +164,7 @@ export default function ReviewsPage() {
             <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
               Rating
             </span>
-            <Select
-              value={String(rating)}
-              onValueChange={(v) => setRating(Number(v))}
-            >
+            <Select value={String(rating)} onValueChange={(v) => setRating(Number(v))}>
               <SelectTrigger className="mt-1 w-full rounded-none bg-input px-4 py-2 text-sm focus:border-gold sm:w-40">
                 <SelectValue placeholder="Select rating" />
               </SelectTrigger>
@@ -290,10 +287,7 @@ export default function ReviewsPage() {
               <span className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
                 Rating
               </span>
-              <Select
-                value={String(editRating)}
-                onValueChange={(v) => setEditRating(Number(v))}
-              >
+              <Select value={String(editRating)} onValueChange={(v) => setEditRating(Number(v))}>
                 <SelectTrigger className="mt-1 w-full rounded-none bg-input px-4 py-2 text-sm focus:border-gold sm:w-40">
                   <SelectValue placeholder="Select rating" />
                 </SelectTrigger>

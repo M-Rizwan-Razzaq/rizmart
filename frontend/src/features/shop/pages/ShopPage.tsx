@@ -18,7 +18,15 @@ import { useGetCategoriesQuery } from "@/store/services/categoriesApi";
 import type { ProductQuery } from "@/store/services/productsApi";
 
 const GENDERS = ["all", "women", "men", "unisex"] as const;
-const MATERIALS = ["all", "leather", "faux-leather", "canvas", "nylon", "polyester", "suede"] as const;
+const MATERIALS = [
+  "all",
+  "leather",
+  "faux-leather",
+  "canvas",
+  "nylon",
+  "polyester",
+  "suede",
+] as const;
 const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
   { label: "Newest", value: "newest" },

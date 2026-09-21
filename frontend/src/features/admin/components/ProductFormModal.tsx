@@ -439,13 +439,13 @@ export function ProductFormModal({ open, onOpenChange, product }: Props) {
           <div className="md:col-span-2">
             <div className="flex items-center justify-between gap-3 mb-3">
               <div>
-                  <div className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
-                    Specifications
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    Add custom key/value details like material, capacity, compartment count, or size.
-                  </p>
+                <div className="text-[11px] tracking-[0.2em] uppercase text-muted-foreground">
+                  Specifications
                 </div>
+                <p className="text-xs text-muted-foreground">
+                  Add custom key/value details like material, capacity, compartment count, or size.
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={addSpecification}

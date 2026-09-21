@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: product.name,
     description:
       product.description ||
-      `Buy ${product.name} online in Pakistan — crafted by RizMart with complimentary insured shipping and a lifetime quality promise.`,
+      `Buy ${product.name} online in Pakistan at RizMart — premium quality bag with cash on delivery, free shipping & 7-day returns. Trusted by customers across Karachi, Lahore & Islamabad.`,
     path: `/product/${product.slug}`,
     image: getImageUrl(product.images[0]),
     type: "product",
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: seo.title,
       description: seo.description,
       url: seo.url,
-      images: [{ url: seo.image }],
+      images: [{ url: seo.image, width: 800, height: 800, alt: product.name }],
       locale: "en_US",
     },
     twitter: {

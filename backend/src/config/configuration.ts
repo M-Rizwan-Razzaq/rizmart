@@ -31,8 +31,10 @@ export default () => ({
       user: process.env.EMAIL_USER || "",
       pass: process.env.EMAIL_PASS || "",
       from: process.env.EMAIL_FROM || process.env.EMAIL_USER || "",
-      fromOrders: process.env.EMAIL_FROM_ORDERS || "RizMart <orders@rizmart.store>",
-      fromOffers: process.env.EMAIL_FROM_OFFERS || "RizMart <offers@rizmart.store>",
+      fromOrders:
+        process.env.EMAIL_FROM_ORDERS || "RizMart <orders@rizmart.store>",
+      fromOffers:
+        process.env.EMAIL_FROM_OFFERS || "RizMart <offers@rizmart.store>",
     },
   },
 

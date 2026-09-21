@@ -26,11 +26,11 @@ export function buildSeo(input: SeoInput = {}) {
   const path = input.path ?? "/";
   const url = `${SITE_URL}${path}`;
   const title = input.title
-    ? `${input.title} | ${SITE_NAME}`
-    : `${SITE_NAME} — Bags Store in Pakistan | Shop Laptop Bags, Backpacks & Travel Bags Online`;
+    ? `${input.title} | ${SITE_NAME} Pakistan`
+    : `${SITE_NAME} — #1 Bags Store in Pakistan | Buy Laptop Bags, Backpacks & Travel Bags Online`;
   const description =
     input.description ??
-    "RizMart is a Pakistani bags store selling laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags online. Complimentary insured shipping across Pakistan and a lifetime quality promise.";
+    "Shop premium bags online in Pakistan at RizMart. Largest collection of laptop bags, backpacks, school bags, travel bags, handbags, tote bags & crossbody bags. Cash on delivery, free shipping & 7-day returns. Serving Karachi, Lahore, Islamabad & all of Pakistan.";
   const image = input.image || DEFAULT_IMAGE;
 
   return {

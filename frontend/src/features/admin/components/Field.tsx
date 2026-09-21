@@ -45,12 +45,8 @@ export const Select = ({
     (child) => isValidElement(child) && (child.type as unknown) === "option",
   ) as unknown as OptionLike[];
 
-  const emptyOption = options.find(
-    (o) => o.props.value === "" || o.props.value == null,
-  );
-  const selectable = options.filter(
-    (o) => o.props.value !== "" && o.props.value != null,
-  );
+  const emptyOption = options.find((o) => o.props.value === "" || o.props.value == null);
+  const selectable = options.filter((o) => o.props.value !== "" && o.props.value != null);
   const placeholderText =
     placeholder ?? (emptyOption ? String(emptyOption.props.children) : undefined);
   const currentValue = value != null && value !== "" ? String(value) : undefined;
@@ -63,9 +59,7 @@ export const Select = ({
       }
       disabled={disabled}
     >
-      <SelectTrigger
-        className={`${inputCls} ${className ?? ""} h-auto rounded-none`}
-      >
+      <SelectTrigger className={`${inputCls} ${className ?? ""} h-auto rounded-none`}>
         <SelectValue placeholder={placeholderText} />
       </SelectTrigger>
       <SelectContent className="max-h-60">

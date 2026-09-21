@@ -3,7 +3,10 @@ import { InjectModel } from "@nestjs/mongoose";
 import { ConfigService } from "@nestjs/config";
 import { Model } from "mongoose";
 import { Product, ProductDocument } from "../products/schemas/product.schema";
-import { Category, CategoryDocument } from "../categories/schemas/category.schema";
+import {
+  Category,
+  CategoryDocument,
+} from "../categories/schemas/category.schema";
 
 const STATIC_ROUTES: Array<{ path: string; priority: string; freq: string }> = [
   { path: "/", priority: "1.0", freq: "weekly" },
@@ -19,8 +22,10 @@ const STATIC_ROUTES: Array<{ path: string; priority: string; freq: string }> = [
 @Injectable()
 export class SitemapService {
   constructor(
-    @InjectModel(Product.name) private readonly productModel: Model<ProductDocument>,
-    @InjectModel(Category.name) private readonly categoryModel: Model<CategoryDocument>,
+    @InjectModel(Product.name)
+    private readonly productModel: Model<ProductDocument>,
+    @InjectModel(Category.name)
+    private readonly categoryModel: Model<CategoryDocument>,
     private readonly configService: ConfigService,
   ) {}
 
@@ -42,7 +47,11 @@ export class SitemapService {
         .exec(),
     ]);
 
-    const urls = [...STATIC_ROUTES.map((r) => this.urlEntry(baseUrl + r.path, r.freq, r.priority))];
+    const urls = [
+      ...STATIC_ROUTES.map((r) =>
+        this.urlEntry(baseUrl + r.path, r.freq, r.priority),
+      ),
+    ];
 
     for (const product of products) {
       urls.push(
@@ -69,8 +78,15 @@ export class SitemapService {
     return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join("\n")}\n</urlset>`;
   }
 
-  private urlEntry(loc: string, freq: string, priority: string, lastmod?: Date): string {
-    const lastmodTag = lastmod ? `\n    <lastmod>${lastmod.toISOString()}</lastmod>` : "";
+  private urlEntry(
+    loc: string,
+    freq: string,
+    priority: string,
+    lastmod?: Date,
+  ): string {
+    const lastmodTag = lastmod
+      ? `\n    <lastmod>${lastmod.toISOString()}</lastmod>`
+      : "";
     return `  <url>
     <loc>${this.escapeXml(loc)}</loc>${lastmodTag}
     <changefreq>${freq}</changefreq>

@@ -1,8 +1,8 @@
 export const BRAND = "RizMart";
 
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/rizmart.pk/",
-  facebook: "https://www.facebook.com/profile.php?id=61591588391481",
+  instagram: "https://www.instagram.com/rizmart.store/",
+  facebook: "https://www.facebook.com/p/RizMart-61593524831297/",
   whatsapp: "923186592403",
 };
 

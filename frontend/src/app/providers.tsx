@@ -8,6 +8,7 @@ import { fetchMeThunk } from "@/store/slices/authSlice";
 import { useGetThemeQuery } from "@/store/services/themeApi";
 import { applyThemeColors } from "@/lib/theme";
 import { useLocation } from "@/lib/router";
+import { BASE_URL } from "@/lib/api";
 
 function ThemeBootstrap() {
   const { data } = useGetThemeQuery();
@@ -31,6 +32,17 @@ function AuthBootstrap() {
   return null;
 }
 
+/** Pings the backend on first load so Render's free-tier instance wakes up
+ *  before the user actually tries to browse products/categories. */
+function BackendWakeUp() {
+  useEffect(() => {
+    // Fire and forget — we only need to wake the server, not read the response
+    fetch(`${BASE_URL}/products?page=1&limit=1`).catch(() => {});
+  }, []);
+
+  return null;
+}
+
 function ScrollToTop() {
   const { pathname } = useLocation();
 
@@ -46,6 +58,7 @@ export default function Providers({ children }: { children: ReactNode }) {
     <Provider store={store}>
       <ThemeBootstrap />
       <AuthBootstrap />
+      <BackendWakeUp />
       <ScrollToTop />
       {children}
       <Toaster
@@ -53,9 +66,9 @@ export default function Providers({ children }: { children: ReactNode }) {
         position="top-right"
         toastOptions={{
           style: {
-            background: "oklch(0.17 0.006 60)",
-            border: "1px solid oklch(0.28 0.008 70 / 60%)",
-            color: "oklch(0.96 0.01 80)",
+            background: "#2b251f",
+            border: "1px solid #5b4b3b",
+            color: "#f7f1e3",
           },
         }}
       />

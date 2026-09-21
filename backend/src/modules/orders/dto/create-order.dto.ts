@@ -28,8 +28,16 @@ export class OrderItemDto {
 
 export class ShippingAddressDto {
   @ApiPropertyOptional() @IsOptional() @IsString() @IsNotEmpty() name?: string;
-  @ApiPropertyOptional() @IsOptional() @IsString() @IsNotEmpty() firstName?: string;
-  @ApiPropertyOptional() @IsOptional() @IsString() @IsNotEmpty() lastName?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  firstName?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  @IsNotEmpty()
+  lastName?: string;
   @ApiProperty() @IsString() @IsNotEmpty() address: string;
   @ApiProperty() @IsString() @IsNotEmpty() city: string;
   @ApiPropertyOptional() @IsOptional() @IsString() @IsNotEmpty() state?: string;

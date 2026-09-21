@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { toMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = toMetadata({
-  title: "Shop Bags Online in Pakistan",
+  title: "Shop Bags Online in Pakistan — Laptop Bags, Backpacks, Travel Bags",
   description:
-    "Browse and buy bags online in Pakistan — laptop bags, backpacks, school bags, travel bags, handbags and crossbody bags by RizMart. Insured delivery to Karachi, Lahore, Islamabad and all of Pakistan.",
+    "Buy bags online in Pakistan from RizMart's largest collection — laptop bags, backpacks, school bags, travel bags, handbags, tote bags & crossbody bags. Cash on delivery. Free shipping to Karachi, Lahore, Islamabad & all of Pakistan.",
   path: "/shop",
 });
 

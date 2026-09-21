@@ -4,7 +4,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* RizMart — Premium Bags Design System */
+/* RizMart — Premium Bags Store Design System
+   Palette: Saddle-leather espresso base · Cognac surfaces · Burnished-bronze CTAs · Champagne cream
+   Inspired by Coach, Tory Burch, Michael Kors dark-luxury e-commerce palettes */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -52,52 +54,58 @@
 }
 
 :root {
-  --radius: 1.25rem;
+  --radius: 1rem;
 
-  /* Onyx black base */
-  --background: oklch(0.14 0.005 60);
-  --foreground: oklch(0.96 0.01 80);
+  /* ── Base: rich espresso / saddle-leather dark ── */
+  --background: oklch(0.12 0.018 38);
+  --foreground: oklch(0.94 0.012 68);
 
-  --card: oklch(0.17 0.006 60);
-  --card-foreground: oklch(0.96 0.01 80);
+  /* ── Cards: warm cognac leather surface ── */
+  --card: oklch(0.16 0.022 35);
+  --card-foreground: oklch(0.94 0.012 68);
 
-  --popover: oklch(0.17 0.006 60);
-  --popover-foreground: oklch(0.96 0.01 80);
+  --popover: oklch(0.16 0.022 35);
+  --popover-foreground: oklch(0.94 0.012 68);
 
-  /* Champagne gold primary */
-  --primary: oklch(0.78 0.11 82);
-  --primary-foreground: oklch(0.14 0.005 60);
+  /* ── Primary: burnished bronze — signature bags CTA ── */
+  --primary: oklch(0.68 0.12 48);
+  --primary-foreground: oklch(0.1 0.01 38);
 
-  --secondary: oklch(0.22 0.008 60);
-  --secondary-foreground: oklch(0.96 0.01 80);
+  /* ── Secondary: warm dark-tan leather ── */
+  --secondary: oklch(0.21 0.028 36);
+  --secondary-foreground: oklch(0.94 0.012 68);
 
-  --muted: oklch(0.2 0.006 60);
-  --muted-foreground: oklch(0.68 0.015 80);
+  /* ── Muted: mid espresso ── */
+  --muted: oklch(0.19 0.022 36);
+  --muted-foreground: oklch(0.62 0.018 52);
 
-  --accent: oklch(0.24 0.012 70);
-  --accent-foreground: oklch(0.96 0.01 80);
+  /* ── Accent: caramel-mocha highlight ── */
+  --accent: oklch(0.25 0.035 42);
+  --accent-foreground: oklch(0.94 0.012 68);
 
-  --destructive: oklch(0.6 0.22 27);
+  --destructive: oklch(0.58 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
 
-  --border: oklch(0.28 0.008 70 / 60%);
-  --input: oklch(0.24 0.008 70);
-  --ring: oklch(0.78 0.11 82);
+  --border: oklch(0.3 0.028 40 / 55%);
+  --input: oklch(0.21 0.025 38);
+  --ring: oklch(0.68 0.12 48);
 
-  --gold: oklch(0.82 0.13 82);
-  --gold-soft: oklch(0.88 0.08 85);
-  --gold-dark: oklch(0.62 0.12 75);
-  --ivory: oklch(0.96 0.015 82);
-  --onyx: oklch(0.1 0.005 60);
+  /* ── Brand palette: bronze · champagne · saddle · cream ── */
+  --gold: oklch(0.72 0.13 50);
+  --gold-soft: oklch(0.8 0.1 55);
+  --gold-dark: oklch(0.52 0.14 42);
+  --ivory: oklch(0.96 0.014 68);
+  --onyx: oklch(0.09 0.012 38);
 
-  --sidebar: oklch(0.12 0.005 60);
-  --sidebar-foreground: oklch(0.9 0.01 80);
-  --sidebar-primary: oklch(0.78 0.11 82);
-  --sidebar-primary-foreground: oklch(0.14 0.005 60);
-  --sidebar-accent: oklch(0.2 0.008 60);
-  --sidebar-accent-foreground: oklch(0.96 0.01 80);
-  --sidebar-border: oklch(0.28 0.008 70 / 60%);
-  --sidebar-ring: oklch(0.78 0.11 82);
+  /* ── Sidebar ── */
+  --sidebar: oklch(0.1 0.015 36);
+  --sidebar-foreground: oklch(0.9 0.012 66);
+  --sidebar-primary: oklch(0.68 0.12 48);
+  --sidebar-primary-foreground: oklch(0.1 0.01 38);
+  --sidebar-accent: oklch(0.19 0.025 36);
+  --sidebar-accent-foreground: oklch(0.94 0.012 68);
+  --sidebar-border: oklch(0.3 0.028 40 / 55%);
+  --sidebar-ring: oklch(0.68 0.12 48);
 
   --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
@@ -105,16 +113,18 @@
 
   --button-gradient-start: var(--gold-soft);
   --button-gradient-end: var(--gold-dark);
-  --button-foreground: var(--onyx);
+  --button-foreground: var(--ivory);
 
+  /* ── Burnished-bronze shimmer gradient for CTAs ── */
   --gradient-gold: linear-gradient(
     135deg,
-    var(--button-gradient-start),
-    var(--button-gradient-end)
+    oklch(0.8 0.1 55),
+    oklch(0.68 0.12 48),
+    oklch(0.52 0.14 42)
   );
-  --gradient-hero: linear-gradient(180deg, oklch(0.14 0.005 60 / 0), oklch(0.1 0.005 60 / 0.9));
-  --shadow-gold: 0 10px 40px -12px color-mix(in srgb, var(--gold) 35%, transparent);
-  --shadow-luxe: 0 20px 60px -20px oklch(0 0 0 / 0.6);
+  --gradient-hero: linear-gradient(180deg, oklch(0.12 0.018 38 / 0), oklch(0.08 0.014 36 / 0.94));
+  --shadow-gold: 0 10px 40px -12px color-mix(in srgb, var(--gold) 45%, transparent);
+  --shadow-luxe: 0 20px 60px -20px oklch(0 0 0 / 0.7);
 }
 
 .dark {

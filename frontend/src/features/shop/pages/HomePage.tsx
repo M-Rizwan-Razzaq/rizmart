@@ -72,18 +72,17 @@ export default function HomePage() {
 
   const getCategoryImage = (name: string) => {
     const normalized = name.trim().toLowerCase();
-    const imagePath =
-      normalized.includes("laptop")
-        ? brand?.homeCategoryImageRings
-        : normalized.includes("backpack") || normalized.includes("school")
-          ? brand?.homeCategoryImageNecklaces
-          : normalized.includes("travel")
-            ? brand?.homeCategoryImageBraceletes
-            : normalized.includes("hand") ||
+    const imagePath = normalized.includes("laptop")
+      ? brand?.homeCategoryImageRings
+      : normalized.includes("backpack") || normalized.includes("school")
+        ? brand?.homeCategoryImageNecklaces
+        : normalized.includes("travel")
+          ? brand?.homeCategoryImageBraceletes
+          : normalized.includes("hand") ||
               normalized.includes("shoulder") ||
               normalized.includes("crossbody")
-              ? brand?.homeCategoryImageEarrings
-              : "";
+            ? brand?.homeCategoryImageEarrings
+            : "";
 
     return getImageUrl(imagePath?.trim() || "") || homeMainImage;
   };
@@ -119,20 +118,20 @@ export default function HomePage() {
               Collection · {new Date().getFullYear()}
             </div>
             <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[0.95] mb-4 sm:mb-6">
-              Carry More.<br />Move Better.
+              Carry More.
+              <br />
+              Move Better.
             </h1>
             <p className="text-muted-foreground text-base sm:text-lg max-w-lg mb-6 sm:mb-8">
-              RizMart is Pakistan's destination for premium bags - laptop bags, backpacks,
-              school bags, travel bags and crossbody styles designed for work, study and everyday
-              life.
+              RizMart is Pakistan's destination for premium bags - laptop bags, backpacks, school
+              bags, travel bags and crossbody styles designed for work, study and everyday life.
             </p>
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link
                 to="/shop"
                 className="group inline-flex items-center gap-3 bg-gold-gradient text-onyx px-6 sm:px-8 py-3 sm:py-4 text-xs tracking-[0.25em] uppercase font-medium rounded-[20px]"
               >
-                Shop Bags{" "}
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+                Shop Bags <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
               </Link>
               <Link
                 to="/about"

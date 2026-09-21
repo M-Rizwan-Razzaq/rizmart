@@ -1,7 +1,10 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { Product, ProductSchema } from "../products/schemas/product.schema";
-import { Category, CategorySchema } from "../categories/schemas/category.schema";
+import {
+  Category,
+  CategorySchema,
+} from "../categories/schemas/category.schema";
 import { SitemapController } from "./sitemap.controller";
 import { SitemapService } from "./sitemap.service";
 

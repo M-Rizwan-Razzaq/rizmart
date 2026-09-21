@@ -254,8 +254,8 @@ export default function OrdersPage() {
                 <span className="text-foreground">Ship to:</span>{" "}
                 {detail.shippingAddress.name ??
                   `${detail.shippingAddress.firstName ?? ""} ${detail.shippingAddress.lastName ?? ""}`.trim()}
-                , {detail.shippingAddress.address},{" "}
-                {detail.shippingAddress.city}, {detail.shippingAddress.country}
+                , {detail.shippingAddress.address}, {detail.shippingAddress.city},{" "}
+                {detail.shippingAddress.country}
               </div>
               {detail.notes && (
                 <div className="mt-1">

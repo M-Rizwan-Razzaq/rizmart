@@ -12,8 +12,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   let token: string | null = null;
   if (typeof window !== "undefined") {
-    token =
-      localStorage.getItem(STORAGE_KEYS.authToken) ?? localStorage.getItem("luxora_token");
+    token = localStorage.getItem(STORAGE_KEYS.authToken) ?? localStorage.getItem("luxora_token");
   }
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;

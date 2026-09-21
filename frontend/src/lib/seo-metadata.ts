@@ -9,17 +9,13 @@ export function toMetadata(input: SeoInput = {}): Metadata {
   const seo = buildSeo(input);
 
   const ogType =
-    seo.type === "article" || seo.type === "profile" || seo.type === "book"
-      ? seo.type
-      : "website";
+    seo.type === "article" || seo.type === "profile" || seo.type === "book" ? seo.type : "website";
 
   return {
     title: seo.title,
     description: seo.description,
     alternates: { canonical: seo.url },
-    robots: seo.noindex
-      ? { index: false, follow: false }
-      : { index: true, follow: true },
+    robots: seo.noindex ? { index: false, follow: false } : { index: true, follow: true },
     openGraph: {
       siteName: SITE_NAME,
       type: ogType,
@@ -52,14 +48,14 @@ export const accountMetadata: Metadata = toMetadata({
 export const loginMetadata: Metadata = toMetadata({
   title: "Sign In",
   description:
-    "Sign in to your RizMart account to track orders, save favorites and manage your details.",
+    "Sign in to your RizMart account to track your bag orders, save favourites and manage your details. Pakistan's premium online bags store.",
   path: "/login",
 });
 
 export const registerMetadata: Metadata = toMetadata({
   title: "Create Account",
   description:
-    "Join RizMart — create an account for first access to new arrivals, private offers and faster checkout.",
+    "Join RizMart — Pakistan's premium bags store. Create an account for early access to new bag arrivals, exclusive offers and faster checkout with cash on delivery.",
   path: "/register",
 });
 
