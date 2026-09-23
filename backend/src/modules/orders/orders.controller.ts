@@ -26,6 +26,7 @@ import { OrdersService } from "./orders.service";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { UpdateOrderStatusDto } from "./dto/update-order-status.dto";
 import { JwtAuthGuard } from "../../common/guards/jwt-auth.guard";
+import { JwtOptionalAuthGuard } from "../../common/guards/jwt-optional-auth.guard";
 import { RolesGuard } from "../../common/guards/roles.guard";
 import { Roles } from "../../common/decorators/roles.decorator";
 import { CurrentUser } from "../../common/decorators/current-user.decorator";
@@ -39,6 +40,7 @@ export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
   @Post()
+  @UseGuards(JwtOptionalAuthGuard)
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: "Place an order (guest or authenticated)" })
   @ApiResponse({ status: 201, description: "Order placed" })
