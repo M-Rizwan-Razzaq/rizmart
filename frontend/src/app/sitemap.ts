@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic";
 
 const BASE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "https://www.rizmart.store";
+  "https://rizmart.store";
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:3000/api";
 
 type ProductLite = { slug: string; updatedAt?: string };

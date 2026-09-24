@@ -2,7 +2,7 @@ import { BRAND } from "@/lib/constants";
 
 export const SITE_URL =
   (process.env.NEXT_PUBLIC_SITE_URL as string | undefined)?.replace(/\/$/, "") ||
-  "https://www.rizmart.store";
+  "https://rizmart.store";
 
 export const SITE_NAME = BRAND;
 
