@@ -82,7 +82,7 @@ export default function CheckoutPage() {
         },
       });
     } catch (err: any) {
-      toast.error(typeof err === "string" ? err : err?.message ?? "Failed to place order");
+      toast.error(typeof err === "string" ? err : (err?.message ?? "Failed to place order"));
     }
   };
 

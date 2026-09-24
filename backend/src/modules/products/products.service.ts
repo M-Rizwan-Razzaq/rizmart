@@ -143,6 +143,7 @@ export class ProductsService {
   async findFeatured(): Promise<any[]> {
     return this.productModel
       .find({ featured: true, isActive: true })
+      .sort({ createdAt: -1 })
       .limit(8)
       .lean()
       .exec() as any;

@@ -20,9 +20,12 @@ import { useGetBrandSettingsQuery } from "@/store/services/brandApi";
 import { useSubscribeNewsletterMutation } from "@/store/services/newsletterApi";
 import { DEFAULT_BRAND_FORM } from "@/lib/brand";
 import { getImageUrl } from "@/lib/constants";
+import type { ApiProduct } from "@/store/services/productsApi";
 
-export default function HomePage() {
-  const { data: featured = [], isLoading: fl } = useGetFeaturedProductsQuery();
+export default function HomePage({ initialFeatured }: { initialFeatured?: ApiProduct[] }) {
+  const { data: fetchedFeatured, isLoading: featuredLoading } = useGetFeaturedProductsQuery();
+  const featured = fetchedFeatured ?? initialFeatured ?? [];
+  const fl = featuredLoading && initialFeatured === undefined;
   const { data: trending = [], isLoading: tl } = useGetTrendingProductsQuery();
   const { data: bestSellers = [] } = useGetBestSellersQuery();
   const { data: newArrivals = [] } = useGetNewArrivalsQuery();
@@ -90,7 +93,7 @@ export default function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[520px] sm:min-h-[580px] md:min-h-[640px] lg:min-h-[700px] w-full overflow-hidden">
+      <section className="relative min-h-[420px] sm:min-h-[580px] md:min-h-[640px] lg:min-h-[700px] w-full overflow-hidden">
         <div className="absolute inset-0 bg-onyx" />
         {!brandLoading && (
           <img
@@ -141,6 +144,28 @@ export default function HomePage() {
               </Link>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* FEATURED — put products near the top so social visitors can shop quickly */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-24">
+        <SectionHeading eyebrow="Signature" title="Featured Bags" />
+        {fl ? (
+          <PageSpinner />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+            {featured.map((p) => (
+              <ProductCard key={p._id} product={p} />
+            ))}
+          </div>
+        )}
+        <div className="mt-8 text-center">
+          <Link
+            to="/shop"
+            className="inline-flex items-center gap-2 border border-gold px-6 py-3 text-xs tracking-[0.2em] uppercase text-gold"
+          >
+            Shop all bags <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 
@@ -205,20 +230,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* FEATURED */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
-        <SectionHeading eyebrow="Signature" title="Featured Bags" />
-        {fl ? (
-          <PageSpinner />
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featured.map((p) => (
-              <ProductCard key={p._id} product={p} />
-            ))}
-          </div>
-        )}
-      </section>
 
       {/* EDITORIAL */}
       <section className="relative py-20 sm:py-32 overflow-hidden">

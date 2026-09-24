@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "@/lib/router";
 import { Mail, Phone, MapPin } from "lucide-react";
-import { InstagramIcon, FacebookIcon } from "@/components/icons/BrandIcons";
+import { InstagramIcon, FacebookIcon, TrustpilotIcon } from "@/components/icons/BrandIcons";
 import { useGetBrandSettingsQuery } from "@/store/services/brandApi";
 import { useSubscribeNewsletterMutation } from "@/store/services/newsletterApi";
 import { DEFAULT_BRAND_FORM } from "@/lib/brand";
@@ -71,6 +71,16 @@ export function Footer() {
               className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 text-muted-foreground transition-colors hover:text-gold hover:border-gold"
             >
               <FacebookIcon className="h-4 w-4" />
+            </a>
+            <a
+              href={SOCIAL_LINKS.trustpilot}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Review RizMart on Trustpilot"
+              title="Review RizMart on Trustpilot"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-border/60 text-[#00b67a] transition-colors hover:border-gold hover:text-gold"
+            >
+              <TrustpilotIcon className="h-4 w-4" />
             </a>
           </div>
         </div>

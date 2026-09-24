@@ -16,6 +16,14 @@ export function FacebookIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
+export function TrustpilotIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="m12 1.2 2.45 7.54h7.93l-6.42 4.66 2.45 7.54L12 16.28l-6.41 4.66 2.45-7.54-6.42-4.66h7.93L12 1.2Z" />
+    </svg>
+  );
+}
+
 export function WhatsAppIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
