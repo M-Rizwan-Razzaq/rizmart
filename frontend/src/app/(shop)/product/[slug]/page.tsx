@@ -71,6 +71,30 @@ export default async function Page({ params }: Props) {
         price: String(price),
         availability:
           product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+        hasMerchantReturnPolicy: {
+          "@type": "MerchantReturnPolicy",
+          applicableCountry: "PK",
+          returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
+          merchantReturnDays: 30,
+          returnMethod: "https://schema.org/ReturnByMail",
+        },
+        shippingDetails: [
+          {
+            "@type": "OfferShippingDetails",
+            shippingRate: { "@type": "MonetaryAmount", value: "25", currency: "PKR" },
+            shippingDestination: { "@type": "DefinedRegion", addressCountry: "PK" },
+          },
+          {
+            "@type": "OfferShippingDetails",
+            shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "PKR" },
+            shippingDestination: { "@type": "DefinedRegion", addressCountry: "PK" },
+            eligibleTransactionVolume: {
+              "@type": "PriceSpecification",
+              price: "500",
+              priceCurrency: "PKR",
+            },
+          },
+        ],
       },
       ...(product.reviewCount > 0
         ? {
