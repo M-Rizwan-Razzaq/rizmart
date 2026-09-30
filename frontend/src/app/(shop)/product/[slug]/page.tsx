@@ -4,7 +4,7 @@ import ProductPage from "@/features/shop/pages/ProductPage";
 import { fetchApiData } from "@/lib/server-api";
 import { buildSeo, SITE_URL } from "@/lib/seo";
 import { getImageUrl } from "@/lib/constants";
-import type { ApiProduct } from "@/store/services/productsApi";
+import type { ApiProduct, ApiReview, PaginatedReviews } from "@/store/services/productsApi";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -55,6 +55,10 @@ export default async function Page({ params }: Props) {
 
   const price = product.discountPrice ?? product.price;
   const image = getImageUrl(product.images[0]);
+  const reviews = await fetchApiData<PaginatedReviews>(
+    `/reviews/product/${product._id}?page=1&limit=10`,
+  );
+  const reviewMarkup: ApiReview[] = reviews?.data ?? [];
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -105,6 +109,25 @@ export default async function Page({ params }: Props) {
               bestRating: "5",
               worstRating: "1",
             },
+          }
+        : {}),
+      ...(reviewMarkup.length > 0
+        ? {
+            review: reviewMarkup.map((review) => ({
+              "@type": "Review",
+              author: {
+                "@type": "Person",
+                name: review.displayName || review.user?.name || "Customer",
+              },
+              datePublished: review.createdAt,
+              reviewBody: review.comment,
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: String(review.rating),
+                bestRating: "5",
+                worstRating: "1",
+              },
+            })),
           }
         : {}),
     },
