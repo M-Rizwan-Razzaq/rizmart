@@ -27,10 +27,10 @@ export function buildSeo(input: SeoInput = {}) {
   const url = `${SITE_URL}${path}`;
   const title = input.title
     ? `${input.title} | ${SITE_NAME} Pakistan`
-    : `${SITE_NAME} — #1 Bags Store in Pakistan | Buy Laptop Bags, Backpacks & Travel Bags Online`;
+    : "Shop Bags Online in Pakistan | RizMart Pakistan";
   const description =
     input.description ??
-    "Shop premium bags online in Pakistan at RizMart. Largest collection of laptop bags, backpacks, school bags, travel bags, handbags, tote bags & crossbody bags. Cash on delivery, free shipping & 7-day returns. Serving Karachi, Lahore, Islamabad & all of Pakistan.";
+    "Shop backpacks, laptop bags, school bags and travel bags at RizMart. Order online in Pakistan with cash on delivery and nationwide delivery.";
   const image = input.image || DEFAULT_IMAGE;
 
   return {

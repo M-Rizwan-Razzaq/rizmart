@@ -10,9 +10,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default:
-      "RizMart — #1 Bags Store in Pakistan | Buy Laptop Bags, Backpacks & Travel Bags Online",
-    template: "%s | RizMart Pakistan",
+    default: "RizMart | Bags, Backpacks & Travel Bags in Pakistan",
+    template: "%s",
   },
   description:
     "Shop premium bags online in Pakistan at RizMart. Largest collection of laptop bags, backpacks, school bags, travel bags, handbags, tote bags & crossbody bags. Cash on delivery, free shipping, 7-day returns. Serving Karachi, Lahore, Islamabad & all of Pakistan.",
