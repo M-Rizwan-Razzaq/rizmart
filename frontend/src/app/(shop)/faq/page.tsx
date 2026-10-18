@@ -4,7 +4,7 @@ import { toMetadata } from "@/lib/seo-metadata";
 export const metadata: Metadata = toMetadata({
   title: "FAQ — Buying Bags Online in Pakistan",
   description:
-    "Frequently asked questions about buying bags online in Pakistan from RizMart — cash on delivery, free shipping, 7-day returns, laptop bags, backpacks, travel bags and our quality guarantee.",
+    "Answers to common questions about RizMart orders, cash on delivery, shipping charges, product details and returns.",
   path: "/faq",
 });
 

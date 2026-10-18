@@ -47,52 +47,73 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="mx-auto max-w-md px-4 sm:px-6 py-16 sm:py-24">
-      <h1 className="font-display text-3xl sm:text-4xl text-center mb-2">Create your account</h1>
-      <p className="text-center text-muted-foreground mb-10">Join the {appName} circle</p>
+    <div className="bg-[#FAF9F6] min-h-[75vh] flex items-center justify-center py-12 px-4 sm:px-6">
+      <div className="max-w-md w-full bg-white rounded-2xl border border-[#E6E8EC] p-7 sm:p-9 shadow-xs">
+        <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-[#193B63] text-center mb-1.5">
+          Create Account
+        </h1>
+        <p className="text-center text-xs text-[#627184] mb-8">
+          Register with {appName} for quick checkout and order tracking
+        </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <input
-          {...register("name", { required: "Name is required" })}
-          placeholder="Full name"
-          className="w-full bg-input border border-border px-4 py-3 focus:outline-none focus:border-gold"
-        />
-        {errors.name && <p className="text-xs text-destructive -mt-2">{errors.name.message}</p>}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+              Full Name
+            </label>
+            <input
+              {...register("name", { required: "Name is required" })}
+              placeholder="e.g. Asad Khan"
+              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            />
+            {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name.message}</p>}
+          </div>
 
-        <input
-          {...register("email", { required: "Email is required" })}
-          type="email"
-          placeholder="Email"
-          className="w-full bg-input border border-border px-4 py-3 focus:outline-none focus:border-gold"
-        />
-        {errors.email && <p className="text-xs text-destructive -mt-2">{errors.email.message}</p>}
+          <div>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+              Email Address
+            </label>
+            <input
+              {...register("email", { required: "Email is required" })}
+              type="email"
+              placeholder="name@example.com"
+              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            />
+            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+          </div>
 
-        <input
-          {...register("password", {
-            required: "Password required",
-            minLength: { value: 6, message: "Min 6 characters" },
-          })}
-          type="password"
-          placeholder="Password"
-          className="w-full bg-input border border-border px-4 py-3 focus:outline-none focus:border-gold"
-        />
-        {errors.password && (
-          <p className="text-xs text-destructive -mt-2">{errors.password.message}</p>
-        )}
+          <div>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+              Password (Min. 6 Characters)
+            </label>
+            <input
+              {...register("password", {
+                required: "Password required",
+                minLength: { value: 6, message: "Min 6 characters" },
+              })}
+              type="password"
+              placeholder="••••••••"
+              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            />
+            {errors.password && (
+              <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
+            )}
+          </div>
 
-        <button
-          disabled={loading}
-          className="w-full bg-gold-gradient text-onyx py-3 text-xs tracking-[0.25em] uppercase font-medium disabled:opacity-50"
-        >
-          {loading ? "Creating account…" : "Create Account"}
-        </button>
-      </form>
+          <button
+            disabled={loading}
+            className="w-full bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm cursor-pointer"
+          >
+            {loading ? "Creating account…" : "Create Account"}
+          </button>
+        </form>
 
-      <div className="mt-6 text-center text-sm text-muted-foreground">
-        Already a member?{" "}
-        <Link to="/login" className="text-gold">
-          Sign in
-        </Link>
+        <div className="mt-6 text-center text-xs text-[#627184]">
+          Already have an account?{" "}
+          <Link to="/login" className="font-bold text-[#193B63] hover:underline">
+            Sign in
+          </Link>
+        </div>
       </div>
     </div>
   );

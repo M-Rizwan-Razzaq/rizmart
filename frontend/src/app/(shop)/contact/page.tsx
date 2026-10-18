@@ -4,7 +4,7 @@ import { toMetadata } from "@/lib/seo-metadata";
 export const metadata: Metadata = toMetadata({
   title: "Contact RizMart — Pakistan's Online Bags Store",
   description:
-    "Get in touch with RizMart Pakistan's bags store. Questions about laptop bags, backpacks, travel bags, orders, cash on delivery, or our 7-day return policy? We're here to help.",
+    "Contact RizMart with questions about bags, product details, an existing order, shipping charges or the return policy.",
   path: "/contact",
 });
 

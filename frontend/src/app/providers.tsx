@@ -62,13 +62,13 @@ export default function Providers({ children }: { children: ReactNode }) {
       <ScrollToTop />
       {children}
       <Toaster
-        theme="dark"
+        theme="light"
         position="top-right"
         toastOptions={{
           style: {
-            background: "#2b251f",
-            border: "1px solid #5b4b3b",
-            color: "#f7f1e3",
+            background: "#FFFFFF",
+            border: "1px solid #E6E8EC",
+            color: "#263445",
           },
         }}
       />

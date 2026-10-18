@@ -16,16 +16,22 @@ export default function PrivacyPage() {
     .replace(/our support team/gi, contactEmail);
 
   return (
-    <article className="mx-auto max-w-3xl px-4 sm:px-6 py-16 sm:py-24">
-      <h1 className="font-display text-4xl sm:text-5xl mb-8">{page.title}</h1>
-      <div
-        className="space-y-4 text-muted-foreground leading-7
-                   [&_h2]:font-display [&_h2]:text-2xl [&_h2]:text-foreground [&_h2]:pt-6
-                   [&_p]:mb-4 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-6 [&_ol]:pl-6
-                   [&_a]:text-gold [&_a]:underline"
-        dangerouslySetInnerHTML={{ __html: renderedHtml }}
-      />
-      <p className="mt-8 text-sm text-muted-foreground">Contact: {contactEmail}</p>
-    </article>
+    <div className="bg-[#FAF9F6] min-h-screen py-12 sm:py-20">
+      <article className="mx-auto max-w-3xl px-4 sm:px-6 bg-white p-6 sm:p-10 rounded-2xl border border-[#E6E8EC] shadow-xs">
+        <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#193B63] mb-6 pb-4 border-b border-[#E6E8EC]">
+          {page.title}
+        </h1>
+        <div
+          className="space-y-4 text-[#263445] leading-relaxed text-sm sm:text-base
+                     [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-[#193B63] [&_h2]:pt-4 [&_h2]:mb-2
+                     [&_p]:mb-4 [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:pl-6 [&_ol]:pl-6
+                     [&_a]:text-[#193B63] [&_a]:underline"
+          dangerouslySetInnerHTML={{ __html: renderedHtml }}
+        />
+        <div className="mt-8 pt-4 border-t border-[#E6E8EC] text-xs font-semibold text-[#627184]">
+          Privacy Questions: <span className="text-[#193B63]">{contactEmail}</span>
+        </div>
+      </article>
+    </div>
   );
 }

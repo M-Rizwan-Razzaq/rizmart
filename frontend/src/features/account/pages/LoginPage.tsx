@@ -47,51 +47,69 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="mx-auto max-w-md px-4 sm:px-6 py-16 sm:py-24">
-      <h1 className="font-display text-3xl sm:text-4xl text-center mb-2">Welcome back</h1>
-      <p className="text-center text-muted-foreground mb-10">Sign in to your account</p>
+    <div className="bg-[#FAF9F6] min-h-[75vh] flex items-center justify-center py-12 px-4 sm:px-6">
+      <div className="max-w-md w-full bg-white rounded-2xl border border-[#E6E8EC] p-7 sm:p-9 shadow-xs">
+        <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-[#193B63] text-center mb-1.5">
+          Welcome Back
+        </h1>
+        <p className="text-center text-xs text-[#627184] mb-8">
+          Sign in to manage your bag orders & profile
+        </p>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <input
-          {...register("email", { required: "Email is required" })}
-          type="email"
-          placeholder="Email"
-          autoComplete="email"
-          className="w-full bg-input border border-border px-4 py-3 focus:outline-none focus:border-gold"
-        />
-        {errors.email && <p className="text-xs text-destructive -mt-2">{errors.email.message}</p>}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+              Email Address
+            </label>
+            <input
+              {...register("email", { required: "Email is required" })}
+              type="email"
+              placeholder="name@example.com"
+              autoComplete="email"
+              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            />
+            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
+          </div>
 
-        <input
-          {...register("password", { required: "Password is required" })}
-          type="password"
-          placeholder="Password"
-          autoComplete="current-password"
-          className="w-full bg-input border border-border px-4 py-3 focus:outline-none focus:border-gold"
-        />
-        {errors.password && (
-          <p className="text-xs text-destructive -mt-2">{errors.password.message}</p>
-        )}
+          <div>
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+              Password
+            </label>
+            <input
+              {...register("password", { required: "Password is required" })}
+              type="password"
+              placeholder="••••••••"
+              autoComplete="current-password"
+              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            />
+            {errors.password && (
+              <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
+            )}
+          </div>
 
-        <Link
-          to="/forgot-password"
-          className="block text-right text-xs text-muted-foreground hover:text-gold"
-        >
-          Forgot password?
-        </Link>
+          <div className="text-right">
+            <Link
+              to="/forgot-password"
+              className="text-xs font-semibold text-[#627184] hover:text-[#193B63]"
+            >
+              Forgot password?
+            </Link>
+          </div>
 
-        <button
-          disabled={loading}
-          className="w-full bg-gold-gradient text-onyx py-3 text-xs tracking-[0.25em] uppercase font-medium disabled:opacity-50"
-        >
-          {loading ? "Signing in…" : "Sign In"}
-        </button>
-      </form>
+          <button
+            disabled={loading}
+            className="w-full bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm cursor-pointer"
+          >
+            {loading ? "Signing in…" : "Sign In to RizMart"}
+          </button>
+        </form>
 
-      <div className="mt-6 text-center text-sm text-muted-foreground">
-        New here?{" "}
-        <Link to="/register" className="text-gold">
-          Create an account
-        </Link>
+        <div className="mt-6 text-center text-xs text-[#627184]">
+          New customer?{" "}
+          <Link to="/register" className="font-bold text-[#193B63] hover:underline">
+            Create an account
+          </Link>
+        </div>
       </div>
     </div>
   );

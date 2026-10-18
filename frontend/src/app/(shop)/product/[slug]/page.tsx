@@ -16,12 +16,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return {};
-  const price = product.discountPrice ?? product.price;
+  const description =
+    product.description
+      ?.replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim() ||
+    `${product.name}. View current price, availability and product details at RizMart.`;
   const seo = buildSeo({
     title: product.name,
-    description:
-      product.description ||
-      `Buy ${product.name} online in Pakistan at RizMart — premium quality bag with cash on delivery, free shipping & 7-day returns. Trusted by customers across Karachi, Lahore & Islamabad.`,
+    description: description.slice(0, 160),
     path: `/product/${product.slug}`,
     image: getImageUrl(product.images[0]),
     type: "product",
@@ -53,7 +56,10 @@ export default async function Page({ params }: Props) {
   const product = await getProduct(slug);
   if (!product) return notFound();
 
-  const price = product.discountPrice ?? product.price;
+  const price =
+    product.discountPrice && product.discountPrice < product.price
+      ? product.discountPrice
+      : product.price;
   const image = getImageUrl(product.images[0]);
   const reviews = await fetchApiData<PaginatedReviews>(
     `/reviews/product/${product._id}?page=1&limit=10`,
@@ -64,7 +70,7 @@ export default async function Page({ params }: Props) {
       "@context": "https://schema.org",
       "@type": "Product",
       name: product.name,
-      image: [image],
+      ...(image ? { image: [image] } : {}),
       description: product.description,
       sku: product.sku,
       brand: { "@type": "Brand", name: "RizMart" },
@@ -75,32 +81,8 @@ export default async function Page({ params }: Props) {
         price: String(price),
         availability:
           product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
-        hasMerchantReturnPolicy: {
-          "@type": "MerchantReturnPolicy",
-          applicableCountry: "PK",
-          returnPolicyCategory: "https://schema.org/MerchantReturnFiniteReturnWindow",
-          merchantReturnDays: 30,
-          returnMethod: "https://schema.org/ReturnByMail",
-        },
-        shippingDetails: [
-          {
-            "@type": "OfferShippingDetails",
-            shippingRate: { "@type": "MonetaryAmount", value: "25", currency: "PKR" },
-            shippingDestination: { "@type": "DefinedRegion", addressCountry: "PK" },
-          },
-          {
-            "@type": "OfferShippingDetails",
-            shippingRate: { "@type": "MonetaryAmount", value: "0", currency: "PKR" },
-            shippingDestination: { "@type": "DefinedRegion", addressCountry: "PK" },
-            eligibleTransactionVolume: {
-              "@type": "PriceSpecification",
-              price: "500",
-              priceCurrency: "PKR",
-            },
-          },
-        ],
       },
-      ...(product.reviewCount > 0
+      ...(product.reviewCount > 0 && product.averageRating > 0
         ? {
             aggregateRating: {
               "@type": "AggregateRating",

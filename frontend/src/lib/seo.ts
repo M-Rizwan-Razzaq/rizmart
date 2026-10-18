@@ -30,7 +30,7 @@ export function buildSeo(input: SeoInput = {}) {
     : "Shop Bags Online in Pakistan | RizMart Pakistan";
   const description =
     input.description ??
-    "Shop backpacks, laptop bags, school bags and travel bags at RizMart. Order online in Pakistan with cash on delivery and nationwide delivery.";
+    "Shop backpacks, school bags, laptop bags and travel bags online at RizMart. Browse product details, check current availability and place a cash on delivery order.";
   const image = input.image || DEFAULT_IMAGE;
 
   return {

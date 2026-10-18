@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "@/lib/router";
-import { SlidersHorizontal, X } from "lucide-react";
+import { SlidersHorizontal, X, Search } from "lucide-react";
 import { ProductCard } from "@/features/shop/components/ProductCard";
 import PageSpinner from "@/components/PageSpinner";
 import { formatPrice } from "@/lib/constants";
@@ -26,13 +26,13 @@ const MATERIALS = [
   "nylon",
   "polyester",
   "suede",
+  "vegan-leather",
 ] as const;
 const SORT_OPTIONS = [
-  { label: "Featured", value: "featured" },
   { label: "Newest", value: "newest" },
-  { label: "Price: Low", value: "price_asc" },
-  { label: "Price: High", value: "price_desc" },
-  { label: "Popularity", value: "popular" },
+  { label: "Price: Low to High", value: "price_asc" },
+  { label: "Price: High to Low", value: "price_desc" },
+  { label: "Most Reviewed", value: "popular" },
   { label: "Top Rated", value: "rating" },
 ] as const;
 
@@ -43,20 +43,27 @@ export default function ShopPage() {
   const [category, setCategory] = useState<string>(searchParams.get("category") ?? "all");
   const [sortBy, setSortBy] = useState<ProductQuery["sortBy"]>("newest");
   const [max, setMax] = useState(50000);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("search") ?? "");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
   const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     setGender(searchParams.get("gender") ?? "all");
     setCategory(searchParams.get("category") ?? "all");
+    setSearch(searchParams.get("search") ?? "");
     setPage(1);
   }, [searchParams]);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => setDebouncedSearch(search.trim()), 250);
+    return () => window.clearTimeout(timeout);
+  }, [search]);
 
   const query: ProductQuery = {
     page,
     limit: 12,
-    ...(search && { search }),
+    ...(debouncedSearch && { search: debouncedSearch }),
     ...(gender !== "all" && { gender }),
     ...(material !== "all" && { material }),
     ...(category !== "all" && { category }),
@@ -64,11 +71,12 @@ export default function ShopPage() {
     sortBy,
   };
 
-  const { data, isLoading } = useGetProductsQuery(query);
+  const { currentData: data, isFetching, isError, refetch } = useGetProductsQuery(query);
   const { data: categories = [] } = useGetCategoriesQuery();
 
   const products = data?.data ?? [];
   const totalPages = data?.totalPages ?? 1;
+  const selectedCategory = categories.find((item) => item._id === category);
   const formatChipLabel = (value: string) =>
     value === "all"
       ? "All"
@@ -78,43 +86,45 @@ export default function ShopPage() {
           .join(" ");
 
   const filterPanel = (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 text-xs tracking-[0.25em] uppercase text-gold">
-          <SlidersHorizontal className="h-4 w-4" /> Filters
+    <div className="space-y-6 bg-white p-5 rounded-xl border border-[#E6E8EC]">
+      <div className="flex items-center justify-between pb-3 border-b border-[#E6E8EC]">
+        <div className="flex items-center gap-2 text-xs tracking-wider uppercase font-bold text-[#193B63]">
+          <SlidersHorizontal className="h-4 w-4 text-[#E3A34D]" /> Filter Collection
         </div>
         <button
-          className="lg:hidden"
+          className="lg:hidden text-[#263445] p-1"
           onClick={() => setShowFilters(false)}
           aria-label="Close filters"
         >
           <X className="h-5 w-5" />
         </button>
       </div>
-      <input
-        value={search}
-        onChange={(e) => {
-          setSearch(e.target.value);
-          setPage(1);
-        }}
-        placeholder="Search bags…"
-        className="w-full bg-input border border-border px-3 py-2 text-sm focus:outline-none focus:border-gold"
-      />
-      <FilterGroup title="Audience">
-        {GENDERS.map((g) => (
-          <Chip
-            key={g}
-            active={gender === g}
-            onClick={() => {
-              setGender(g);
+
+      {/* Search Input */}
+      <div>
+        <label
+          htmlFor="shop-search"
+          className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-2"
+        >
+          Search by Keyword
+        </label>
+        <div className="relative">
+          <input
+            id="shop-search"
+            value={search}
+            onChange={(e) => {
+              setSearch(e.target.value);
               setPage(1);
             }}
-          >
-            {formatChipLabel(g)}
-          </Chip>
-        ))}
-      </FilterGroup>
-      <FilterGroup title="Category">
+            placeholder="Search school, laptop, travel..."
+            className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg pl-9 pr-3 py-2 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+          />
+          <Search className="h-4 w-4 text-[#627184] absolute left-3 top-2.5" />
+        </div>
+      </div>
+
+      {/* Categories */}
+      <FilterGroup title="Bag Category">
         <Chip
           active={category === "all"}
           onClick={() => {
@@ -137,6 +147,24 @@ export default function ShopPage() {
           </Chip>
         ))}
       </FilterGroup>
+
+      {/* Audience */}
+      <FilterGroup title="Audience">
+        {GENDERS.map((g) => (
+          <Chip
+            key={g}
+            active={gender === g}
+            onClick={() => {
+              setGender(g);
+              setPage(1);
+            }}
+          >
+            {formatChipLabel(g)}
+          </Chip>
+        ))}
+      </FilterGroup>
+
+      {/* Material */}
       <FilterGroup title="Material">
         {MATERIALS.map((m) => (
           <Chip
@@ -151,113 +179,191 @@ export default function ShopPage() {
           </Chip>
         ))}
       </FilterGroup>
-      <div>
-        <div className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-3">
-          Max price: {formatPrice(max)}
+
+      {/* Price Slider */}
+      <div className="pt-2 border-t border-[#E6E8EC]">
+        <div className="flex items-center justify-between text-xs font-bold text-[#193B63] mb-2">
+          <span className="uppercase tracking-wider">Max Price</span>
+          <span>{formatPrice(max)}</span>
         </div>
         <input
           type="range"
-          min={200}
+          min={500}
           max={50000}
-          step={50}
+          step={100}
           value={max}
           onChange={(e) => {
             setMax(Number(e.target.value));
             setPage(1);
           }}
-          className="w-full accent-gold"
+          className="w-full accent-[#193B63] cursor-pointer"
         />
+        <div className="flex justify-between text-[11px] text-[#627184] mt-1">
+          <span>PKR 500</span>
+          <span>PKR 50,000</span>
+        </div>
       </div>
     </div>
   );
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-16">
-      <div className="text-center mb-8 sm:mb-12">
-        <div className="text-[11px] tracking-[0.3em] uppercase text-gold mb-3">The Collection</div>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl">All Bags</h1>
-      </div>
-
-      <div className="grid lg:grid-cols-[260px_1fr] gap-6 lg:gap-10">
-        <aside className="hidden lg:block">{filterPanel}</aside>
-        <div>
-          <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setShowFilters(true)}
-                className="lg:hidden inline-flex items-center gap-2 border border-border px-3 py-2 text-xs uppercase tracking-widest"
-              >
-                <SlidersHorizontal className="h-4 w-4" /> Filters
-              </button>
-              <div className="text-sm text-muted-foreground">{data?.total ?? 0} bags</div>
-            </div>
-            <Select
-              value={sortBy === "newest" ? "featured" : sortBy}
-              onValueChange={(v) => {
-                setSortBy((v === "featured" ? "newest" : v) as ProductQuery["sortBy"]);
-                setPage(1);
-              }}
-            >
-              <SelectTrigger className="w-auto rounded-none bg-input px-3 py-2 text-sm focus:border-gold">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent className="max-h-60">
-                {SORT_OPTIONS.map((s) => (
-                  <SelectItem key={s.value} value={s.value}>
-                    {s.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+    <div className="bg-[#FAF9F6] min-h-screen py-8 sm:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Header Breadcrumb / Title */}
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+          <div className="text-xs font-bold tracking-widest uppercase text-[#E3A34D] mb-2">
+            {selectedCategory ? "Shop Collection" : "The Complete Collection"}
           </div>
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#193B63]">
+            {selectedCategory?.name ?? "All Bags & Backpacks"}
+          </h1>
+          <p className="mt-2.5 text-sm sm:text-base text-[#627184]">
+            {selectedCategory
+              ? `Browse ${selectedCategory.name.toLowerCase()} and see current prices, product details, and availability.`
+              : "Browse school bags, backpacks, laptop bags and travel bags. Check each product page for available details and current stock."}
+          </p>
+        </div>
 
-          {isLoading ? (
-            <PageSpinner />
-          ) : (
-            <>
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-                {products.map((p) => (
-                  <ProductCard key={p._id} product={p} />
-                ))}
+        <div className="grid lg:grid-cols-[270px_1fr] gap-6 lg:gap-8 items-start">
+          {/* Desktop Filter Sidebar */}
+          <aside className="hidden lg:block sticky top-24">{filterPanel}</aside>
+
+          {/* Main Product Grid */}
+          <div>
+            {/* Sorting & Filter toggle header */}
+            <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E6E8EC] flex flex-wrap items-center justify-between gap-3 mb-6 shadow-xs">
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setShowFilters(true)}
+                  className="lg:hidden inline-flex items-center gap-2 border border-[#E6E8EC] bg-[#FAF9F6] px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg text-[#193B63]"
+                >
+                  <SlidersHorizontal className="h-4 w-4 text-[#E3A34D]" /> Filters
+                </button>
+                <div className="text-xs sm:text-sm text-[#627184] font-medium">
+                  Showing <span className="font-bold text-[#193B63]">{products.length}</span> of{" "}
+                  <span className="font-bold text-[#193B63]">{data?.total ?? 0}</span> products
+                </div>
               </div>
-              {products.length === 0 && (
-                <div className="text-center py-24 text-muted-foreground">
-                  No bags match your filters.
+
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-[#627184] hidden sm:inline">Sort:</span>
+                <Select
+                  value={sortBy}
+                  onValueChange={(v) => {
+                    setSortBy(v as ProductQuery["sortBy"]);
+                    setPage(1);
+                  }}
+                >
+                  <SelectTrigger className="w-auto rounded-lg bg-[#FAF9F6] border-[#E6E8EC] px-3 py-2 text-xs sm:text-sm font-medium text-[#263445] focus:border-[#193B63]">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-60 border-[#E6E8EC] bg-white text-[#263445]">
+                    {SORT_OPTIONS.map((s) => (
+                      <SelectItem
+                        key={s.value}
+                        value={s.value}
+                        className="text-xs text-[#263445] focus:bg-[#193B63] focus:text-white sm:text-sm"
+                      >
+                        {s.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            {/* Products Listing */}
+            {isFetching ? (
+              <PageSpinner minH="40vh" />
+            ) : isError ? (
+              <div
+                className="rounded-xl border border-[#E6E8EC] bg-white px-6 py-12 text-center"
+                role="alert"
+              >
+                <p className="mb-4 text-sm text-[#627184]">
+                  We couldn’t load the collection. Please try again.
+                </p>
+                <button
+                  onClick={() => refetch()}
+                  className="rounded-lg bg-[#193B63] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#132D4C]"
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
+                  {products.map((p) => (
+                    <ProductCard key={p._id} product={p} />
+                  ))}
                 </div>
-              )}
-              {totalPages > 1 && (
-                <div className="flex justify-center gap-2 mt-10">
-                  <button
-                    disabled={page === 1}
-                    onClick={() => setPage((p) => p - 1)}
-                    className="border border-border px-4 py-2 text-xs uppercase tracking-widest disabled:opacity-40 hover:border-gold"
-                  >
-                    Prev
-                  </button>
-                  <span className="px-4 py-2 text-xs text-muted-foreground">
-                    {page} / {totalPages}
-                  </span>
-                  <button
-                    disabled={page === totalPages}
-                    onClick={() => setPage((p) => p + 1)}
-                    className="border border-border px-4 py-2 text-xs uppercase tracking-widest disabled:opacity-40 hover:border-gold"
-                  >
-                    Next
-                  </button>
-                </div>
-              )}
-            </>
-          )}
+
+                {products.length === 0 && (
+                  <div className="text-center py-20 bg-white rounded-xl border border-[#E6E8EC] p-8">
+                    <p className="text-base text-[#263445] font-semibold mb-2">
+                      No bags match your current filters.
+                    </p>
+                    <p className="text-xs text-[#627184] mb-4">
+                      Try clearing search terms or selecting a different category.
+                    </p>
+                    <button
+                      onClick={() => {
+                        setGender("all");
+                        setCategory("all");
+                        setMaterial("all");
+                        setSearch("");
+                        setMax(50000);
+                        setPage(1);
+                      }}
+                      className="inline-flex items-center gap-2 bg-[#193B63] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg"
+                    >
+                      Reset All Filters
+                    </button>
+                  </div>
+                )}
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex justify-center items-center gap-2 mt-10">
+                    <button
+                      disabled={page === 1}
+                      onClick={() => {
+                        setPage((p) => p - 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="border border-[#E6E8EC] bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-[#193B63] text-[#193B63] transition-colors"
+                    >
+                      Previous
+                    </button>
+                    <span className="px-3 py-2 text-xs font-semibold text-[#627184]">
+                      Page {page} of {totalPages}
+                    </span>
+                    <button
+                      disabled={page === totalPages}
+                      onClick={() => {
+                        setPage((p) => p + 1);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="border border-[#E6E8EC] bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-[#193B63] text-[#193B63] transition-colors"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
 
+      {/* Mobile Filters Slide-over / Modal */}
       {showFilters && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-background/80"
+            className="absolute inset-0 bg-[#263445]/60 backdrop-blur-xs"
             onClick={() => setShowFilters(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-[85vw] max-w-sm bg-card border-l border-border overflow-y-auto p-6">
+          <div className="absolute right-0 top-0 h-full w-[88vw] max-w-sm bg-white overflow-y-auto p-5 shadow-2xl">
             {filterPanel}
           </div>
         </div>
@@ -269,8 +375,10 @@ export default function ShopPage() {
 function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-3">{title}</div>
-      <div className="flex flex-wrap gap-2">{children}</div>
+      <div className="text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-2.5">
+        {title}
+      </div>
+      <div className="flex flex-wrap gap-1.5">{children}</div>
     </div>
   );
 }
@@ -287,7 +395,11 @@ function Chip({
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-1.5 text-xs uppercase tracking-wider border transition ${active ? "bg-gold-gradient text-onyx border-transparent" : "border-border text-muted-foreground hover:border-gold hover:text-gold"}`}
+      className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
+        active
+          ? "bg-[#193B63] text-white border-[#193B63] shadow-xs font-semibold"
+          : "border-[#E6E8EC] bg-[#FAF9F6] text-[#263445] hover:border-[#193B63]/40 hover:bg-white"
+      }`}
     >
       {children}
     </button>

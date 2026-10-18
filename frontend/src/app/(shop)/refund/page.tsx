@@ -3,7 +3,8 @@ import { toMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = toMetadata({
   title: "Refund Policy",
-  description: "RizMart refund and return policy — unused bags may be returned within 30 days.",
+  description:
+    "Read RizMart's refund and return policy, including eligibility and how to contact us about an order.",
   path: "/refund",
 });
 
