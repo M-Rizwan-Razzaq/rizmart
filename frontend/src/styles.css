@@ -4,9 +4,16 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* RizMart — Premium Bags Store Design System
-   Palette: Saddle-leather espresso base · Cognac surfaces · Burnished-bronze CTAs · Champagne cream
-   Inspired by Coach, Tory Burch, Michael Kors dark-luxury e-commerce palettes */
+/* RizMart — Bags & Backpacks Store Design System
+   Palette:
+   - Deep Denim Blue: #193B63
+   - Soft Ivory: #FAF9F6
+   - White: #FFFFFF
+   - Muted Amber: #E3A34D
+   - Slate Charcoal: #263445
+   - Subtle Borders: #E6E8EC
+   - Muted Text: #627184
+*/
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -34,11 +41,20 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+
+  --color-denim: var(--primary);
+  --color-denim-hover: var(--primary);
+  /* Compatibility aliases used by existing storefront and admin components. */
   --color-gold: var(--gold);
   --color-gold-soft: var(--gold-soft);
   --color-gold-dark: var(--gold-dark);
   --color-ivory: var(--ivory);
   --color-onyx: var(--onyx);
+  --color-amber: var(--gold);
+  --color-amber-hover: var(--gold-dark);
+  --color-charcoal: var(--foreground);
+  --color-subtle-border: var(--border);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -48,87 +64,124 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display:
+    "Manrope", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --icon-color: var(--muted-foreground);
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.625rem;
 
-  /* ── Base: rich espresso / saddle-leather dark ── */
-  --background: oklch(0.12 0.018 38);
-  --foreground: oklch(0.94 0.012 68);
+  /* Surfaces */
+  --background: #faf9f6;
+  --foreground: #263445;
 
-  /* ── Cards: warm cognac leather surface ── */
-  --card: oklch(0.16 0.022 35);
-  --card-foreground: oklch(0.94 0.012 68);
+  --card: #ffffff;
+  --card-foreground: #263445;
 
-  --popover: oklch(0.16 0.022 35);
-  --popover-foreground: oklch(0.94 0.012 68);
+  --popover: #ffffff;
+  --popover-foreground: #263445;
 
-  /* ── Primary: burnished bronze — signature bags CTA ── */
-  --primary: oklch(0.68 0.12 48);
-  --primary-foreground: oklch(0.1 0.01 38);
+  /* Deep Denim Blue Primary */
+  --primary: #193b63;
+  --primary-foreground: #ffffff;
 
-  /* ── Secondary: warm dark-tan leather ── */
-  --secondary: oklch(0.21 0.028 36);
-  --secondary-foreground: oklch(0.94 0.012 68);
+  /* Soft Ivory Secondary */
+  --secondary: #faf9f6;
+  --secondary-foreground: #193b63;
 
-  /* ── Muted: mid espresso ── */
-  --muted: oklch(0.19 0.022 36);
-  --muted-foreground: oklch(0.62 0.018 52);
+  /* Muted / Soft Backgrounds */
+  --muted: #faf9f6;
+  --muted-foreground: #627184;
 
-  /* ── Accent: caramel-mocha highlight ── */
-  --accent: oklch(0.25 0.035 42);
-  --accent-foreground: oklch(0.94 0.012 68);
+  /* Muted Amber Accent */
+  --accent: #e3a34d;
+  --accent-foreground: #ffffff;
 
-  --destructive: oklch(0.58 0.22 25);
-  --destructive-foreground: oklch(0.98 0 0);
+  --destructive: #d9383a;
+  --destructive-foreground: #ffffff;
 
-  --border: oklch(0.3 0.028 40 / 55%);
-  --input: oklch(0.21 0.025 38);
-  --ring: oklch(0.68 0.12 48);
+  --border: #e6e8ec;
+  --input: #f3f5f7;
+  --ring: #193b63;
 
-  /* ── Brand palette: bronze · champagne · saddle · cream ── */
-  --gold: oklch(0.72 0.13 50);
-  --gold-soft: oklch(0.8 0.1 55);
-  --gold-dark: oklch(0.52 0.14 42);
-  --ivory: oklch(0.96 0.014 68);
-  --onyx: oklch(0.09 0.012 38);
+  /* Named brand tokens */
+  --gold: #e3a34d;
+  --gold-soft: #f3c582;
+  --gold-dark: #cc8e39;
+  --denim: #193b63;
+  --denim-hover: #132d4c;
+  --ivory: #faf9f6;
+  --onyx: #193b63;
+  --amber: #e3a34d;
+  --charcoal: #263445;
 
-  /* ── Sidebar ── */
-  --sidebar: oklch(0.1 0.015 36);
-  --sidebar-foreground: oklch(0.9 0.012 66);
-  --sidebar-primary: oklch(0.68 0.12 48);
-  --sidebar-primary-foreground: oklch(0.1 0.01 38);
-  --sidebar-accent: oklch(0.19 0.025 36);
-  --sidebar-accent-foreground: oklch(0.94 0.012 68);
-  --sidebar-border: oklch(0.3 0.028 40 / 55%);
-  --sidebar-ring: oklch(0.68 0.12 48);
+  /* Admin Sidebar */
+  --sidebar: #193b63;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #e3a34d;
+  --sidebar-primary-foreground: #193b63;
+  --sidebar-accent: #132d4c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #385477;
+  --sidebar-ring: #e3a34d;
 
-  --font-display: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --icon-color: var(--muted-foreground);
+  --button-gradient-start: #193b63;
+  --button-gradient-end: #132d4c;
+  --button-foreground: #ffffff;
 
-  --button-gradient-start: var(--gold-soft);
-  --button-gradient-end: var(--gold-dark);
-  --button-foreground: var(--ivory);
-
-  /* ── Burnished-bronze shimmer gradient for CTAs ── */
-  --gradient-gold: linear-gradient(
-    135deg,
-    oklch(0.8 0.1 55),
-    oklch(0.68 0.12 48),
-    oklch(0.52 0.14 42)
-  );
-  --gradient-hero: linear-gradient(180deg, oklch(0.12 0.018 38 / 0), oklch(0.08 0.014 36 / 0.94));
-  --shadow-gold: 0 10px 40px -12px color-mix(in srgb, var(--gold) 45%, transparent);
-  --shadow-luxe: 0 20px 60px -20px oklch(0 0 0 / 0.7);
+  --shadow-card: 0 1px 3px rgba(38, 52, 69, 0.05), 0 4px 12px rgba(38, 52, 69, 0.04);
+  --shadow-card-hover: 0 10px 24px -4px rgba(25, 59, 99, 0.12), 0 2px 6px rgba(25, 59, 99, 0.04);
 }
 
-.dark {
-  color-scheme: dark;
+/* Admin Console has its own private palette. Storefront theme edits apply only to customers. */
+.admin-theme {
+  --background: #faf9f6;
+  --foreground: #263445;
+  --card: #ffffff;
+  --card-foreground: #263445;
+  --popover: #ffffff;
+  --popover-foreground: #263445;
+  --primary: #193b63;
+  --primary-foreground: #ffffff;
+  --secondary: #faf9f6;
+  --secondary-foreground: #193b63;
+  --muted: #faf9f6;
+  --muted-foreground: #627184;
+  --accent: #e3a34d;
+  --accent-foreground: #193b63;
+  --destructive: #d9383a;
+  --destructive-foreground: #ffffff;
+  --border: #e6e8ec;
+  --input: #f3f5f7;
+  --ring: #193b63;
+  --gold: #e3a34d;
+  --gold-soft: #f3c582;
+  --gold-dark: #cc8e39;
+  --ivory: #faf9f6;
+  --onyx: #193b63;
+  --sidebar: #193b63;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #e3a34d;
+  --sidebar-primary-foreground: #193b63;
+  --sidebar-accent: #132d4c;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #385477;
+  --sidebar-ring: #e3a34d;
+  --icon-color: #627184;
+  --font-display: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --button-gradient-start: #193b63;
+  --button-gradient-end: #132d4c;
+  --button-foreground: #ffffff;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+#application-content {
+  font-family: var(--font-sans);
 }
 
 @layer base {
@@ -149,33 +202,30 @@
   svg:not([class*="text-"]) {
     color: var(--icon-color);
   }
-  button svg,
-  a svg {
-    color: currentColor;
-  }
   h1,
   h2,
   h3,
   h4,
   .font-display {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
   }
   ::selection {
-    background: var(--gold);
-    color: var(--onyx);
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
 }
 
+/* Utilities for legacy & consistent styling */
 @utility text-gold-gradient {
-  background: var(--gradient-gold);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  font-weight: 700;
 }
 
 @utility bg-gold-gradient {
-  background: var(--gradient-gold);
+  background: linear-gradient(135deg, var(--button-gradient-start), var(--button-gradient-end));
   color: var(--button-foreground) !important;
 }
 
@@ -183,13 +233,10 @@
   color: var(--button-foreground);
 }
 
-@utility hairline {
-  border-top: 1px solid var(--color-border);
-}
-
 @utility card-luxe {
-  background: var(--color-card);
+  background: var(--card);
+  color: var(--card-foreground);
   border: 1px solid var(--color-border);
-  border-radius: 20px;
-  box-shadow: var(--shadow-luxe);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
 }

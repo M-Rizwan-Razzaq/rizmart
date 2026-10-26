@@ -15,7 +15,7 @@ export const DEFAULT_BRAND_FORM: BrandSettings = {
   appName: "RizMart",
   contactEmail: "rizmart.pk@gmail.com",
   contactPhone: "+92 318 6592403",
-  atelier: "Karachi, Pakistan",
+  atelier: "Wapda Town, Lahore, Pakistan",
   homeMainImage: "",
   homeCategoryImageRings: "",
   homeCategoryImageNecklaces: "",
@@ -88,13 +88,19 @@ export const THEME_BRAND_IMAGE_FIELDS: Array<{
   },
 ];
 
+export function getBrandAddress(value?: string | null): string {
+  const address = value?.trim();
+  if (!address || /\bkarachi\b/i.test(address)) return DEFAULT_BRAND_FORM.atelier;
+  return address;
+}
+
 export function createBrandForm(overrides?: Partial<BrandSettings> | null): BrandSettings {
   return {
     ...DEFAULT_BRAND_FORM,
     appName: overrides?.appName?.trim() || DEFAULT_BRAND_FORM.appName,
     contactEmail: overrides?.contactEmail?.trim() || DEFAULT_BRAND_FORM.contactEmail,
     contactPhone: overrides?.contactPhone?.trim() || DEFAULT_BRAND_FORM.contactPhone,
-    atelier: overrides?.atelier?.trim() || DEFAULT_BRAND_FORM.atelier,
+    atelier: getBrandAddress(overrides?.atelier),
     homeMainImage: overrides?.homeMainImage?.trim() || DEFAULT_BRAND_FORM.homeMainImage,
     homeCategoryImageRings:
       overrides?.homeCategoryImageRings?.trim() || DEFAULT_BRAND_FORM.homeCategoryImageRings,

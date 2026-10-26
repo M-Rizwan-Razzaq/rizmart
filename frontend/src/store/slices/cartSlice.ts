@@ -50,11 +50,13 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, { payload }: PayloadAction<{ product: CartProduct; qty?: number }>) {
       const { product, qty = 1 } = payload;
+      if (product.stock < 1) return;
       const existing = state.items.find((i) => i.product._id === product._id);
       if (existing) {
-        existing.qty += qty;
+        existing.product = product;
+        existing.qty = Math.min(product.stock, existing.qty + qty);
       } else {
-        state.items.push({ product, qty });
+        state.items.push({ product, qty: Math.min(product.stock, qty) });
       }
       saveCart(state.items);
     },
@@ -66,7 +68,9 @@ const cartSlice = createSlice({
 
     setQty(state, { payload }: PayloadAction<{ id: string; qty: number }>) {
       const item = state.items.find((i) => i.product._id === payload.id);
-      if (item) item.qty = Math.max(1, payload.qty);
+      if (item && item.product.stock > 0) {
+        item.qty = Math.min(item.product.stock, Math.max(1, payload.qty));
+      }
       saveCart(state.items);
     },
 

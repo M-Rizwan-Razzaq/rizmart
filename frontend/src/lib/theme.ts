@@ -45,7 +45,7 @@ export type ThemePreset = {
   name: string;
   description: string;
   colors: ThemeColors;
-  category: "Dark Luxury" | "Soft Elegant" | "Bold Luxe" | "Cool Modern";
+  category: "RizMart" | "Dark Luxury" | "Soft Elegant" | "Bold Luxe" | "Cool Modern";
 };
 
 export const THEME_FONT_OPTIONS = {
@@ -152,47 +152,55 @@ export const THEME_BUTTON_FIELDS: Array<{
 ];
 
 export const DEFAULT_THEME_FORM: Record<ThemeColorKey, string> = {
-  background: "#1e140d" /* saddle-leather espresso dark */,
-  foreground: "#f5eedf" /* warm cream */,
-  card: "#29190f" /* cognac leather surface */,
-  cardForeground: "#f5eedf",
-  popover: "#29190f",
-  popoverForeground: "#f5eedf",
-  primary: "#c8803a" /* burnished bronze */,
-  primaryForeground: "#1a0f08",
-  secondary: "#3b2416" /* dark tan leather */,
-  secondaryForeground: "#f5eedf",
-  muted: "#33200f" /* mid espresso */,
-  mutedForeground: "#c0a07e" /* warm sand */,
-  accent: "#412b18" /* caramel-mocha */,
-  accentForeground: "#f5eedf",
-  destructive: "#c45c4a",
-  destructiveForeground: "#faf7f2",
-  border: "#5b3d25",
-  input: "#3c2518",
-  ring: "#c8803a",
-  gold: "#c8803a" /* burnished bronze */,
-  goldSoft: "#e8be88" /* warm champagne */,
-  goldDark: "#8c4e1a" /* deep cognac bronze */,
-  ivory: "#f7f1e3" /* cream white */,
-  onyx: "#190d06" /* deep espresso black */,
-  sidebar: "#180e08",
-  sidebarForeground: "#eee4d0",
-  sidebarPrimary: "#c8803a",
-  sidebarPrimaryForeground: "#1a0f08",
-  sidebarAccent: "#32200f",
-  sidebarAccentForeground: "#f5eedf",
-  sidebarBorder: "#4d3018",
-  sidebarRing: "#c8803a",
-  iconColor: "#c0a07e",
-  displayFont: '"Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif',
-  bodyFont: '"Inter", ui-sans-serif, system-ui, sans-serif',
-  buttonGradientStart: "#e8be88",
-  buttonGradientEnd: "#8c4e1a",
-  buttonForeground: "#f7f1e3",
+  background: "#FAF9F6",
+  foreground: "#263445",
+  card: "#FFFFFF",
+  cardForeground: "#263445",
+  popover: "#FFFFFF",
+  popoverForeground: "#263445",
+  primary: "#193B63",
+  primaryForeground: "#FFFFFF",
+  secondary: "#FAF9F6",
+  secondaryForeground: "#193B63",
+  muted: "#FAF9F6",
+  mutedForeground: "#627184",
+  accent: "#E3A34D",
+  accentForeground: "#FFFFFF",
+  destructive: "#D9383A",
+  destructiveForeground: "#FFFFFF",
+  border: "#E6E8EC",
+  input: "#F3F5F7",
+  ring: "#193B63",
+  gold: "#E3A34D",
+  goldSoft: "#F3C582",
+  goldDark: "#CC8E39",
+  ivory: "#FAF9F6",
+  onyx: "#193B63",
+  sidebar: "#193B63",
+  sidebarForeground: "#FFFFFF",
+  sidebarPrimary: "#E3A34D",
+  sidebarPrimaryForeground: "#193B63",
+  sidebarAccent: "#132D4C",
+  sidebarAccentForeground: "#FFFFFF",
+  sidebarBorder: "#385477",
+  sidebarRing: "#E3A34D",
+  iconColor: "#627184",
+  displayFont:
+    '"Manrope", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  bodyFont: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+  buttonGradientStart: "#193B63",
+  buttonGradientEnd: "#132D4C",
+  buttonForeground: "#FFFFFF",
 };
 
 export const THEME_PRESETS: ThemePreset[] = [
+  {
+    id: "rizmart-signature",
+    name: "RizMart Signature",
+    description: "Soft ivory workspace, deep navy navigation and warm amber accents.",
+    category: "RizMart",
+    colors: { ...DEFAULT_THEME_FORM },
+  },
   {
     id: "noir-gold",
     name: "Noir Gold",
@@ -235,6 +243,50 @@ export const THEME_PRESETS: ThemePreset[] = [
       buttonGradientStart: "#edd7a3",
       buttonGradientEnd: "#b88b3a",
       buttonForeground: "#1b1714",
+    },
+  },
+  {
+    id: "obsidian-black",
+    name: "Obsidian Black",
+    description: "A crisp near-black storefront with ivory text and restrained champagne accents.",
+    category: "Dark Luxury",
+    colors: {
+      background: "#090a0c",
+      foreground: "#f4f2ed",
+      card: "#121417",
+      cardForeground: "#f4f2ed",
+      popover: "#171a1e",
+      popoverForeground: "#f4f2ed",
+      primary: "#c9a96e",
+      primaryForeground: "#11100d",
+      secondary: "#1c2024",
+      secondaryForeground: "#f4f2ed",
+      muted: "#202328",
+      mutedForeground: "#aaa9a4",
+      accent: "#29251d",
+      accentForeground: "#f4f2ed",
+      border: "#30343a",
+      input: "#1c2024",
+      ring: "#c9a96e",
+      gold: "#c9a96e",
+      goldSoft: "#e5d2a8",
+      goldDark: "#a88445",
+      ivory: "#f4f2ed",
+      onyx: "#050607",
+      sidebar: "#0d0f12",
+      sidebarForeground: "#f4f2ed",
+      sidebarPrimary: "#c9a96e",
+      sidebarPrimaryForeground: "#11100d",
+      sidebarAccent: "#1c2024",
+      sidebarAccentForeground: "#f4f2ed",
+      sidebarBorder: "#30343a",
+      sidebarRing: "#c9a96e",
+      iconColor: "#c9a96e",
+      displayFont: '"Manrope", "Inter", ui-sans-serif, system-ui, sans-serif',
+      bodyFont: '"Inter", ui-sans-serif, system-ui, sans-serif',
+      buttonGradientStart: "#dfc58e",
+      buttonGradientEnd: "#a88445",
+      buttonForeground: "#11100d",
     },
   },
   {
@@ -820,6 +872,7 @@ export const THEME_PRESETS: ThemePreset[] = [
 ];
 
 export const THEME_PRESET_CATEGORIES: Array<ThemePreset["category"]> = [
+  "RizMart",
   "Dark Luxury",
   "Soft Elegant",
   "Bold Luxe",
@@ -877,7 +930,7 @@ const CSS_VAR_MAP: Record<ThemeColorKey, string> = {
 export function applyThemeColors(theme?: ThemeColors | null) {
   if (typeof document === "undefined") return;
 
-  const root = document.documentElement;
+  const root = document.getElementById("application-content") ?? document.documentElement;
   for (const [key, cssVar] of Object.entries(CSS_VAR_MAP) as Array<[ThemeColorKey, string]>) {
     const value = theme?.[key];
     if (value) root.style.setProperty(cssVar, value);

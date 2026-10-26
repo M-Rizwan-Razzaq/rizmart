@@ -21,7 +21,7 @@ export const DEFAULT_SITE_CONTENT: Record<SiteContentSlug, SiteContentDraft> = {
     slug: "about",
     title: "About Us",
     contentHtml:
-      '<p class="mb-4">RizMart was built for people who move through the day with purpose. We design bags that work as hard as you do, from the first commute of the morning to the last trip home at night.</p><p class="mb-4">Every bag begins with a real carry need. We refine the structure, choose durable materials, test the zippers and straps, and shape the pockets so laptops, books, chargers and daily essentials all have a proper place.</p><p>Our focus is simple: thoughtful design, reliable construction and a bag you will actually reach for every day. We do not chase clutter or gimmicks. We build practical pieces that feel premium, look clean and last.</p>',
+      '<p class="mb-4">RizMart is an online store offering bags for school, work, travel and everyday use. The collection includes backpacks, school bags, laptop bags and travel bags.</p><p class="mb-4">Product details, materials and specifications vary by item. Check each product page for the information currently available, price and stock status.</p><p>For questions about an item or an existing order, please contact the RizMart support team.</p>',
   },
   "privacy-policy": {
     slug: "privacy-policy",

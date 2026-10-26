@@ -1,5 +1,12 @@
 export const BRAND = "RizMart";
 
+export const SHIPPING_FEE = 25;
+export const FREE_SHIPPING_THRESHOLD = 500;
+
+export function getShippingCost(subtotal: number) {
+  return subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_FEE;
+}
+
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/rizmart.store/",
   facebook: "https://www.facebook.com/p/RizMart-61593524831297/",

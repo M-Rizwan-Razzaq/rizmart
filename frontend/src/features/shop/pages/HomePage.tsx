@@ -3,7 +3,7 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "@/lib/router";
 import { motion } from "framer-motion";
-import { ArrowRight, ShieldCheck, Truck, Package, RotateCcw } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck, Package, RotateCcw, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 const heroImg1 = "/herosection1.jpg";
 import { ProductCard } from "@/features/shop/components/ProductCard";
@@ -44,6 +44,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
 
   useEffect(() => {
     setHeroLoaded(false);
+    setHeroFailed(false);
   }, [dynamicHero]);
 
   const handleSubscribe = async (e: FormEvent) => {
@@ -60,7 +61,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
       setStatus(
         result.alreadySubscribed
           ? { type: "info", message: "You are already subscribed." }
-          : { type: "success", message: "Thanks for subscribing." },
+          : { type: "success", message: "Thank you for subscribing to RizMart." },
       );
       toast.success(result.alreadySubscribed ? "Already subscribed" : "Subscribed successfully");
       setEmail("");
@@ -73,187 +74,272 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
   const homeMainImage =
     getImageUrl(brand?.homeMainImage?.trim() || DEFAULT_BRAND_FORM.homeMainImage) || heroImg1;
 
-  const getCategoryImage = (name: string) => {
+  const getCategoryFallbackImage = (name: string) => {
+    const normalized = name.trim().toLowerCase();
+    if (normalized.includes("laptop")) return "/category-laptop-bags.jpg";
+    if (
+      normalized.includes("hand") ||
+      normalized.includes("purse") ||
+      normalized.includes("shoulder") ||
+      normalized.includes("crossbody")
+    ) {
+      return "/category-hand-bags.jpg";
+    }
+    if (
+      normalized.includes("travel") ||
+      normalized.includes("duffel") ||
+      normalized.includes("weekender") ||
+      normalized.includes("suitcase")
+    ) {
+      return "/category-travel-bags.jpg";
+    }
+    return "/category-backpacks.jpg";
+  };
+
+  const getCategoryImage = (name: string, categoryImage?: string) => {
     const normalized = name.trim().toLowerCase();
     const imagePath = normalized.includes("laptop")
       ? brand?.homeCategoryImageRings
-      : normalized.includes("backpack") || normalized.includes("school")
+      : normalized.includes("backpack") ||
+          normalized.includes("school") ||
+          normalized.includes("kid")
         ? brand?.homeCategoryImageNecklaces
-        : normalized.includes("travel")
+        : normalized.includes("travel") ||
+            normalized.includes("duffel") ||
+            normalized.includes("weekender")
           ? brand?.homeCategoryImageBraceletes
           : normalized.includes("hand") ||
+              normalized.includes("purse") ||
               normalized.includes("shoulder") ||
               normalized.includes("crossbody")
             ? brand?.homeCategoryImageEarrings
             : "";
 
-    return getImageUrl(imagePath?.trim() || "") || homeMainImage;
+    return (
+      getImageUrl(categoryImage?.trim() || "") ||
+      getImageUrl(imagePath?.trim() || "") ||
+      getCategoryFallbackImage(name)
+    );
   };
 
   return (
-    <>
-      {/* HERO */}
-      <section className="relative min-h-[420px] sm:min-h-[580px] md:min-h-[640px] lg:min-h-[700px] w-full overflow-hidden">
-        <div className="absolute inset-0 bg-onyx" />
-        {!brandLoading && (
-          <img
-            src={heroFailed ? heroImg1 : dynamicHero || heroImg1}
-            alt="RizMart bags hero image"
-            width={1600}
-            height={1200}
-            onLoad={() => setHeroLoaded(true)}
-            onError={() => {
-              if (dynamicHero) setHeroFailed(true);
-            }}
-            className="absolute inset-0 h-full w-full object-cover rounded-[20px] transition-opacity duration-500"
-            style={{ opacity: heroLoaded ? 1 : 0 }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/30 to-background" />
-        <div className="relative z-10 mx-auto flex h-full max-w-7xl flex-col justify-start px-4 sm:px-6 pt-10 sm:pt-14 md:pt-16 pb-12 sm:pb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="max-w-2xl"
-          >
-            <div className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">
-              Collection · {new Date().getFullYear()}
-            </div>
-            <h1 className="font-display text-4xl sm:text-6xl md:text-8xl leading-[0.95] mb-4 sm:mb-6">
-              Carry More.
-              <br />
-              Move Better.
-            </h1>
-            <p className="text-muted-foreground text-base sm:text-lg max-w-lg mb-6 sm:mb-8">
-              RizMart is Pakistan's destination for premium bags - laptop bags, backpacks, school
-              bags, travel bags and crossbody styles designed for work, study and everyday life.
-            </p>
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Link
-                to="/shop"
-                className="group inline-flex items-center gap-3 bg-gold-gradient text-onyx px-6 sm:px-8 py-3 sm:py-4 text-xs tracking-[0.25em] uppercase font-medium rounded-[20px]"
-              >
-                Shop Bags <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
-              </Link>
-              <Link
-                to="/about"
-                className="inline-flex items-center gap-3 border border-border hover:border-gold px-6 sm:px-8 py-3 sm:py-4 text-xs tracking-[0.25em] uppercase transition rounded-[20px]"
-              >
-                Our Story
-              </Link>
-            </div>
-          </motion.div>
+    <div className="bg-card">
+      {/* HERO SECTION — Clean, bright, trust-building */}
+      <section className="relative bg-secondary border-b border-border overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Hero Copy */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-7 space-y-6"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border text-primary text-xs font-bold tracking-wider uppercase shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-gold" />
+                Pakistan's Bag & Backpack Store
+              </div>
+
+              <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-primary leading-[1.08] tracking-tight">
+                Everyday Bags for <br className="hidden sm:inline" />
+                School, Work & Travel.
+              </h1>
+
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                Browse school backpacks, laptop bags, and travel bags for everyday carry. Check each
+                product page for its available details and current stock.
+              </p>
+
+              {/* Trust bullets */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-foreground font-semibold">
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                  <span>Product details listed where available</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                  <span>Cash on Delivery</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                  <Link to="/refund" className="hover:text-primary underline underline-offset-2">
+                    Review our return policy
+                  </Link>
+                </div>
+              </div>
+
+              {/* CTAs */}
+              <div className="flex flex-wrap gap-3.5 pt-2">
+                <Link
+                  to="/shop"
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md hover:shadow-lg transition-all"
+                >
+                  <span>Shop Collection</span>
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/about"
+                  className="inline-flex items-center justify-center gap-2 bg-card hover:bg-secondary text-primary border border-border hover:border-primary/40 px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-xs transition-all"
+                >
+                  Our Story
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Hero Image Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7 }}
+              className="lg:col-span-5 relative"
+            >
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] rounded-2xl overflow-hidden border border-border bg-card shadow-xl">
+                {!brandLoading && (
+                  <img
+                    src={heroFailed ? heroImg1 : dynamicHero || heroImg1}
+                    alt="RizMart bags and backpacks collection"
+                    width={1200}
+                    height={960}
+                    onLoad={() => setHeroLoaded(true)}
+                    onError={() => {
+                      if (dynamicHero) setHeroFailed(true);
+                    }}
+                    className="w-full h-full object-cover transition-opacity duration-500"
+                    style={{ opacity: heroLoaded ? 1 : 0 }}
+                  />
+                )}
+                {/* Visual badge on hero image */}
+                <div className="absolute bottom-4 left-4 bg-card/95 backdrop-blur-md border border-border rounded-xl p-3 shadow-md">
+                  <div className="text-xs font-bold text-primary">School & Laptop Bags</div>
+                  <div className="text-[11px] text-muted-foreground">Cash on delivery available</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* FEATURED — put products near the top so social visitors can shop quickly */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-24">
-        <SectionHeading eyebrow="Signature" title="Featured Bags" />
+      {/* VALUE PROPOSITION STRIP */}
+      <section className="bg-card border-b border-border">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
+            {[
+              { icon: Truck, title: "Shipping", subtitle: "Free over PKR 500" },
+              {
+                icon: ShieldCheck,
+                title: "Cash on Delivery",
+                subtitle: "Pay the courier on arrival",
+              },
+              {
+                icon: Package,
+                title: "Product Details",
+                subtitle: "See available specs on each item",
+              },
+              { icon: RotateCcw, title: "Returns", subtitle: "Check policy and eligibility" },
+            ].map((f, i) => (
+              <div key={i} className="flex items-center gap-3.5 py-5 sm:py-6 px-3 sm:px-4">
+                <div className="h-10 w-10 rounded-lg bg-secondary border border-border flex items-center justify-center shrink-0 text-primary">
+                  <f.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-bold text-primary uppercase tracking-wide">
+                    {f.title}
+                  </div>
+                  <div className="text-[11px] sm:text-xs text-muted-foreground">{f.subtitle}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED BAGS — Top priority so visitors can immediately see and buy bags */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
+        <SectionHeading
+          eyebrow="Popular Picks"
+          title="Featured Bags & Backpacks"
+          description="Handpicked customer favorites — from vibrant school bags to sleek laptop carry-alls."
+        />
         {fl ? (
-          <PageSpinner />
+          <PageSpinner minH="30vh" />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
             {featured.map((p) => (
               <ProductCard key={p._id} product={p} />
             ))}
           </div>
         )}
-        <div className="mt-8 text-center">
+        <div className="mt-10 text-center">
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 border border-gold px-6 py-3 text-xs tracking-[0.2em] uppercase text-gold"
+            className="inline-flex items-center gap-2 bg-card text-primary border border-primary hover:bg-secondary px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
           >
-            Shop all bags <ArrowRight className="h-4 w-4" />
+            <span>View All Bags ({featured.length}+ Items)</span>
+            <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
-      {/* USP STRIP */}
-      <section className="border-y border-border/60 bg-onyx/40">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 md:grid-cols-4 divide-x divide-border/60">
-          {[
-            { icon: Truck, label: "Insured Shipping" },
-            { icon: ShieldCheck, label: "Built to Last" },
-            { icon: Package, label: "Smart Compartments" },
-            { icon: RotateCcw, label: "30-Day Returns" },
-          ].map((f, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-2 sm:gap-3 justify-center py-5 sm:py-6 px-3 sm:px-4 text-center"
-            >
-              <f.icon className="h-4 w-4 sm:h-5 sm:w-5 text-gold shrink-0" />
-              <span className="text-[10px] sm:text-xs tracking-[0.15em] sm:tracking-[0.2em] uppercase text-muted-foreground">
-                {f.label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CATEGORIES */}
+      {/* CATEGORIES SECTION — Clear visual entry points */}
       {categories.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
-          <SectionHeading
-            eyebrow="The Collection"
-            title="Shop by Category"
-            description="Curated bags for work, study, travel and everyday carry."
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {categories.slice(0, 4).map((c) => {
-              const imgUrl = getCategoryImage(c.name);
-              return (
-                <Link
-                  key={c._id}
-                  to={`/shop?category=${c._id}`}
-                  className="group relative aspect-[3/4] overflow-hidden rounded-[20px] border border-border/60"
-                >
-                  <img
-                    src={imgUrl}
-                    alt={c.name}
-                    loading="lazy"
-                    className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-[1200ms] rounded-[20px]"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = homeMainImage;
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-onyx via-onyx/30 to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-                    <div className="font-display text-xl sm:text-2xl">{c.name}</div>
-                    <div className="text-xs text-gold tracking-[0.2em] uppercase mt-1">
-                      Explore →
+        <section className="bg-secondary border-y border-border py-12 sm:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <SectionHeading
+              eyebrow="Find Your Style"
+              title="Shop by Bag Category"
+              description="Designed specifically for school, university, office commutes, and weekend travel."
+            />
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+              {categories.slice(0, 4).map((c) => {
+                const fallbackImgUrl = getCategoryFallbackImage(c.name);
+                const imgUrl = getCategoryImage(c.name, c.image);
+                return (
+                  <Link
+                    key={c._id}
+                    to={`/shop?category=${c._id}`}
+                    className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-border bg-card shadow-xs hover:shadow-lg transition-all"
+                  >
+                    <img
+                      src={imgUrl}
+                      alt={c.name}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      onError={(e) => {
+                        const image = e.currentTarget;
+                        if (!image.src.endsWith(fallbackImgUrl)) image.src = fallbackImgUrl;
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-primary-foreground">
+                      <div
+                        className="font-display max-w-full break-words text-lg leading-tight font-bold text-primary-foreground drop-shadow-sm sm:text-xl"
+                      >
+                        {c.name}
+                      </div>
+                      <div className="mt-2 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gold-soft drop-shadow-sm transition-transform group-hover:translate-x-1">
+                        <span>Explore Collection</span>
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
       )}
 
-      {/* EDITORIAL */}
-      <section className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center">
-          <div className="text-[11px] tracking-[0.3em] uppercase text-gold mb-4">Craftsmanship</div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-6xl leading-tight mb-6 sm:mb-8">
-            "Every bag begins with a carry need and ends up in daily rotation."
-          </h2>
-          <Link
-            to="/about"
-            className="inline-flex items-center gap-2 text-gold hover:text-gold-soft transition text-sm tracking-[0.2em] uppercase"
-          >
-            Discover our collection <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
-      </section>
-
-      {/* TRENDING */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24">
-        <SectionHeading eyebrow="Loved by You" title="Trending Now" />
+      {/* TRENDING NOW */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16">
+        <SectionHeading
+          eyebrow="Trending in Pakistan"
+          title="Trending Backpacks"
+          description="Most visited and purchased items across all cities this week."
+        />
         {tl ? (
-          <PageSpinner />
+          <PageSpinner minH="30vh" />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5 sm:gap-6">
             {trending.map((p) => (
               <ProductCard key={p._id} product={p} />
             ))}
@@ -261,60 +347,110 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
         )}
       </section>
 
-      {/* BEST SELLERS + NEW ARRIVALS */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-24 grid gap-12">
-        <div>
-          <SectionHeading eyebrow="Icons" title="Best Sellers" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {bestSellers.slice(0, 4).map((p) => (
-              <ProductCard key={p._id} product={p} />
-            ))}
-          </div>
-        </div>
-        <div>
-          <SectionHeading eyebrow="Fresh" title="New Arrivals" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            {newArrivals.slice(0, 4).map((p) => (
-              <ProductCard key={p._id} product={p} />
-            ))}
-          </div>
+      {/* BEST SELLERS & NEW ARRIVALS SPLIT */}
+      <section className="bg-secondary border-t border-border py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 sm:space-y-16">
+          {bestSellers.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <div className="text-xs font-bold text-gold uppercase tracking-wider">
+                    Top Rated
+                  </div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-primary">
+                    Best Sellers
+                  </h3>
+                </div>
+                <Link
+                  to="/shop"
+                  className="text-xs font-bold uppercase tracking-wider text-primary hover:text-gold flex items-center gap-1"
+                >
+                  See all <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
+                {bestSellers.slice(0, 4).map((p) => (
+                  <ProductCard key={p._id} product={p} />
+                ))}
+              </div>
+            </div>
+          )}
+
+          {newArrivals.length > 0 && (
+            <div>
+              <div className="flex items-center justify-between mb-8">
+                <div>
+                  <div className="text-xs font-bold text-gold uppercase tracking-wider">
+                    Just Landed
+                  </div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-primary">
+                    New Arrivals
+                  </h3>
+                </div>
+                <Link
+                  to="/shop"
+                  className="text-xs font-bold uppercase tracking-wider text-primary hover:text-gold flex items-center gap-1"
+                >
+                  See all <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">
+                {newArrivals.slice(0, 4).map((p) => (
+                  <ProductCard key={p._id} product={p} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* NEWSLETTER */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-16 sm:py-24 text-center">
-        <SectionHeading
-          eyebrow="Membership"
-          title="Join the Circle"
-          description="First access to new arrivals, restocks and private offers. No noise, ever."
-        />
-        <form
-          onSubmit={handleSubscribe}
-          className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-        >
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="flex-1 bg-input border border-border rounded px-4 py-3 focus:outline-none focus:border-gold text-sm"
-            placeholder="Your email address"
+      {/* NEWSLETTER SECTION — Clean & non-intrusive */}
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16 text-center">
+        <div className="bg-secondary border border-border rounded-2xl p-6 sm:p-10">
+          <SectionHeading
+            eyebrow="RizMart VIP Club"
+            title="Get RizMart Updates"
+            description="Subscribe for updates about products, new arrivals and store offers."
           />
-          <button
-            type="submit"
-            disabled={subscribing}
-            className="bg-gold-gradient text-onyx px-8 py-3 text-xs tracking-[0.25em] uppercase font-medium disabled:opacity-50"
+          <form
+            onSubmit={handleSubscribe}
+            className="flex flex-col sm:flex-row gap-2.5 max-w-md mx-auto"
           >
-            {subscribing ? "Joining…" : "Subscribe"}
-          </button>
-        </form>
-        {status.type && (
-          <p
-            className={`mt-3 text-xs ${status.type === "success" ? "text-gold" : status.type === "info" ? "text-muted-foreground" : "text-destructive"}`}
-          >
-            {status.message}
-          </p>
-        )}
+            <label htmlFor="home-newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="home-newsletter-email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="flex-1 bg-card border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-foreground shadow-xs"
+              placeholder="Enter your email address"
+            />
+            <button
+              type="submit"
+              disabled={subscribing}
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-xs tracking-wider uppercase font-bold rounded-lg disabled:opacity-50 transition-colors shadow-sm"
+            >
+              {subscribing ? "Subscribing…" : "Get Discount"}
+            </button>
+          </form>
+          {status.type && (
+            <p
+              className={`mt-3 text-xs ${
+                status.type === "success"
+                  ? "text-primary font-semibold"
+                  : status.type === "info"
+                    ? "text-muted-foreground"
+                    : "text-red-500 font-semibold"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
+        </div>
       </section>
-    </>
+    </div>
   );
 }

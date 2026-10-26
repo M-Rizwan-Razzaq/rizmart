@@ -21,11 +21,10 @@ export function Navbar() {
   const { data: categories = [] } = useGetCategoriesQuery();
   const { data: brand } = useGetBrandSettingsQuery();
   const appName = brand?.appName?.trim() || DEFAULT_BRAND_FORM.appName;
-  const themeStripStyle = {
-    backgroundColor: "var(--muted)",
-    borderColor: "var(--border)",
-    color: "var(--muted-foreground)",
-  } as const;
+
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search]);
 
   const isActive = (to: string) => {
     const [path, query] = to.split("?");
@@ -34,155 +33,227 @@ export function Navbar() {
     return location.search === `?${query}`;
   };
 
-  const primaryCategories = categories.slice(0, 3);
+  const primaryCategories = categories.slice(0, 4);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-xl">
-      <div className="border-b" style={themeStripStyle}>
-        <div
-          className="mx-auto max-w-7xl px-6 py-2 text-center text-[11px] tracking-[0.25em] uppercase"
-          style={{ color: "var(--muted-foreground)" }}
-        >
-          Complimentary Insured Shipping · Built for the Journey
+    <header className="sticky top-0 z-50 bg-card">
+      {/* Top Banner / Announcement Strip */}
+      <div className="bg-primary text-primary-foreground">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-1 px-2 py-2 text-center text-[8px] font-semibold uppercase tracking-[0.02em] sm:gap-x-2 sm:px-6 sm:text-xs sm:tracking-[0.14em]">
+          <span>Free Shipping Over PKR 500</span>
+          <span className="hidden opacity-50 min-[360px]:inline">•</span>
+          <span>Cash on Delivery Available</span>
         </div>
       </div>
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <button
-          className="lg:hidden text-foreground"
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
 
-        <Link
-          to="/"
-          className="font-display text-2xl tracking-[0.2em] text-gold-gradient font-medium"
-        >
-          {appName}
-        </Link>
-
-        <nav className="hidden lg:flex items-center gap-6 text-sm">
-          <NavLink
-            to="/shop"
-            className={({ isActive }) =>
-              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
-            }
+      {/* Main Navigation Bar */}
+      <div className="border-b border-border bg-card">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-0.5 px-2 py-2.5 min-[380px]:gap-1.5 min-[380px]:px-3 sm:gap-3 sm:px-6 sm:py-4 lg:gap-2">
+          {/* Mobile hamburger */}
+          <button
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-primary transition-colors hover:bg-secondary hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold min-[380px]:h-10 min-[380px]:w-10 lg:hidden"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle navigation menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
-            Shop
-          </NavLink>
-          {primaryCategories.map((category) => (
-            <Link
-              key={category._id}
-              to={`/shop?category=${category._id}`}
-              className={`transition-colors ${
-                isActive(`/shop?category=${category._id}`)
-                  ? "text-gold"
-                  : "hover:text-gold/90 text-foreground/90"
-              }`}
+            {open ? <X className="h-5 w-5 min-[380px]:h-6 min-[380px]:w-6" /> : <Menu className="h-5 w-5 min-[380px]:h-6 min-[380px]:w-6" />}
+          </button>
+
+          {/* Logo */}
+          <Link
+            to="/"
+            aria-label={`${appName} home`}
+            className="group flex min-w-0 flex-1 items-center gap-1 sm:gap-2.5 lg:flex-none lg:gap-1 2xl:gap-2.5"
+          >
+            <img
+              src="/rizmart-mark.jpg"
+              alt=""
+              className="h-7 w-7 shrink-0 rounded-lg border border-border object-cover min-[380px]:h-8 min-[380px]:w-8 sm:h-11 sm:w-11 lg:h-9 lg:w-9 2xl:h-11 2xl:w-11"
+            />
+            <span className="truncate font-display text-[16px] font-extrabold tracking-tight text-primary transition-colors group-hover:text-primary/90 min-[380px]:text-[19px] sm:text-3xl lg:text-xl 2xl:text-3xl">
+              {appName.toUpperCase()}
+            </span>
+          </Link>
+
+          {/* Desktop Categories & Links */}
+          <nav className="hidden shrink-0 items-center gap-3 whitespace-nowrap text-[11px] font-semibold tracking-normal text-foreground lg:flex lg:gap-3 2xl:gap-5 2xl:text-sm">
+            <NavLink
+              to="/shop"
+              className={({ isActive }) =>
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
+                }`
+              }
             >
-              {category.name}
-            </Link>
-          ))}
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
-            }
-          >
-            About
-          </NavLink>
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              `transition-colors ${isActive ? "text-gold" : "hover:text-gold/90 text-foreground/90"}`
-            }
-          >
-            Contact
-          </NavLink>
-        </nav>
+              All Bags
+            </NavLink>
+            {primaryCategories.map((category) => (
+              <Link
+                key={category._id}
+                to={`/shop?category=${category._id}`}
+                className={`shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive(`/shop?category=${category._id}`)
+                    ? "text-primary border-b-2 border-primary"
+                    : "hover:text-gold"
+                }`}
+              >
+                {category.name}
+              </Link>
+            ))}
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
+                }`
+              }
+            >
+              About
+            </NavLink>
+            <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
+                }`
+              }
+            >
+              Contact
+            </NavLink>
+          </nav>
 
-        <div className="flex items-center gap-4">
-          <Link to="/shop" aria-label="Search">
-            <Search className="h-5 w-5 hover:text-gold transition" />
-          </Link>
-          <Link to="/wishlist" aria-label="Wishlist" className="relative">
-            <Heart className="h-5 w-5 hover:text-gold transition" />
-            {mounted && wishCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-[10px] bg-gold-gradient text-onyx rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-medium">
-                {wishCount}
-              </span>
-            )}
-          </Link>
-          {mounted && isAdmin && (
-            <Link to="/admin" aria-label="Admin panel" title="Admin Panel">
-              <ShieldCheck className="h-5 w-5 hover:text-gold transition text-gold/70" />
+          {/* Action Icons */}
+          <div className="flex shrink-0 items-center gap-0 sm:gap-2 lg:gap-2 2xl:gap-3">
+            <Link
+              to="/shop"
+              aria-label="Search bags"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+            >
+              <Search className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
             </Link>
-          )}
-          <Link to="/account" aria-label="Account">
-            <User className="h-5 w-5 hover:text-gold transition" />
-          </Link>
-          <Link to="/cart" aria-label="Cart" className="relative">
-            <ShoppingBag className="h-5 w-5 hover:text-gold transition" />
-            {mounted && cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 text-[10px] bg-gold-gradient text-onyx rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-medium">
-                {cartCount}
-              </span>
+
+            <Link
+              to="/wishlist"
+              aria-label="Wishlist"
+              className="relative flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+            >
+              <Heart className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
+              {mounted && wishCount > 0 && (
+                <span className="absolute -top-1 -right-1 text-[10px] bg-gold text-accent-foreground rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
+                  {wishCount}
+                </span>
+              )}
+            </Link>
+
+            {mounted && isAdmin && (
+              <Link
+                to="/admin"
+                aria-label="Admin panel"
+                title="Admin Panel"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-primary transition-colors hover:bg-secondary hover:text-gold min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+              >
+                <ShieldCheck className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
+              </Link>
             )}
-          </Link>
+
+            <Link
+              to="/account"
+              aria-label="My Account"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+            >
+              <User className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
+            </Link>
+
+            <Link
+              to="/cart"
+              aria-label="Shopping Cart"
+              className="relative flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
+            >
+              <ShoppingBag className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
+              {mounted && cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 text-[10px] bg-gold text-accent-foreground rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Drawer Menu */}
       {open && (
-        <div className="lg:hidden border-t border-border/60 bg-background/95 backdrop-blur-xl">
-          <nav className="mx-auto flex max-w-md flex-col items-center gap-3 px-6 py-6 text-sm">
+        <div
+          id="mobile-navigation"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain border-b border-border bg-card px-3 py-3 shadow-xl animate-in slide-in-from-top-2 duration-200 sm:px-4 sm:py-4 lg:hidden"
+        >
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1.5 text-sm font-semibold">
             <Link
               to="/shop"
               onClick={() => setOpen(false)}
-              className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
+              className={`flex min-h-11 items-center justify-between rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                 location.pathname === "/shop" && !location.search
-                  ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
-                  : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
               }`}
             >
-              Shop All
+              All Bags & Backpacks
             </Link>
             {categories.map((c) => (
               <Link
                 key={c._id}
                 to={`/shop?category=${c._id}`}
                 onClick={() => setOpen(false)}
-                className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
+                className={`flex min-h-11 items-center justify-between rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                   isActive(`/shop?category=${c._id}`)
-                    ? "border-gold bg-[linear-gradient(135deg,var(--gold-soft),var(--gold))] text-onyx shadow-[0_12px_30px_-18px_var(--gold)]"
-                    : "border-border/70 bg-background/60 text-muted-foreground hover:border-gold/80 hover:text-foreground"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-foreground hover:bg-secondary"
                 }`}
               >
                 {c.name}
               </Link>
             ))}
+            <div className="my-2 border-t border-border" />
             <Link
               to="/about"
               onClick={() => setOpen(false)}
-              className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
-                isActive("/about")
-                  ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
-                  : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
+                isActive("/about") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-secondary"
               }`}
             >
-              About
+              About RizMart
             </Link>
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className={`flex w-full items-center justify-center rounded-full border px-4 py-3 tracking-[0.18em] uppercase transition ${
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                 isActive("/contact")
-                  ? "border-gold bg-gold/10 text-gold shadow-[0_0_0_1px_var(--gold)]"
-                  : "border-border/70 bg-background/60 text-foreground/90 hover:border-gold/80 hover:bg-gold/5"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
               }`}
             >
-              Contact
+              Contact Support
             </Link>
+            <Link
+              to="/account"
+              onClick={() => setOpen(false)}
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
+                isActive("/account")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
+              }`}
+            >
+              My Account
+            </Link>
+            {mounted && isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setOpen(false)}
+                className="flex min-h-11 items-center rounded-lg px-3 py-2.5 text-foreground transition-colors hover:bg-secondary sm:px-4"
+              >
+                Admin Panel
+              </Link>
+            )}
           </nav>
         </div>
       )}
