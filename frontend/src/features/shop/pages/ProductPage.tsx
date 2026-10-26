@@ -86,14 +86,14 @@ export default function ProductPage() {
   if (isLoading) return <PageSpinner minH="60vh" />;
   if (isError || !product) {
     return (
-      <div className="p-20 text-center bg-[#FAF9F6]">
-        <h2 className="text-xl font-bold text-[#193B63] mb-2">Product Not Found</h2>
-        <p className="text-sm text-[#627184] mb-4">
+      <div className="p-20 text-center bg-secondary">
+        <h2 className="text-xl font-bold text-primary mb-2">Product Not Found</h2>
+        <p className="text-sm text-muted-foreground mb-4">
           The bag you are looking for is currently unavailable.
         </p>
         <Link
           to="/shop"
-          className="inline-flex items-center gap-2 bg-[#193B63] text-white px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider"
+          className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider"
         >
           Back to Bag Store
         </Link>
@@ -139,33 +139,33 @@ export default function ProductPage() {
   const whatsappUrl = `https://wa.me/${SOCIAL_LINKS.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-8 sm:py-12">
+    <div className="bg-secondary min-h-screen py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Breadcrumb navigation */}
-        <nav className="text-xs text-[#627184] mb-6 flex items-center gap-1.5 flex-wrap">
-          <Link to="/" className="hover:text-[#193B63] transition-colors">
+        <nav className="text-xs text-muted-foreground mb-6 flex items-center gap-1.5 flex-wrap">
+          <Link to="/" className="hover:text-primary transition-colors">
             Home
           </Link>
           <span>/</span>
-          <Link to="/shop" className="hover:text-[#193B63] transition-colors">
+          <Link to="/shop" className="hover:text-primary transition-colors">
             Bags
           </Link>
           <span>/</span>
           {categoryName && (
             <>
-              <span className="text-[#263445] font-medium">{categoryName}</span>
+              <span className="text-foreground font-medium">{categoryName}</span>
               <span>/</span>
             </>
           )}
-          <span className="text-[#193B63] font-bold truncate max-w-xs">{product.name}</span>
+          <span className="text-primary font-bold truncate max-w-xs">{product.name}</span>
         </nav>
 
         {/* Product Main Container */}
-        <div className="bg-white rounded-2xl border border-[#E6E8EC] p-5 sm:p-8 lg:p-10 shadow-xs mb-12">
+        <div className="bg-card rounded-2xl border border-border p-5 sm:p-8 lg:p-10 shadow-xs mb-12">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             {/* Gallery Section */}
             <div className="space-y-4">
-              <div className="aspect-[4/5] sm:aspect-square bg-[#FAF9F6] rounded-xl border border-[#E6E8EC] overflow-hidden flex items-center justify-center p-4 relative">
+              <div className="aspect-[4/5] sm:aspect-square bg-secondary rounded-xl border border-border overflow-hidden flex items-center justify-center p-4 relative">
                 {currentImage && failedImage !== currentImage ? (
                   <img
                     src={getImageUrl(currentImage)}
@@ -176,10 +176,10 @@ export default function ProductPage() {
                     className="max-h-full max-w-full object-contain"
                   />
                 ) : (
-                  <span className="text-sm text-[#627184]">Product image unavailable</span>
+                  <span className="text-sm text-muted-foreground">Product image unavailable</span>
                 )}
                 {hasDiscount && (
-                  <span className="absolute top-4 left-4 bg-[#E3A34D] text-white text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded">
+                  <span className="absolute top-4 left-4 bg-gold text-accent-foreground text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded">
                     Sale
                   </span>
                 )}
@@ -193,10 +193,10 @@ export default function ProductPage() {
                       key={i}
                       onClick={() => setImage(img)}
                       aria-label={`View ${product.name}, image ${i + 1}`}
-                      className={`h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-lg bg-[#FAF9F6] border-2 p-1.5 transition-all overflow-hidden ${
+                      className={`h-16 w-16 sm:h-20 sm:w-20 shrink-0 rounded-lg bg-secondary border-2 p-1.5 transition-all overflow-hidden ${
                         img === currentImage
-                          ? "border-[#193B63] shadow-xs"
-                          : "border-[#E6E8EC] hover:border-[#193B63]/40"
+                          ? "border-primary shadow-xs"
+                          : "border-border hover:border-primary/40"
                       }`}
                     >
                       <img
@@ -215,7 +215,7 @@ export default function ProductPage() {
             {/* Details Section */}
             <div className="flex flex-col justify-between space-y-6">
               <div>
-                <div className="flex items-center gap-2 text-xs font-bold text-[#E3A34D] tracking-wider uppercase mb-2">
+                <div className="flex items-center gap-2 text-xs font-bold text-gold tracking-wider uppercase mb-2">
                   <span>{categoryName}</span>
                   {product.material && (
                     <>
@@ -225,7 +225,7 @@ export default function ProductPage() {
                   )}
                 </div>
 
-                <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#193B63] mb-3 leading-tight">
+                <h1 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold text-primary mb-3 leading-tight">
                   {product.name}
                 </h1>
 
@@ -245,68 +245,68 @@ export default function ProductPage() {
                           key={i}
                           className={`h-4 w-4 ${
                             i < Math.round(product.averageRating)
-                              ? "fill-[#E3A34D] text-[#E3A34D]"
-                              : "text-[#E6E8EC]"
+                              ? "fill-gold text-gold"
+                              : "text-border"
                           }`}
                         />
                       ))}
                     </div>
-                    <span className="text-xs font-semibold text-[#627184]">
+                    <span className="text-xs font-semibold text-muted-foreground">
                       {product.averageRating.toFixed(1)} ({product.reviewCount}{" "}
                       {product.reviewCount === 1 ? "review" : "reviews"})
                     </span>
                   </div>
                 ) : (
-                  <p className="text-xs text-[#627184] mb-5">
+                  <p className="text-xs text-muted-foreground mb-5">
                     No reviews yet. Be the first to review this bag.
                   </p>
                 )}
 
                 {/* Price block */}
-                <div className="flex items-baseline gap-3 mb-6 p-4 rounded-xl bg-[#FAF9F6] border border-[#E6E8EC]">
-                  <span className="text-3xl font-extrabold text-[#193B63]">
+                <div className="flex items-baseline gap-3 mb-6 p-4 rounded-xl bg-secondary border border-border">
+                  <span className="text-3xl font-extrabold text-primary">
                     {formatPrice(price)}
                   </span>
                   {hasDiscount && (
-                    <span className="text-base text-[#8C9BAA] line-through font-medium">
+                    <span className="text-base text-muted-foreground line-through font-medium">
                       {formatPrice(product.price)}
                     </span>
                   )}
                   {hasDiscount && (
-                    <span className="text-xs font-bold text-[#E3A34D] ml-auto uppercase tracking-wider">
+                    <span className="text-xs font-bold text-gold ml-auto uppercase tracking-wider">
                       Save {formatPrice(product.price - product.discountPrice!)}
                     </span>
                   )}
                 </div>
 
                 {/* Description snippet */}
-                <p className="text-sm text-[#263445] leading-relaxed mb-6">
+                <p className="text-sm text-foreground leading-relaxed mb-6">
                   {product.description ||
                     "Product details are currently unavailable. Contact us if you need more information."}
                 </p>
 
                 {/* Quantity selector & stock */}
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="flex items-center border border-[#E6E8EC] rounded-lg bg-white overflow-hidden shadow-xs">
+                  <div className="flex items-center border border-border rounded-lg bg-card overflow-hidden shadow-xs">
                     <button
                       onClick={() => setQty(Math.max(1, qty - 1))}
                       disabled={qty <= 1}
-                      className="p-3 text-[#263445] hover:bg-[#FAF9F6] transition-colors"
+                      className="p-3 text-foreground hover:bg-secondary transition-colors"
                       aria-label="Decrease quantity"
                     >
                       <Minus className="h-4 w-4" />
                     </button>
-                    <div className="w-12 text-center font-bold text-sm text-[#193B63]">{qty}</div>
+                    <div className="w-12 text-center font-bold text-sm text-primary">{qty}</div>
                     <button
                       onClick={() => setQty(Math.min(maxAddable, qty + 1))}
                       disabled={!stockAvailable || qty >= maxAddable}
-                      className="p-3 text-[#263445] hover:bg-[#FAF9F6] transition-colors"
+                      className="p-3 text-foreground hover:bg-secondary transition-colors"
                       aria-label="Increase quantity"
                     >
                       <Plus className="h-4 w-4" />
                     </button>
                   </div>
-                  <div className="text-xs text-[#627184] font-medium">
+                  <div className="text-xs text-muted-foreground font-medium">
                     <span
                       className={`font-bold inline-flex items-center gap-1 ${stockAvailable ? "text-emerald-700" : "text-red-600"}`}
                     >
@@ -317,7 +317,7 @@ export default function ProductPage() {
                           ? `In stock (${maxAddable} available)`
                           : "Available quantity already in cart"}
                     </span>
-                    <span className="block text-[11px] text-[#8C9BAA]">SKU: {product.sku}</span>
+                    <span className="block text-[11px] text-muted-foreground">SKU: {product.sku}</span>
                   </div>
                 </div>
 
@@ -331,7 +331,7 @@ export default function ProductPage() {
                       dispatch(addToCart({ product: cartProduct, qty: quantityToAdd }));
                       toast.success(`${quantityToAdd} × ${product.name} added to cart`);
                     }}
-                    className="min-w-0 bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white py-3.5 px-4 sm:px-6 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all disabled:cursor-not-allowed disabled:opacity-50"
+                    className="min-w-0 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground py-3.5 px-4 sm:px-6 rounded-lg text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <ShoppingBag className="h-4 w-4" />
                     <span>Add to Cart</span>
@@ -343,8 +343,8 @@ export default function ProductPage() {
                     }}
                     className={`h-12 w-12 shrink-0 rounded-lg border flex items-center justify-center transition-colors shadow-xs ${
                       wishHas
-                        ? "border-[#E3A34D] bg-[#E3A34D]/10 text-[#E3A34D]"
-                        : "border-[#E6E8EC] hover:border-[#193B63] text-[#263445]"
+                        ? "border-gold bg-gold/10 text-gold"
+                        : "border-border hover:border-primary text-foreground"
                     }`}
                     aria-label={
                       wishHas
@@ -352,7 +352,7 @@ export default function ProductPage() {
                         : `Add ${product.name} to wishlist`
                     }
                   >
-                    <Heart className={`h-5 w-5 ${wishHas ? "fill-[#E3A34D]" : ""}`} />
+                    <Heart className={`h-5 w-5 ${wishHas ? "fill-gold" : ""}`} />
                   </button>
                 </div>
                 {maxAddable > 0 && (
@@ -368,24 +368,24 @@ export default function ProductPage() {
               </div>
 
               {/* Product Trust Highlights */}
-              <div className="grid grid-cols-3 gap-2.5 pt-4 border-t border-[#E6E8EC] text-[11px] sm:text-xs text-[#263445] font-semibold text-center">
-                <div className="p-2.5 rounded-lg bg-[#FAF9F6] border border-[#E6E8EC]">
-                  <Truck className="h-4 w-4 text-[#193B63] mx-auto mb-1" />
+              <div className="grid grid-cols-3 gap-2.5 pt-4 border-t border-border text-[11px] sm:text-xs text-foreground font-semibold text-center">
+                <div className="p-2.5 rounded-lg bg-secondary border border-border">
+                  <Truck className="h-4 w-4 text-primary mx-auto mb-1" />
                   <span>
                     {getShippingCost(cartSubtotal + price * qty) === 0
                       ? "Free shipping"
                       : `${formatPrice(getShippingCost(cartSubtotal + price * qty))} shipping`}
                   </span>
                 </div>
-                <div className="p-2.5 rounded-lg bg-[#FAF9F6] border border-[#E6E8EC]">
-                  <ShieldCheck className="h-4 w-4 text-[#193B63] mx-auto mb-1" />
+                <div className="p-2.5 rounded-lg bg-secondary border border-border">
+                  <ShieldCheck className="h-4 w-4 text-primary mx-auto mb-1" />
                   <span>Cash on delivery</span>
                 </div>
                 <Link
                   to="/refund"
-                  className="p-2.5 rounded-lg bg-[#FAF9F6] border border-[#E6E8EC] hover:border-[#193B63]/40 transition-colors"
+                  className="p-2.5 rounded-lg bg-secondary border border-border hover:border-primary/40 transition-colors"
                 >
-                  <RotateCcw className="h-4 w-4 text-[#193B63] mx-auto mb-1" />
+                  <RotateCcw className="h-4 w-4 text-primary mx-auto mb-1" />
                   <span>Return policy</span>
                 </Link>
               </div>
@@ -393,14 +393,14 @@ export default function ProductPage() {
           </div>
 
           {/* Specifications & Reviews Tab */}
-          <div className="mt-12 pt-8 border-t border-[#E6E8EC]">
-            <div className="flex border-b border-[#E6E8EC] gap-6">
+          <div className="mt-12 pt-8 border-t border-border">
+            <div className="flex border-b border-border gap-6">
               <button
                 onClick={() => setTab("specs")}
                 className={`pb-3 text-sm font-bold tracking-wider uppercase transition-colors relative ${
                   tab === "specs"
-                    ? "text-[#193B63] border-b-2 border-[#193B63]"
-                    : "text-[#627184] hover:text-[#193B63]"
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 Specifications & Features
@@ -409,8 +409,8 @@ export default function ProductPage() {
                 onClick={() => setTab("reviews")}
                 className={`pb-3 text-sm font-bold tracking-wider uppercase transition-colors relative ${
                   tab === "reviews"
-                    ? "text-[#193B63] border-b-2 border-[#193B63]"
-                    : "text-[#627184] hover:text-[#193B63]"
+                    ? "text-primary border-b-2 border-primary"
+                    : "text-muted-foreground hover:text-primary"
                 }`}
               >
                 Customer Reviews ({product.reviewCount})
@@ -420,23 +420,23 @@ export default function ProductPage() {
             <div className="py-6">
               {tab === "specs" && (
                 <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#E6E8EC] space-y-2 text-sm">
-                    <div className="text-xs font-bold text-[#627184] uppercase">Category</div>
-                    <div className="font-semibold text-[#193B63]">{categoryName}</div>
+                  <div className="p-4 rounded-xl bg-secondary border border-border space-y-2 text-sm">
+                    <div className="text-xs font-bold text-muted-foreground uppercase">Category</div>
+                    <div className="font-semibold text-primary">{categoryName}</div>
                   </div>
-                  <div className="p-4 rounded-xl bg-[#FAF9F6] border border-[#E6E8EC] space-y-2 text-sm">
-                    <div className="text-xs font-bold text-[#627184] uppercase">Material</div>
-                    <div className="font-semibold text-[#193B63]">
+                  <div className="p-4 rounded-xl bg-secondary border border-border space-y-2 text-sm">
+                    <div className="text-xs font-bold text-muted-foreground uppercase">Material</div>
+                    <div className="font-semibold text-primary">
                       {product.material || "Not specified"}
                     </div>
                   </div>
                   {Object.entries(specs).map(([k, v]) => (
                     <div
                       key={k}
-                      className="p-4 rounded-xl bg-[#FAF9F6] border border-[#E6E8EC] space-y-2 text-sm"
+                      className="p-4 rounded-xl bg-secondary border border-border space-y-2 text-sm"
                     >
-                      <div className="text-xs font-bold text-[#627184] uppercase">{k}</div>
-                      <div className="font-semibold text-[#193B63]">{String(v)}</div>
+                      <div className="text-xs font-bold text-muted-foreground uppercase">{k}</div>
+                      <div className="font-semibold text-primary">{String(v)}</div>
                     </div>
                   ))}
                 </div>
@@ -444,12 +444,12 @@ export default function ProductPage() {
 
               {tab === "reviews" && (
                 <div className="space-y-6">
-                  <div className="flex items-center justify-between gap-4 flex-wrap pb-4 border-b border-[#E6E8EC]">
+                  <div className="flex items-center justify-between gap-4 flex-wrap pb-4 border-b border-border">
                     <div>
-                      <h3 className="font-display text-lg font-bold text-[#193B63]">
+                      <h3 className="font-display text-lg font-bold text-primary">
                         Customer Experiences
                       </h3>
-                      <p className="text-xs text-[#627184]">Reviews submitted for this product.</p>
+                      <p className="text-xs text-muted-foreground">Reviews submitted for this product.</p>
                     </div>
                     <Button
                       type="button"
@@ -463,7 +463,7 @@ export default function ProductPage() {
                   </div>
 
                   {showReviewForm && (
-                    <div className="bg-[#FAF9F6] p-5 sm:p-6 rounded-xl border border-[#E6E8EC]">
+                    <div className="bg-secondary p-5 sm:p-6 rounded-xl border border-border">
                       <form
                         className="space-y-4"
                         onSubmit={async (e) => {
@@ -497,28 +497,28 @@ export default function ProductPage() {
                       >
                         <div className="grid sm:grid-cols-2 gap-4">
                           <label className="block">
-                            <span className="text-xs font-bold text-[#263445] uppercase">
+                            <span className="text-xs font-bold text-foreground uppercase">
                               Your Name
                             </span>
                             <input
                               value={reviewDisplayName}
                               onChange={(e) => setReviewDisplayName(e.target.value)}
-                              className="mt-1 w-full rounded-lg border border-[#E6E8EC] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[#193B63]"
+                              className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm focus:outline-none focus:border-primary"
                               placeholder="e.g. Asad K."
                             />
                           </label>
                           <label className="block">
-                            <span className="text-xs font-bold text-[#263445] uppercase">
+                            <span className="text-xs font-bold text-foreground uppercase">
                               Rating
                             </span>
                             <Select
                               value={String(reviewRating)}
                               onValueChange={(v) => setReviewRating(Number(v))}
                             >
-                              <SelectTrigger className="mt-1 w-full rounded-lg border border-[#E6E8EC] bg-white px-3 py-2 text-sm">
+                              <SelectTrigger className="mt-1 w-full rounded-lg border border-border bg-card px-3 py-2 text-sm">
                                 <SelectValue placeholder="Select rating" />
                               </SelectTrigger>
-                              <SelectContent className="bg-white border-[#E6E8EC]">
+                              <SelectContent className="bg-card border-border">
                                 {[5, 4, 3, 2, 1].map((value) => (
                                   <SelectItem key={value} value={String(value)}>
                                     {value} Star{value > 1 ? "s" : ""}
@@ -529,21 +529,21 @@ export default function ProductPage() {
                           </label>
                         </div>
                         <label className="block">
-                          <span className="text-xs font-bold text-[#263445] uppercase">
+                          <span className="text-xs font-bold text-foreground uppercase">
                             Your Review
                           </span>
                           <textarea
                             value={reviewComment}
                             onChange={(e) => setReviewComment(e.target.value)}
                             rows={3}
-                            className="mt-1 w-full rounded-lg border border-[#E6E8EC] bg-white p-3 text-sm focus:outline-none focus:border-[#193B63]"
+                            className="mt-1 w-full rounded-lg border border-border bg-card p-3 text-sm focus:outline-none focus:border-primary"
                             placeholder="Share your thoughts on the bag quality, straps, space..."
                           />
                         </label>
                         <button
                           type="submit"
                           disabled={savingReview}
-                          className="bg-[#193B63] hover:bg-[#132D4C] text-white px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50"
+                          className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50"
                         >
                           {savingReview ? "Submitting…" : "Post Review"}
                         </button>
@@ -554,7 +554,7 @@ export default function ProductPage() {
                   {/* Reviews List */}
                   <div className="space-y-3">
                     {reviewsLoading && (
-                      <p className="text-sm text-[#627184] py-4" role="status">
+                      <p className="text-sm text-muted-foreground py-4" role="status">
                         Loading reviews…
                       </p>
                     )}
@@ -564,7 +564,7 @@ export default function ProductPage() {
                       </p>
                     )}
                     {!reviewsLoading && !reviewsError && reviews.length === 0 && (
-                      <p className="text-sm text-[#627184] py-4">
+                      <p className="text-sm text-muted-foreground py-4">
                         No reviews yet for this bag. Be the first to review!
                       </p>
                     )}
@@ -572,22 +572,22 @@ export default function ProductPage() {
                       reviews.map((r) => (
                         <div
                           key={r._id}
-                          className="p-4 rounded-xl border border-[#E6E8EC] bg-white space-y-1.5"
+                          className="p-4 rounded-xl border border-border bg-card space-y-1.5"
                         >
                           <div className="flex items-center justify-between">
-                            <span className="text-sm font-bold text-[#193B63]">
+                            <span className="text-sm font-bold text-primary">
                               {r.displayName ?? r.user?.name ?? "Customer"}
                             </span>
                             <div className="flex items-center gap-0.5">
                               {[...Array(r.rating)].map((_, j) => (
                                 <Star
                                   key={j}
-                                  className="h-3.5 w-3.5 fill-[#E3A34D] text-[#E3A34D]"
+                                  className="h-3.5 w-3.5 fill-gold text-gold"
                                 />
                               ))}
                             </div>
                           </div>
-                          <p className="text-sm text-[#263445]">{r.comment}</p>
+                          <p className="text-sm text-foreground">{r.comment}</p>
                         </div>
                       ))}
                   </div>
@@ -600,7 +600,7 @@ export default function ProductPage() {
         {/* Related Products */}
         {related.length > 0 && (
           <section className="mt-8">
-            <h2 className="font-display text-2xl font-bold text-[#193B63] mb-6">
+            <h2 className="font-display text-2xl font-bold text-primary mb-6">
               You May Also Like
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-6">

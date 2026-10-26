@@ -45,7 +45,7 @@ export type ThemePreset = {
   name: string;
   description: string;
   colors: ThemeColors;
-  category: "Dark Luxury" | "Soft Elegant" | "Bold Luxe" | "Cool Modern";
+  category: "RizMart" | "Dark Luxury" | "Soft Elegant" | "Bold Luxe" | "Cool Modern";
 };
 
 export const THEME_FONT_OPTIONS = {
@@ -152,7 +152,7 @@ export const THEME_BUTTON_FIELDS: Array<{
 ];
 
 export const DEFAULT_THEME_FORM: Record<ThemeColorKey, string> = {
-  background: "#FFFFFF",
+  background: "#FAF9F6",
   foreground: "#263445",
   card: "#FFFFFF",
   cardForeground: "#263445",
@@ -179,10 +179,10 @@ export const DEFAULT_THEME_FORM: Record<ThemeColorKey, string> = {
   sidebar: "#193B63",
   sidebarForeground: "#FFFFFF",
   sidebarPrimary: "#E3A34D",
-  sidebarPrimaryForeground: "#FFFFFF",
+  sidebarPrimaryForeground: "#193B63",
   sidebarAccent: "#132D4C",
   sidebarAccentForeground: "#FFFFFF",
-  sidebarBorder: "rgba(255, 255, 255, 0.12)",
+  sidebarBorder: "#385477",
   sidebarRing: "#E3A34D",
   iconColor: "#627184",
   displayFont:
@@ -194,6 +194,13 @@ export const DEFAULT_THEME_FORM: Record<ThemeColorKey, string> = {
 };
 
 export const THEME_PRESETS: ThemePreset[] = [
+  {
+    id: "rizmart-signature",
+    name: "RizMart Signature",
+    description: "Soft ivory workspace, deep navy navigation and warm amber accents.",
+    category: "RizMart",
+    colors: { ...DEFAULT_THEME_FORM },
+  },
   {
     id: "noir-gold",
     name: "Noir Gold",
@@ -236,6 +243,50 @@ export const THEME_PRESETS: ThemePreset[] = [
       buttonGradientStart: "#edd7a3",
       buttonGradientEnd: "#b88b3a",
       buttonForeground: "#1b1714",
+    },
+  },
+  {
+    id: "obsidian-black",
+    name: "Obsidian Black",
+    description: "A crisp near-black storefront with ivory text and restrained champagne accents.",
+    category: "Dark Luxury",
+    colors: {
+      background: "#090a0c",
+      foreground: "#f4f2ed",
+      card: "#121417",
+      cardForeground: "#f4f2ed",
+      popover: "#171a1e",
+      popoverForeground: "#f4f2ed",
+      primary: "#c9a96e",
+      primaryForeground: "#11100d",
+      secondary: "#1c2024",
+      secondaryForeground: "#f4f2ed",
+      muted: "#202328",
+      mutedForeground: "#aaa9a4",
+      accent: "#29251d",
+      accentForeground: "#f4f2ed",
+      border: "#30343a",
+      input: "#1c2024",
+      ring: "#c9a96e",
+      gold: "#c9a96e",
+      goldSoft: "#e5d2a8",
+      goldDark: "#a88445",
+      ivory: "#f4f2ed",
+      onyx: "#050607",
+      sidebar: "#0d0f12",
+      sidebarForeground: "#f4f2ed",
+      sidebarPrimary: "#c9a96e",
+      sidebarPrimaryForeground: "#11100d",
+      sidebarAccent: "#1c2024",
+      sidebarAccentForeground: "#f4f2ed",
+      sidebarBorder: "#30343a",
+      sidebarRing: "#c9a96e",
+      iconColor: "#c9a96e",
+      displayFont: '"Manrope", "Inter", ui-sans-serif, system-ui, sans-serif',
+      bodyFont: '"Inter", ui-sans-serif, system-ui, sans-serif',
+      buttonGradientStart: "#dfc58e",
+      buttonGradientEnd: "#a88445",
+      buttonForeground: "#11100d",
     },
   },
   {
@@ -821,6 +872,7 @@ export const THEME_PRESETS: ThemePreset[] = [
 ];
 
 export const THEME_PRESET_CATEGORIES: Array<ThemePreset["category"]> = [
+  "RizMart",
   "Dark Luxury",
   "Soft Elegant",
   "Bold Luxe",
@@ -878,7 +930,7 @@ const CSS_VAR_MAP: Record<ThemeColorKey, string> = {
 export function applyThemeColors(theme?: ThemeColors | null) {
   if (typeof document === "undefined") return;
 
-  const root = document.documentElement;
+  const root = document.getElementById("application-content") ?? document.documentElement;
   for (const [key, cssVar] of Object.entries(CSS_VAR_MAP) as Array<[ThemeColorKey, string]>) {
     const value = theme?.[key];
     if (value) root.style.setProperty(cssVar, value);

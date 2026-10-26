@@ -36,16 +36,16 @@ export default function FaqPage() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-12 sm:py-20">
+    <div className="bg-secondary min-h-screen py-12 sm:py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <div className="text-center mb-10 sm:mb-12">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#E3A34D] mb-2">
+          <div className="text-xs font-bold tracking-widest uppercase text-gold mb-2">
             Help Center
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-[#193B63]">
+          <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-primary">
             Frequently Asked Questions
           </h1>
-          <p className="mt-2 text-sm text-[#627184]">
+          <p className="mt-2 text-sm text-muted-foreground">
             Answers about ordering, shipping charges, product details, and return policies at{" "}
             {appName}.
           </p>
@@ -55,23 +55,23 @@ export default function FaqPage() {
           {faqs.map((f, i) => (
             <div
               key={i}
-              className="bg-white border border-[#E6E8EC] rounded-xl overflow-hidden shadow-xs transition-colors"
+              className="bg-card border border-border rounded-xl overflow-hidden shadow-xs transition-colors"
             >
               <button
                 onClick={() => setOpen(open === i ? null : i)}
                 className="w-full flex items-center justify-between gap-4 p-4 sm:p-5 text-left"
               >
-                <span className="font-display text-base sm:text-lg font-bold text-[#193B63]">
+                <span className="font-display text-base sm:text-lg font-bold text-primary">
                   {f.q}
                 </span>
                 <ChevronDown
-                  className={`h-5 w-5 shrink-0 transition-transform text-[#193B63] ${
-                    open === i ? "rotate-180 text-[#E3A34D]" : ""
+                  className={`h-5 w-5 shrink-0 transition-transform text-primary ${
+                    open === i ? "rotate-180 text-gold" : ""
                   }`}
                 />
               </button>
               {open === i && (
-                <div className="px-4 sm:px-5 pb-5 text-sm text-[#627184] leading-relaxed border-t border-[#E6E8EC]/60 pt-3">
+                <div className="px-4 sm:px-5 pb-5 text-sm text-muted-foreground leading-relaxed border-t border-border/60 pt-3">
                   {f.a}
                 </div>
               )}

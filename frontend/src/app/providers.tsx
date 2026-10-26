@@ -60,15 +60,17 @@ export default function Providers({ children }: { children: ReactNode }) {
       <AuthBootstrap />
       <BackendWakeUp />
       <ScrollToTop />
-      {children}
+      <div id="application-content" className="min-h-screen bg-background text-foreground">
+        {children}
+      </div>
       <Toaster
         theme="light"
         position="top-right"
         toastOptions={{
           style: {
-            background: "#FFFFFF",
-            border: "1px solid #E6E8EC",
-            color: "#263445",
+            background: "var(--card)",
+            border: "1px solid var(--border)",
+            color: "var(--card-foreground)",
           },
         }}
       />

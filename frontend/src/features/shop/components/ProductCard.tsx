@@ -39,8 +39,14 @@ export function ProductCard({ product }: { product: ApiProduct }) {
   };
 
   const hasDiscount = product.discountPrice && product.discountPrice < product.price;
-  const categoryName =
+  const rawCategoryName =
     typeof product.category === "object" ? product.category?.name : product.category;
+  // Some product responses contain only the category's MongoDB ID. Never show
+  // that internal identifier as the customer-facing category label.
+  const categoryName =
+    rawCategoryName && !/^[a-f\d]{24}$/i.test(rawCategoryName)
+      ? rawCategoryName
+      : product.material || "Bag";
 
   return (
     <motion.div
@@ -48,10 +54,10 @@ export function ProductCard({ product }: { product: ApiProduct }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
       transition={{ duration: 0.35 }}
-      className="group flex flex-col h-full bg-white rounded-xl border border-[#E6E8EC] overflow-hidden hover:border-[#193B63]/30 hover:shadow-lg transition-all duration-300"
+      className="group flex flex-col h-full bg-card rounded-xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-lg transition-all duration-300"
     >
       {/* Product Image Stage */}
-      <div className="relative aspect-[4/5] bg-[#FAF9F6] overflow-hidden flex items-center justify-center p-3">
+      <div className="relative aspect-[4/5] bg-secondary overflow-hidden flex items-center justify-center p-3">
         <Link
           to={`/product/${product.slug}`}
           className="w-full h-full flex items-center justify-center"
@@ -68,7 +74,7 @@ export function ProductCard({ product }: { product: ApiProduct }) {
               className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
             />
           ) : (
-            <span className="px-4 text-center text-xs text-[#627184]">
+            <span className="px-4 text-center text-xs text-muted-foreground">
               Product image unavailable
             </span>
           )}
@@ -77,12 +83,12 @@ export function ProductCard({ product }: { product: ApiProduct }) {
         {/* Badges */}
         <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
           {hasDiscount && (
-            <span className="bg-[#E3A34D] text-white text-[10px] tracking-wider px-2 py-0.5 uppercase font-bold rounded shadow-sm">
+            <span className="bg-gold text-accent-foreground text-[10px] tracking-wider px-2 py-0.5 uppercase font-bold rounded shadow-sm">
               Sale
             </span>
           )}
           {product.newArrival && !hasDiscount && (
-            <span className="bg-[#193B63] text-white text-[10px] tracking-wider px-2 py-0.5 uppercase font-bold rounded shadow-sm">
+            <span className="bg-primary text-primary-foreground text-[10px] tracking-wider px-2 py-0.5 uppercase font-bold rounded shadow-sm">
               New
             </span>
           )}
@@ -96,27 +102,27 @@ export function ProductCard({ product }: { product: ApiProduct }) {
             dispatch(toggleWishlist(product._id));
             toast(wishHas ? "Removed from wishlist" : "Saved to wishlist");
           }}
-          className="absolute top-2.5 right-2.5 h-8 w-8 rounded-full bg-white/90 backdrop-blur-sm border border-[#E6E8EC] flex items-center justify-center text-[#263445] hover:text-[#E3A34D] hover:border-[#E3A34D] transition-colors shadow-sm z-10"
+          className="absolute top-2.5 right-2.5 h-8 w-8 rounded-full bg-card/90 backdrop-blur-sm border border-border flex items-center justify-center text-foreground hover:text-gold hover:border-gold transition-colors shadow-sm z-10"
           aria-label={
             wishHas ? `Remove ${product.name} from wishlist` : `Add ${product.name} to wishlist`
           }
         >
-          <Heart className={`h-4 w-4 ${wishHas ? "fill-[#E3A34D] text-[#E3A34D]" : ""}`} />
+          <Heart className={`h-4 w-4 ${wishHas ? "fill-gold text-gold" : ""}`} />
         </button>
       </div>
 
       {/* Product Information */}
-      <div className="p-3.5 sm:p-4 flex flex-col flex-1 justify-between gap-2.5 bg-white">
-        <div>
+      <div className="flex flex-1 flex-col justify-between gap-2.5 bg-card p-2.5 min-[380px]:p-3.5 sm:p-4">
+        <div className="min-w-0">
           {/* Category / Material tag */}
-          <div className="text-[11px] font-medium text-[#627184] uppercase tracking-wider mb-1 truncate">
-            {categoryName || product.material || "Bag"}
+          <div className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider mb-1 truncate">
+            {categoryName}
           </div>
 
           {/* Product Name */}
           <Link
             to={`/product/${product.slug}`}
-            className="block font-display text-sm sm:text-base font-bold text-[#193B63] hover:text-[#E3A34D] transition-colors line-clamp-2 leading-snug"
+            className="block font-display text-sm sm:text-base font-bold text-primary hover:text-gold transition-colors line-clamp-3 leading-snug"
             title={product.name}
           >
             {product.name}
@@ -125,27 +131,27 @@ export function ProductCard({ product }: { product: ApiProduct }) {
 
         <div>
           {/* Price & Rating */}
-          <div className="flex items-center justify-between gap-2 pt-1 border-t border-[#E6E8EC]/60">
-            <div className="flex items-baseline gap-1.5">
+          <div className="flex items-center justify-between gap-2 border-t border-border/60 pt-2">
+            <div className="flex min-w-0 flex-wrap items-baseline gap-x-2 gap-y-0.5">
               {hasDiscount ? (
                 <>
-                  <span className="text-[#193B63] font-bold text-sm sm:text-base">
+                  <span className="whitespace-nowrap text-primary font-bold text-sm sm:text-base">
                     {formatPrice(product.discountPrice!)}
                   </span>
-                  <span className="text-xs text-[#8C9BAA] line-through">
+                  <span className="whitespace-nowrap text-xs text-muted-foreground line-through">
                     {formatPrice(product.price)}
                   </span>
                 </>
               ) : (
-                <span className="text-[#193B63] font-bold text-sm sm:text-base">
+                <span className="whitespace-nowrap text-primary font-bold text-sm sm:text-base">
                   {formatPrice(product.price)}
                 </span>
               )}
             </div>
 
             {product.averageRating > 0 && (
-              <div className="flex items-center gap-1 text-xs text-[#627184] shrink-0 font-medium">
-                <Star className="h-3.5 w-3.5 fill-[#E3A34D] text-[#E3A34D]" />
+              <div className="flex items-center gap-1 text-xs text-muted-foreground shrink-0 font-medium">
+                <Star className="h-3.5 w-3.5 fill-gold text-gold" />
                 <span>{product.averageRating.toFixed(1)}</span>
               </div>
             )}
@@ -155,10 +161,10 @@ export function ProductCard({ product }: { product: ApiProduct }) {
           <button
             onClick={handleAddToCart}
             disabled={product.stock < 1}
-            className="mt-3 w-full bg-[#193B63] text-white text-xs tracking-wider uppercase font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 hover:bg-[#132D4C] active:bg-[#0E223B] transition-colors disabled:cursor-not-allowed disabled:bg-[#8C9BAA]"
+            className="mt-3 flex min-h-11 w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-2 py-2.5 text-[11px] font-bold uppercase tracking-[0.08em] text-primary-foreground transition-colors hover:bg-primary/90 active:bg-primary/80 min-[380px]:text-xs min-[380px]:tracking-wider disabled:cursor-not-allowed disabled:bg-muted-foreground"
           >
-            <ShoppingBag className="h-3.5 w-3.5" />
-            <span>{product.stock > 0 ? "Add to Cart" : "Out of Stock"}</span>
+            <ShoppingBag className="h-3.5 w-3.5 shrink-0" />
+            <span className="whitespace-nowrap">{product.stock > 0 ? "Add to Cart" : "Out of Stock"}</span>
           </button>
         </div>
       </div>

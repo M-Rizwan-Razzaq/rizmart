@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Shop backpacks, school bags, laptop bags and travel bags online at RizMart. Browse product details, check current availability and place a cash on delivery order in Pakistan.",
+    "Shop backpacks, school bags, laptop bags and travel bags online in Pakistan. Compare product details and availability, then order from RizMart with cash on delivery.",
   keywords: [
     "bags store pakistan",
     "buy bags online pakistan",
@@ -38,9 +38,9 @@ export const metadata: Metadata = {
     type: "website",
     title: "Shop Bags Online in Pakistan | RizMart",
     description:
-      "Browse school bags, backpacks, laptop bags and travel bags at RizMart. Check product details and availability, then place your order with cash on delivery.",
+      "Browse school bags, backpacks, laptop bags and travel bags in Pakistan. Check product details and availability, then order from RizMart with cash on delivery.",
     url: `${SITE_URL}/`,
-    locale: "en_US",
+    locale: "en_PK",
     images: [
       { url: "/og-image.svg", width: 1200, height: 630, alt: "RizMart Bags Store Pakistan" },
     ],

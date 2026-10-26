@@ -23,7 +23,7 @@ export function toMetadata(input: SeoInput = {}): Metadata {
       description: seo.description,
       url: seo.url,
       images: [{ url: seo.image }],
-      locale: "en_US",
+      locale: "en_PK",
     },
     twitter: {
       card: "summary_large_image",
@@ -50,6 +50,7 @@ export const loginMetadata: Metadata = toMetadata({
   description:
     "Sign in to your RizMart account to track your bag orders, save favourites and manage your details. Pakistan's premium online bags store.",
   path: "/login",
+  noindex: true,
 });
 
 export const registerMetadata: Metadata = toMetadata({
@@ -57,6 +58,7 @@ export const registerMetadata: Metadata = toMetadata({
   description:
     "Join RizMart — Pakistan's premium bags store. Create an account for early access to new bag arrivals, exclusive offers and faster checkout with cash on delivery.",
   path: "/register",
+  noindex: true,
 });
 
 export const forgotPasswordMetadata: Metadata = toMetadata({

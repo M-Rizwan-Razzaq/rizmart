@@ -86,13 +86,13 @@ export default function ShopPage() {
           .join(" ");
 
   const filterPanel = (
-    <div className="space-y-6 bg-white p-5 rounded-xl border border-[#E6E8EC]">
-      <div className="flex items-center justify-between pb-3 border-b border-[#E6E8EC]">
-        <div className="flex items-center gap-2 text-xs tracking-wider uppercase font-bold text-[#193B63]">
-          <SlidersHorizontal className="h-4 w-4 text-[#E3A34D]" /> Filter Collection
+    <div className="space-y-6 bg-card p-5 rounded-xl border border-border">
+      <div className="flex items-center justify-between pb-3 border-b border-border">
+        <div className="flex items-center gap-2 text-xs tracking-wider uppercase font-bold text-primary">
+          <SlidersHorizontal className="h-4 w-4 text-gold" /> Filter Collection
         </div>
         <button
-          className="lg:hidden text-[#263445] p-1"
+          className="lg:hidden text-foreground p-1"
           onClick={() => setShowFilters(false)}
           aria-label="Close filters"
         >
@@ -104,7 +104,7 @@ export default function ShopPage() {
       <div>
         <label
           htmlFor="shop-search"
-          className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-2"
+          className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2"
         >
           Search by Keyword
         </label>
@@ -117,9 +117,9 @@ export default function ShopPage() {
               setPage(1);
             }}
             placeholder="Search school, laptop, travel..."
-            className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg pl-9 pr-3 py-2 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+            className="w-full bg-secondary border border-border rounded-lg pl-9 pr-3 py-2 text-sm text-foreground focus:outline-none focus:border-primary"
           />
-          <Search className="h-4 w-4 text-[#627184] absolute left-3 top-2.5" />
+          <Search className="h-4 w-4 text-muted-foreground absolute left-3 top-2.5" />
         </div>
       </div>
 
@@ -181,8 +181,8 @@ export default function ShopPage() {
       </FilterGroup>
 
       {/* Price Slider */}
-      <div className="pt-2 border-t border-[#E6E8EC]">
-        <div className="flex items-center justify-between text-xs font-bold text-[#193B63] mb-2">
+      <div className="pt-2 border-t border-border">
+        <div className="flex items-center justify-between text-xs font-bold text-primary mb-2">
           <span className="uppercase tracking-wider">Max Price</span>
           <span>{formatPrice(max)}</span>
         </div>
@@ -196,9 +196,9 @@ export default function ShopPage() {
             setMax(Number(e.target.value));
             setPage(1);
           }}
-          className="w-full accent-[#193B63] cursor-pointer"
+          className="w-full accent-primary cursor-pointer"
         />
-        <div className="flex justify-between text-[11px] text-[#627184] mt-1">
+        <div className="flex justify-between text-[11px] text-muted-foreground mt-1">
           <span>PKR 500</span>
           <span>PKR 50,000</span>
         </div>
@@ -207,17 +207,17 @@ export default function ShopPage() {
   );
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-8 sm:py-12">
+    <div className="bg-secondary min-h-screen py-8 sm:py-12">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header Breadcrumb / Title */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#E3A34D] mb-2">
+          <div className="text-xs font-bold tracking-widest uppercase text-gold mb-2">
             {selectedCategory ? "Shop Collection" : "The Complete Collection"}
           </div>
-          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#193B63]">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary">
             {selectedCategory?.name ?? "All Bags & Backpacks"}
           </h1>
-          <p className="mt-2.5 text-sm sm:text-base text-[#627184]">
+          <p className="mt-2.5 text-sm sm:text-base text-muted-foreground">
             {selectedCategory
               ? `Browse ${selectedCategory.name.toLowerCase()} and see current prices, product details, and availability.`
               : "Browse school bags, backpacks, laptop bags and travel bags. Check each product page for available details and current stock."}
@@ -231,22 +231,22 @@ export default function ShopPage() {
           {/* Main Product Grid */}
           <div>
             {/* Sorting & Filter toggle header */}
-            <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E6E8EC] flex flex-wrap items-center justify-between gap-3 mb-6 shadow-xs">
+            <div className="bg-card p-3.5 sm:p-4 rounded-xl border border-border flex flex-wrap items-center justify-between gap-3 mb-6 shadow-xs">
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setShowFilters(true)}
-                  className="lg:hidden inline-flex items-center gap-2 border border-[#E6E8EC] bg-[#FAF9F6] px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg text-[#193B63]"
+                  className="lg:hidden inline-flex items-center gap-2 border border-border bg-secondary px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg text-primary"
                 >
-                  <SlidersHorizontal className="h-4 w-4 text-[#E3A34D]" /> Filters
+                  <SlidersHorizontal className="h-4 w-4 text-gold" /> Filters
                 </button>
-                <div className="text-xs sm:text-sm text-[#627184] font-medium">
-                  Showing <span className="font-bold text-[#193B63]">{products.length}</span> of{" "}
-                  <span className="font-bold text-[#193B63]">{data?.total ?? 0}</span> products
+                <div className="text-xs sm:text-sm text-muted-foreground font-medium">
+                  Showing <span className="font-bold text-primary">{products.length}</span> of{" "}
+                  <span className="font-bold text-primary">{data?.total ?? 0}</span> products
                 </div>
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-xs text-[#627184] hidden sm:inline">Sort:</span>
+                <span className="text-xs text-muted-foreground hidden sm:inline">Sort:</span>
                 <Select
                   value={sortBy}
                   onValueChange={(v) => {
@@ -254,15 +254,15 @@ export default function ShopPage() {
                     setPage(1);
                   }}
                 >
-                  <SelectTrigger className="w-auto rounded-lg bg-[#FAF9F6] border-[#E6E8EC] px-3 py-2 text-xs sm:text-sm font-medium text-[#263445] focus:border-[#193B63]">
+                  <SelectTrigger className="w-auto rounded-lg bg-secondary border-border px-3 py-2 text-xs sm:text-sm font-medium text-foreground focus:border-primary">
                     <SelectValue placeholder="Sort by" />
                   </SelectTrigger>
-                  <SelectContent className="max-h-60 border-[#E6E8EC] bg-white text-[#263445]">
+                  <SelectContent className="max-h-60 border-border bg-card text-foreground">
                     {SORT_OPTIONS.map((s) => (
                       <SelectItem
                         key={s.value}
                         value={s.value}
-                        className="text-xs text-[#263445] focus:bg-[#193B63] focus:text-white sm:text-sm"
+                        className="text-xs text-foreground focus:bg-primary focus:text-primary-foreground sm:text-sm"
                       >
                         {s.label}
                       </SelectItem>
@@ -277,15 +277,15 @@ export default function ShopPage() {
               <PageSpinner minH="40vh" />
             ) : isError ? (
               <div
-                className="rounded-xl border border-[#E6E8EC] bg-white px-6 py-12 text-center"
+                className="rounded-xl border border-border bg-card px-6 py-12 text-center"
                 role="alert"
               >
-                <p className="mb-4 text-sm text-[#627184]">
+                <p className="mb-4 text-sm text-muted-foreground">
                   We couldn’t load the collection. Please try again.
                 </p>
                 <button
                   onClick={() => refetch()}
-                  className="rounded-lg bg-[#193B63] px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white hover:bg-[#132D4C]"
+                  className="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-primary-foreground hover:bg-primary/90"
                 >
                   Try Again
                 </button>
@@ -299,11 +299,11 @@ export default function ShopPage() {
                 </div>
 
                 {products.length === 0 && (
-                  <div className="text-center py-20 bg-white rounded-xl border border-[#E6E8EC] p-8">
-                    <p className="text-base text-[#263445] font-semibold mb-2">
+                  <div className="text-center py-20 bg-card rounded-xl border border-border p-8">
+                    <p className="text-base text-foreground font-semibold mb-2">
                       No bags match your current filters.
                     </p>
-                    <p className="text-xs text-[#627184] mb-4">
+                    <p className="text-xs text-muted-foreground mb-4">
                       Try clearing search terms or selecting a different category.
                     </p>
                     <button
@@ -315,7 +315,7 @@ export default function ShopPage() {
                         setMax(50000);
                         setPage(1);
                       }}
-                      className="inline-flex items-center gap-2 bg-[#193B63] text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg"
+                      className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-5 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg"
                     >
                       Reset All Filters
                     </button>
@@ -331,11 +331,11 @@ export default function ShopPage() {
                         setPage((p) => p - 1);
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
-                      className="border border-[#E6E8EC] bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-[#193B63] text-[#193B63] transition-colors"
+                      className="border border-border bg-card px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-primary text-primary transition-colors"
                     >
                       Previous
                     </button>
-                    <span className="px-3 py-2 text-xs font-semibold text-[#627184]">
+                    <span className="px-3 py-2 text-xs font-semibold text-muted-foreground">
                       Page {page} of {totalPages}
                     </span>
                     <button
@@ -344,7 +344,7 @@ export default function ShopPage() {
                         setPage((p) => p + 1);
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
-                      className="border border-[#E6E8EC] bg-white px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-[#193B63] text-[#193B63] transition-colors"
+                      className="border border-border bg-card px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg disabled:opacity-40 hover:border-primary text-primary transition-colors"
                     >
                       Next
                     </button>
@@ -360,10 +360,10 @@ export default function ShopPage() {
       {showFilters && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div
-            className="absolute inset-0 bg-[#263445]/60 backdrop-blur-xs"
+            className="absolute inset-0 bg-foreground/60 backdrop-blur-xs"
             onClick={() => setShowFilters(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-[88vw] max-w-sm bg-white overflow-y-auto p-5 shadow-2xl">
+          <div className="absolute right-0 top-0 h-full w-[88vw] max-w-sm bg-card overflow-y-auto p-5 shadow-2xl">
             {filterPanel}
           </div>
         </div>
@@ -375,7 +375,7 @@ export default function ShopPage() {
 function FilterGroup({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <div className="text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-2.5">
+      <div className="text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-2.5">
         {title}
       </div>
       <div className="flex flex-wrap gap-1.5">{children}</div>
@@ -397,8 +397,8 @@ function Chip({
       onClick={onClick}
       className={`px-3 py-1.5 text-xs font-medium rounded-lg border transition-all ${
         active
-          ? "bg-[#193B63] text-white border-[#193B63] shadow-xs font-semibold"
-          : "border-[#E6E8EC] bg-[#FAF9F6] text-[#263445] hover:border-[#193B63]/40 hover:bg-white"
+          ? "bg-primary text-primary-foreground border-primary shadow-xs font-semibold"
+          : "border-border bg-secondary text-foreground hover:border-primary/40 hover:bg-card"
       }`}
     >
       {children}

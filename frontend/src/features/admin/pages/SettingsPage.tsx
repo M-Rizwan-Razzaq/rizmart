@@ -34,6 +34,7 @@ import {
   THEME_COLOR_FIELDS,
   THEME_ICON_FIELDS,
   createThemeForm,
+  applyThemeColors,
   type ThemeColorKey,
   type ThemeColors,
 } from "@/lib/theme";
@@ -94,15 +95,31 @@ export default function SettingsPage() {
   }, [initialBrandForm]);
 
   const setField = (key: ThemeColorKey, value: string) => {
-    setForm((prev) => ({ ...prev, [key]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [key]: value };
+      applyThemeColors(next);
+      return next;
+    });
   };
 
   const setBrandField = (key: keyof BrandSettings, value: string) => {
     setBrandForm((prev) => ({ ...prev, [key]: value }));
   };
 
-  const applyPreset = (presetColors: ThemeColors) => {
-    setForm((prev) => ({ ...prev, ...createThemeForm(presetColors) }));
+  const applyPreset = async (presetColors: ThemeColors) => {
+    const nextForm = createThemeForm(presetColors);
+    setForm(nextForm);
+    applyThemeColors(nextForm);
+    try {
+      const savedTheme = await updateTheme(nextForm).unwrap();
+      applyThemeColors(savedTheme);
+      toast.success("Storefront palette saved and applied");
+    } catch {
+      const previousTheme = createThemeForm(theme);
+      setForm(previousTheme);
+      applyThemeColors(theme);
+      toast.error("Could not save this palette");
+    }
   };
 
   const groupedPresets = THEME_PRESET_CATEGORIES.map((category) => ({
@@ -122,7 +139,8 @@ export default function SettingsPage() {
   const save = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await updateTheme(form as ThemeColors).unwrap();
+      const savedTheme = await updateTheme(form as ThemeColors).unwrap();
+      applyThemeColors(savedTheme);
       toast.success("Theme settings saved");
     } catch {
       toast.error("Failed to save theme settings");
@@ -141,6 +159,8 @@ export default function SettingsPage() {
   const handleReset = async () => {
     try {
       await resetTheme().unwrap();
+      setForm(DEFAULT_THEME_FORM);
+      applyThemeColors(DEFAULT_THEME_FORM);
       toast.success("Theme reset to defaults");
     } catch {
       toast.error("Failed to reset theme");
@@ -153,8 +173,8 @@ export default function SettingsPage() {
         <div>
           <h1 className="font-display text-2xl sm:text-3xl mb-2">Settings</h1>
           <p className="text-sm text-muted-foreground">
-            Update the global palette, typography, and button styling used across the storefront and
-            admin panel.
+            Update the customer-facing storefront colors, typography, and buttons. The admin console
+            keeps its own private RizMart theme.
           </p>
         </div>
         <button
@@ -174,7 +194,8 @@ export default function SettingsPage() {
             <div>
               <h2 className="font-display text-xl">Presets</h2>
               <p className="text-sm text-muted-foreground">
-                Pick a ready-made palette and then customize any color.
+                Pick a palette to apply it to the customer storefront. Custom color edits preview
+                there live; save them below to keep them.
               </p>
             </div>
           </div>
@@ -195,7 +216,8 @@ export default function SettingsPage() {
                       key={preset.id}
                       type="button"
                       onClick={() => applyPreset(preset.colors)}
-                      className="group rounded-[20px] border border-border bg-background/40 p-4 text-left transition hover:border-gold hover:shadow-[0_0_0_1px_var(--gold)]"
+                      disabled={saving}
+                      className="group rounded-[20px] border border-border bg-background/40 p-4 text-left transition hover:border-gold hover:shadow-[0_0_0_1px_var(--gold)] disabled:cursor-wait disabled:opacity-60"
                     >
                       <div
                         className="h-24 rounded-[20px] border border-border/60 mb-4 overflow-hidden"
@@ -422,19 +444,6 @@ export default function SettingsPage() {
             <p className="mt-3 text-sm text-muted-foreground">
               These icons use the preset-driven icon color.
             </p>
-          </div>
-        </section>
-        <section className="border-t border-border pt-8">
-          <h2 className="font-display text-xl mb-4">Sidebar Colors</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-            {THEME_COLOR_FIELDS.filter((field) => field.section === "Sidebar").map((field) => (
-              <ColorField
-                key={field.key}
-                label={field.label}
-                value={form[field.key]}
-                onChange={(value) => setField(field.key, value)}
-              />
-            ))}
           </div>
         </section>
         <div className="flex flex-wrap gap-3">

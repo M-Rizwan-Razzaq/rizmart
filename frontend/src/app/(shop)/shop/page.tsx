@@ -4,9 +4,9 @@ import { fetchApiData } from "@/lib/server-api";
 import type { ApiCategory } from "@/store/services/categoriesApi";
 
 const defaultMetadata: Metadata = toMetadata({
-  title: "Shop Bags Online in Pakistan",
+  title: "Buy Backpacks, School & Travel Bags Online",
   description:
-    "Shop backpacks, laptop bags, school bags and travel bags online at RizMart. Check product details, current availability and cash on delivery at checkout.",
+    "Browse backpacks, school bags, laptop bags and travel bags at RizMart in Pakistan. Compare current prices, product details and availability before ordering with cash on delivery.",
   path: "/shop",
 });
 
@@ -23,8 +23,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   if (!category?.isActive) return defaultMetadata;
 
   return toMetadata({
-    title: `Buy ${category.name} Online in Pakistan`,
-    description: `Browse ${category.name.toLowerCase()} at RizMart. Compare current prices, check product details and availability, and order with cash on delivery.`,
+    title: `${category.name} Online in Pakistan`,
+    description: `Shop ${category.name.toLowerCase()} online in Pakistan with RizMart. Compare current prices, product details and availability, then order with cash on delivery.`,
     path: `/shop?category=${encodeURIComponent(category._id)}`,
   });
 }

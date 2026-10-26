@@ -47,18 +47,18 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-[75vh] flex items-center justify-center py-12 px-4 sm:px-6">
-      <div className="max-w-md w-full bg-white rounded-2xl border border-[#E6E8EC] p-7 sm:p-9 shadow-xs">
-        <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-[#193B63] text-center mb-1.5">
+    <div className="bg-secondary min-h-[75vh] flex items-center justify-center py-12 px-4 sm:px-6">
+      <div className="max-w-md w-full bg-card rounded-2xl border border-border p-7 sm:p-9 shadow-xs">
+        <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-primary text-center mb-1.5">
           Welcome Back
         </h1>
-        <p className="text-center text-xs text-[#627184] mb-8">
+        <p className="text-center text-xs text-muted-foreground mb-8">
           Sign in to manage your bag orders & profile
         </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
               Email Address
             </label>
             <input
@@ -66,13 +66,13 @@ export default function LoginPage() {
               type="email"
               placeholder="name@example.com"
               autoComplete="email"
-              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+              className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
             />
             {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email.message}</p>}
           </div>
 
           <div>
-            <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+            <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
               Password
             </label>
             <input
@@ -80,7 +80,7 @@ export default function LoginPage() {
               type="password"
               placeholder="••••••••"
               autoComplete="current-password"
-              className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+              className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
             />
             {errors.password && (
               <p className="text-xs text-red-500 mt-1">{errors.password.message}</p>
@@ -90,7 +90,7 @@ export default function LoginPage() {
           <div className="text-right">
             <Link
               to="/forgot-password"
-              className="text-xs font-semibold text-[#627184] hover:text-[#193B63]"
+              className="text-xs font-semibold text-muted-foreground hover:text-primary"
             >
               Forgot password?
             </Link>
@@ -98,15 +98,15 @@ export default function LoginPage() {
 
           <button
             disabled={loading}
-            className="w-full bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm cursor-pointer"
+            className="w-full bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm cursor-pointer"
           >
             {loading ? "Signing in…" : "Sign In to RizMart"}
           </button>
         </form>
 
-        <div className="mt-6 text-center text-xs text-[#627184]">
+        <div className="mt-6 text-center text-xs text-muted-foreground">
           New customer?{" "}
-          <Link to="/register" className="font-bold text-[#193B63] hover:underline">
+          <Link to="/register" className="font-bold text-primary hover:underline">
             Create an account
           </Link>
         </div>

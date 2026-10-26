@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProductPage from "@/features/shop/pages/ProductPage";
 import { fetchApiData } from "@/lib/server-api";
-import { buildSeo, SITE_URL } from "@/lib/seo";
+import { buildSeo, SITE_URL, toPlainSeoText, truncateSeoDescription } from "@/lib/seo";
 import { getImageUrl } from "@/lib/constants";
 import type { ApiProduct, ApiReview, PaginatedReviews } from "@/store/services/productsApi";
 
@@ -16,15 +16,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return {};
-  const description =
-    product.description
-      ?.replace(/<[^>]*>/g, " ")
-      .replace(/\s+/g, " ")
-      .trim() ||
-    `${product.name}. View current price, availability and product details at RizMart.`;
+  const description = truncateSeoDescription(
+    toPlainSeoText(product.description ?? "") ||
+      `${product.name}. View current price, availability and product details at RizMart.`,
+  );
   const seo = buildSeo({
     title: product.name,
-    description: description.slice(0, 160),
+    description,
     path: `/product/${product.slug}`,
     image: getImageUrl(product.images[0]),
     type: "product",
@@ -40,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: seo.description,
       url: seo.url,
       images: [{ url: seo.image, width: 800, height: 800, alt: product.name }],
-      locale: "en_US",
+      locale: "en_PK",
     },
     twitter: {
       card: "summary_large_image",
@@ -71,7 +69,7 @@ export default async function Page({ params }: Props) {
       "@type": "Product",
       name: product.name,
       ...(image ? { image: [image] } : {}),
-      description: product.description,
+      description: toPlainSeoText(product.description ?? "") || description,
       sku: product.sku,
       brand: { "@type": "Brand", name: "RizMart" },
       offers: {

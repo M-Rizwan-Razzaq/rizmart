@@ -22,6 +22,10 @@ export function Navbar() {
   const { data: brand } = useGetBrandSettingsQuery();
   const appName = brand?.appName?.trim() || DEFAULT_BRAND_FORM.appName;
 
+  useEffect(() => {
+    setOpen(false);
+  }, [location.pathname, location.search]);
+
   const isActive = (to: string) => {
     const [path, query] = to.split("?");
     if (location.pathname !== path) return false;
@@ -32,47 +36,53 @@ export function Navbar() {
   const primaryCategories = categories.slice(0, 4);
 
   return (
-    <header className="sticky top-0 z-50 bg-white">
+    <header className="sticky top-0 z-50 bg-card">
       {/* Top Banner / Announcement Strip */}
-      <div className="bg-[#193B63] text-white">
-        <div className="mx-auto max-w-7xl px-3 sm:px-6 py-2 text-center text-[9px] sm:text-xs tracking-[0.06em] sm:tracking-[0.14em] uppercase font-semibold flex items-center justify-center gap-1 sm:gap-2">
+      <div className="bg-primary text-primary-foreground">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-1 px-2 py-2 text-center text-[8px] font-semibold uppercase tracking-[0.02em] sm:gap-x-2 sm:px-6 sm:text-xs sm:tracking-[0.14em]">
           <span>Free Shipping Over PKR 500</span>
-          <span className="opacity-50">•</span>
+          <span className="hidden opacity-50 min-[360px]:inline">•</span>
           <span>Cash on Delivery Available</span>
         </div>
       </div>
 
       {/* Main Navigation Bar */}
-      <div className="border-b border-[#E6E8EC] bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5 sm:py-4">
+      <div className="border-b border-border bg-card">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-0.5 px-2 py-2.5 min-[380px]:gap-1.5 min-[380px]:px-3 sm:gap-3 sm:px-6 sm:py-4 lg:gap-2">
           {/* Mobile hamburger */}
           <button
-            className="lg:hidden p-1.5 -ml-1.5 text-[#193B63] hover:text-[#E3A34D] transition-colors"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-primary transition-colors hover:bg-secondary hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold min-[380px]:h-10 min-[380px]:w-10 lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Toggle navigation menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
-            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {open ? <X className="h-5 w-5 min-[380px]:h-6 min-[380px]:w-6" /> : <Menu className="h-5 w-5 min-[380px]:h-6 min-[380px]:w-6" />}
           </button>
 
           {/* Logo */}
-          <Link to="/" aria-label={`${appName} home`} className="flex items-center gap-2.5 group">
+          <Link
+            to="/"
+            aria-label={`${appName} home`}
+            className="group flex min-w-0 flex-1 items-center gap-1 sm:gap-2.5 lg:flex-none lg:gap-1 2xl:gap-2.5"
+          >
             <img
               src="/rizmart-mark.jpg"
               alt=""
-              className="h-10 w-10 rounded-lg border border-[#E6E8EC] object-cover sm:h-11 sm:w-11"
+              className="h-7 w-7 shrink-0 rounded-lg border border-border object-cover min-[380px]:h-8 min-[380px]:w-8 sm:h-11 sm:w-11 lg:h-9 lg:w-9 2xl:h-11 2xl:w-11"
             />
-            <span className="font-display text-2xl sm:text-3xl tracking-tight text-[#193B63] font-extrabold group-hover:text-[#132D4C] transition-colors">
+            <span className="truncate font-display text-[16px] font-extrabold tracking-tight text-primary transition-colors group-hover:text-primary/90 min-[380px]:text-[19px] sm:text-3xl lg:text-xl 2xl:text-3xl">
               {appName.toUpperCase()}
             </span>
           </Link>
 
           {/* Desktop Categories & Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold tracking-normal text-[#263445]">
+          <nav className="hidden shrink-0 items-center gap-3 whitespace-nowrap text-[11px] font-semibold tracking-normal text-foreground lg:flex lg:gap-3 2xl:gap-5 2xl:text-sm">
             <NavLink
               to="/shop"
               className={({ isActive }) =>
-                `transition-colors py-1 ${
-                  isActive ? "text-[#193B63] border-b-2 border-[#193B63]" : "hover:text-[#E3A34D]"
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
                 }`
               }
             >
@@ -82,10 +92,10 @@ export function Navbar() {
               <Link
                 key={category._id}
                 to={`/shop?category=${category._id}`}
-                className={`transition-colors py-1 ${
+                className={`shrink-0 whitespace-nowrap py-1 transition-colors ${
                   isActive(`/shop?category=${category._id}`)
-                    ? "text-[#193B63] border-b-2 border-[#193B63]"
-                    : "hover:text-[#E3A34D]"
+                    ? "text-primary border-b-2 border-primary"
+                    : "hover:text-gold"
                 }`}
               >
                 {category.name}
@@ -94,8 +104,8 @@ export function Navbar() {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                `transition-colors py-1 ${
-                  isActive ? "text-[#193B63] border-b-2 border-[#193B63]" : "hover:text-[#E3A34D]"
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
                 }`
               }
             >
@@ -104,8 +114,8 @@ export function Navbar() {
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                `transition-colors py-1 ${
-                  isActive ? "text-[#193B63] border-b-2 border-[#193B63]" : "hover:text-[#E3A34D]"
+                `shrink-0 whitespace-nowrap py-1 transition-colors ${
+                  isActive ? "text-primary border-b-2 border-primary" : "hover:text-gold"
                 }`
               }
             >
@@ -114,23 +124,23 @@ export function Navbar() {
           </nav>
 
           {/* Action Icons */}
-          <div className="flex items-center gap-4 sm:gap-5">
+          <div className="flex shrink-0 items-center gap-0 sm:gap-2 lg:gap-2 2xl:gap-3">
             <Link
               to="/shop"
               aria-label="Search bags"
-              className="p-1.5 text-[#B8791B] hover:text-[#193B63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3A34D] focus-visible:ring-offset-2 rounded-md transition-colors"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
             >
-              <Search className="h-5 w-5" />
+              <Search className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
             </Link>
 
             <Link
               to="/wishlist"
               aria-label="Wishlist"
-              className="relative p-1.5 text-[#B8791B] hover:text-[#193B63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3A34D] focus-visible:ring-offset-2 rounded-md transition-colors"
+              className="relative flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
             >
-              <Heart className="h-5 w-5" />
+              <Heart className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
               {mounted && wishCount > 0 && (
-                <span className="absolute -top-1 -right-1 text-[10px] bg-[#E3A34D] text-white rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
+                <span className="absolute -top-1 -right-1 text-[10px] bg-gold text-accent-foreground rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
                   {wishCount}
                 </span>
               )}
@@ -141,28 +151,28 @@ export function Navbar() {
                 to="/admin"
                 aria-label="Admin panel"
                 title="Admin Panel"
-                className="p-1.5 text-[#193B63] hover:text-[#E3A34D] transition-colors"
+                className="flex h-8 w-8 items-center justify-center rounded-lg text-primary transition-colors hover:bg-secondary hover:text-gold min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
               >
-                <ShieldCheck className="h-5 w-5" />
+                <ShieldCheck className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
               </Link>
             )}
 
             <Link
               to="/account"
               aria-label="My Account"
-              className="p-1.5 text-[#B8791B] hover:text-[#193B63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3A34D] focus-visible:ring-offset-2 rounded-md transition-colors"
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
             >
-              <User className="h-5 w-5" />
+              <User className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
             </Link>
 
             <Link
               to="/cart"
               aria-label="Shopping Cart"
-              className="relative p-1.5 text-[#B8791B] hover:text-[#193B63] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E3A34D] focus-visible:ring-offset-2 rounded-md transition-colors"
+              className="relative flex h-8 w-8 items-center justify-center rounded-lg text-gold-dark transition-colors hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 min-[380px]:h-10 min-[380px]:w-10 lg:h-8 lg:w-8 2xl:h-10 2xl:w-10"
             >
-              <ShoppingBag className="h-5 w-5" />
+              <ShoppingBag className="h-[18px] w-[18px] min-[380px]:h-5 min-[380px]:w-5" />
               {mounted && cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 text-[10px] bg-[#E3A34D] text-white rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
+                <span className="absolute -top-1 -right-1 text-[10px] bg-gold text-accent-foreground rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold shadow-sm">
                   {cartCount}
                 </span>
               )}
@@ -173,15 +183,18 @@ export function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {open && (
-        <div className="lg:hidden border-b border-[#E6E8EC] bg-white px-4 py-4 shadow-lg animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col gap-1.5 text-sm font-semibold">
+        <div
+          id="mobile-navigation"
+          className="absolute inset-x-0 top-full max-h-[calc(100dvh-6rem)] overflow-y-auto overscroll-contain border-b border-border bg-card px-3 py-3 shadow-xl animate-in slide-in-from-top-2 duration-200 sm:px-4 sm:py-4 lg:hidden"
+        >
+          <nav className="mx-auto flex max-w-7xl flex-col gap-1.5 text-sm font-semibold">
             <Link
               to="/shop"
               onClick={() => setOpen(false)}
-              className={`flex items-center justify-between rounded-lg px-4 py-2.5 transition-colors ${
+              className={`flex min-h-11 items-center justify-between rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                 location.pathname === "/shop" && !location.search
-                  ? "bg-[#193B63] text-white"
-                  : "text-[#263445] hover:bg-[#FAF9F6]"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
               }`}
             >
               All Bags & Backpacks
@@ -191,21 +204,21 @@ export function Navbar() {
                 key={c._id}
                 to={`/shop?category=${c._id}`}
                 onClick={() => setOpen(false)}
-                className={`flex items-center justify-between rounded-lg px-4 py-2.5 transition-colors ${
+                className={`flex min-h-11 items-center justify-between rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                   isActive(`/shop?category=${c._id}`)
-                    ? "bg-[#193B63] text-white"
-                    : "text-[#263445] hover:bg-[#FAF9F6]"
+                    ? "bg-primary text-primary-foreground"
+                    : "text-foreground hover:bg-secondary"
                 }`}
               >
                 {c.name}
               </Link>
             ))}
-            <div className="my-2 border-t border-[#E6E8EC]" />
+            <div className="my-2 border-t border-border" />
             <Link
               to="/about"
               onClick={() => setOpen(false)}
-              className={`flex items-center rounded-lg px-4 py-2.5 transition-colors ${
-                isActive("/about") ? "bg-[#193B63] text-white" : "text-[#263445] hover:bg-[#FAF9F6]"
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
+                isActive("/about") ? "bg-primary text-primary-foreground" : "text-foreground hover:bg-secondary"
               }`}
             >
               About RizMart
@@ -213,14 +226,34 @@ export function Navbar() {
             <Link
               to="/contact"
               onClick={() => setOpen(false)}
-              className={`flex items-center rounded-lg px-4 py-2.5 transition-colors ${
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
                 isActive("/contact")
-                  ? "bg-[#193B63] text-white"
-                  : "text-[#263445] hover:bg-[#FAF9F6]"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
               }`}
             >
               Contact Support
             </Link>
+            <Link
+              to="/account"
+              onClick={() => setOpen(false)}
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2.5 transition-colors sm:px-4 ${
+                isActive("/account")
+                  ? "bg-primary text-primary-foreground"
+                  : "text-foreground hover:bg-secondary"
+              }`}
+            >
+              My Account
+            </Link>
+            {mounted && isAdmin && (
+              <Link
+                to="/admin"
+                onClick={() => setOpen(false)}
+                className="flex min-h-11 items-center rounded-lg px-3 py-2.5 text-foreground transition-colors hover:bg-secondary sm:px-4"
+              >
+                Admin Panel
+              </Link>
+            )}
           </nav>
         </div>
       )}

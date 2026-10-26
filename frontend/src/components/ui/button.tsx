@@ -5,21 +5,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#193B63] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium cursor-pointer transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-[#193B63] text-white shadow-sm hover:bg-[#132D4C] active:bg-[#0E223B]",
-        gold: "bg-[#193B63] text-white shadow-sm hover:bg-[#132D4C]",
-        amber: "bg-[#E3A34D] text-white shadow-sm hover:bg-[#CC8E39]",
-        cognac: "bg-[#E3A34D] text-white shadow-sm hover:bg-[#CC8E39]",
-        destructive: "bg-[#D9383A] text-white shadow-sm hover:bg-[#B72729]",
+        default: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90 active:bg-primary/80",
+        gold: "bg-primary text-primary-foreground shadow-sm hover:bg-primary/90",
+        amber: "bg-gold text-accent-foreground shadow-sm hover:bg-gold-dark",
+        cognac: "bg-gold text-accent-foreground shadow-sm hover:bg-gold-dark",
+        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-[#E6E8EC] bg-white text-[#263445] shadow-sm hover:bg-[#FAF9F6] hover:border-[#193B63]/40",
+          "border border-border bg-card text-foreground shadow-sm hover:bg-secondary hover:border-primary/40",
         secondary:
-          "bg-[#FAF9F6] text-[#193B63] border border-[#E6E8EC] shadow-sm hover:bg-[#F2EFE8]",
-        ghost: "hover:bg-[#FAF9F6] hover:text-[#193B63] text-[#627184]",
-        link: "text-[#193B63] underline-offset-4 hover:underline",
+          "bg-secondary text-primary border border-border shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-secondary hover:text-primary text-muted-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
         default: "h-10 px-5 py-2.5",

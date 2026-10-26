@@ -46,16 +46,16 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-[#FAF9F6] min-h-screen py-12 sm:py-20">
+    <div className="bg-secondary min-h-screen py-12 sm:py-20">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="text-center mb-10 sm:mb-14">
-          <div className="text-xs font-bold tracking-widest uppercase text-[#E3A34D] mb-2">
+          <div className="text-xs font-bold tracking-widest uppercase text-gold mb-2">
             Customer Support
           </div>
-          <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-[#193B63]">
+          <h1 className="font-display text-3xl sm:text-5xl font-extrabold text-primary">
             Get in Touch with {appName}
           </h1>
-          <p className="mt-2 text-sm sm:text-base text-[#627184] max-w-lg mx-auto">
+          <p className="mt-2 text-sm sm:text-base text-muted-foreground max-w-lg mx-auto">
             Questions about our school bags, laptop bags, or an existing order? Our team is here to
             assist you.
           </p>
@@ -81,46 +81,46 @@ export default function ContactPage() {
             ].map((c) => (
               <div
                 key={c.t}
-                className="flex items-start gap-4 bg-white border border-[#E6E8EC] p-5 sm:p-6 rounded-xl shadow-xs"
+                className="flex items-start gap-4 bg-card border border-border p-5 sm:p-6 rounded-xl shadow-xs"
               >
-                <div className="h-10 w-10 rounded-lg bg-[#FAF9F6] border border-[#E6E8EC] flex items-center justify-center shrink-0 text-[#193B63]">
-                  <c.i className="h-5 w-5 text-[#E3A34D]" />
+                <div className="h-10 w-10 rounded-lg bg-secondary border border-border flex items-center justify-center shrink-0 text-primary">
+                  <c.i className="h-5 w-5 text-gold" />
                 </div>
                 <div className="min-w-0">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#627184] mb-0.5">
+                  <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-0.5">
                     {c.t}
                   </div>
                   {c.t === "Email Inquiries" ? (
                     <a
                       href={`mailto:${c.v}`}
-                      className="text-sm sm:text-base font-bold text-[#193B63] break-words hover:underline"
+                      className="text-sm sm:text-base font-bold text-primary break-words hover:underline"
                     >
                       {c.v}
                     </a>
                   ) : c.t === "Phone" ? (
                     <a
                       href={`tel:${c.v.replace(/[^+\d]/g, "")}`}
-                      className="text-sm sm:text-base font-bold text-[#193B63] break-words hover:underline"
+                      className="text-sm sm:text-base font-bold text-primary break-words hover:underline"
                     >
                       {c.v}
                     </a>
                   ) : (
-                    <div className="text-sm sm:text-base font-bold text-[#193B63] break-words">
+                    <div className="text-sm sm:text-base font-bold text-primary break-words">
                       {c.v}
                     </div>
                   )}
-                  <div className="text-xs text-[#8C9BAA] mt-0.5">{c.desc}</div>
+                  <div className="text-xs text-muted-foreground mt-0.5">{c.desc}</div>
                 </div>
               </div>
             ))}
           </div>
 
           {/* Form */}
-          <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#E6E8EC] shadow-xs">
-            <h2 className="font-display text-xl font-bold text-[#193B63] mb-4">Send a Message</h2>
+          <div className="bg-card p-6 sm:p-8 rounded-2xl border border-border shadow-xs">
+            <h2 className="font-display text-xl font-bold text-primary mb-4">Send a Message</h2>
             <form onSubmit={onSubmit} className="space-y-4">
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Your Full Name
                 </label>
                 <input
@@ -128,13 +128,13 @@ export default function ContactPage() {
                   value={form.name}
                   onChange={(e) => setField("name", e.target.value)}
                   placeholder="e.g. Asad Khan"
-                  className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+                  className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Email Address
                   </label>
                   <input
@@ -143,11 +143,11 @@ export default function ContactPage() {
                     onChange={(e) => setField("email", e.target.value)}
                     type="email"
                     placeholder="name@example.com"
-                    className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+                    className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
                     Phone Number
                   </label>
                   <input
@@ -155,13 +155,13 @@ export default function ContactPage() {
                     value={form.phone}
                     onChange={(e) => setField("phone", e.target.value)}
                     placeholder="03XX-XXXXXXX"
-                    className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+                    className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Subject
                 </label>
                 <input
@@ -169,12 +169,12 @@ export default function ContactPage() {
                   value={form.subject}
                   onChange={(e) => setField("subject", e.target.value)}
                   placeholder="Order tracking, product question..."
-                  className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg px-3.5 py-2.5 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+                  className="w-full bg-secondary border border-border rounded-lg px-3.5 py-2.5 text-sm text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#627184] mb-1">
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-muted-foreground mb-1">
                   Message
                 </label>
                 <textarea
@@ -183,13 +183,13 @@ export default function ContactPage() {
                   onChange={(e) => setField("message", e.target.value)}
                   placeholder="How can we help you?"
                   rows={4}
-                  className="w-full bg-[#FAF9F6] border border-[#E6E8EC] rounded-lg p-3 text-sm text-[#263445] focus:outline-none focus:border-[#193B63]"
+                  className="w-full bg-secondary border border-border rounded-lg p-3 text-sm text-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
               <button
                 disabled={isLoading}
-                className="w-full bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm flex items-center justify-center gap-2"
+                className="w-full bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground py-3 rounded-lg text-xs font-bold uppercase tracking-wider disabled:opacity-50 transition-colors shadow-sm flex items-center justify-center gap-2"
               >
                 <Send className="h-3.5 w-3.5" />
                 <span>{isLoading ? "Sending…" : "Send Message"}</span>

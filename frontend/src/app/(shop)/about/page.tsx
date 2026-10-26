@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { toMetadata } from "@/lib/seo-metadata";
 
 export const metadata: Metadata = toMetadata({
-  title: "Our Story — Premium Bags Brand from Pakistan",
+  title: "About RizMart — Bags for School, Work & Travel",
   description:
-    "Learn about RizMart and browse our current collection of backpacks, school bags, laptop bags and travel bags.",
+    "Meet RizMart, an online bags store based in Lahore, Pakistan. Explore backpacks, school bags, laptop bags and travel bags for everyday use.",
   path: "/about",
 });
 

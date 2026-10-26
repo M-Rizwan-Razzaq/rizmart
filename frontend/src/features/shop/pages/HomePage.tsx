@@ -123,9 +123,9 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-card">
       {/* HERO SECTION — Clean, bright, trust-building */}
-      <section className="relative bg-[#FAF9F6] border-b border-[#E6E8EC] overflow-hidden">
+      <section className="relative bg-secondary border-b border-border overflow-hidden">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Hero Copy */}
@@ -135,34 +135,34 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
               transition={{ duration: 0.6 }}
               className="lg:col-span-7 space-y-6"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#E6E8EC] text-[#193B63] text-xs font-bold tracking-wider uppercase shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#E3A34D]" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border text-primary text-xs font-bold tracking-wider uppercase shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-gold" />
                 Pakistan's Bag & Backpack Store
               </div>
 
-              <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#193B63] leading-[1.08] tracking-tight">
-                Carry Your World <br className="hidden sm:inline" />
-                in Comfort & Style.
+              <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-primary leading-[1.08] tracking-tight">
+                Everyday Bags for <br className="hidden sm:inline" />
+                School, Work & Travel.
               </h1>
 
-              <p className="text-sm sm:text-base md:text-lg text-[#627184] leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
                 Browse school backpacks, laptop bags, and travel bags for everyday carry. Check each
                 product page for its available details and current stock.
               </p>
 
               {/* Trust bullets */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-[#263445] font-semibold">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1 text-xs text-foreground font-semibold">
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#E3A34D] shrink-0" />
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
                   <span>Product details listed where available</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#E3A34D] shrink-0" />
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
                   <span>Cash on Delivery</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#E3A34D] shrink-0" />
-                  <Link to="/refund" className="hover:text-[#193B63] underline underline-offset-2">
+                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                  <Link to="/refund" className="hover:text-primary underline underline-offset-2">
                     Review our return policy
                   </Link>
                 </div>
@@ -172,14 +172,14 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
               <div className="flex flex-wrap gap-3.5 pt-2">
                 <Link
                   to="/shop"
-                  className="inline-flex items-center justify-center gap-2 bg-[#193B63] hover:bg-[#132D4C] active:bg-[#0E223B] text-white px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md hover:shadow-lg transition-all"
+                  className="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 active:bg-primary/80 text-primary-foreground px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-md hover:shadow-lg transition-all"
                 >
                   <span>Shop Collection</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <Link
                   to="/about"
-                  className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#FAF9F6] text-[#193B63] border border-[#E6E8EC] hover:border-[#193B63]/40 px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-xs transition-all"
+                  className="inline-flex items-center justify-center gap-2 bg-card hover:bg-secondary text-primary border border-border hover:border-primary/40 px-7 py-3.5 text-xs sm:text-sm font-bold uppercase tracking-wider rounded-lg shadow-xs transition-all"
                 >
                   Our Story
                 </Link>
@@ -193,7 +193,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
               transition={{ duration: 0.7 }}
               className="lg:col-span-5 relative"
             >
-              <div className="relative aspect-[4/3] sm:aspect-[5/4] rounded-2xl overflow-hidden border border-[#E6E8EC] bg-white shadow-xl">
+              <div className="relative aspect-[4/3] sm:aspect-[5/4] rounded-2xl overflow-hidden border border-border bg-card shadow-xl">
                 {!brandLoading && (
                   <img
                     src={heroFailed ? heroImg1 : dynamicHero || heroImg1}
@@ -209,9 +209,9 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
                   />
                 )}
                 {/* Visual badge on hero image */}
-                <div className="absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-[#E6E8EC] rounded-xl p-3 shadow-md">
-                  <div className="text-xs font-bold text-[#193B63]">School & Laptop Bags</div>
-                  <div className="text-[11px] text-[#627184]">Cash on delivery available</div>
+                <div className="absolute bottom-4 left-4 bg-card/95 backdrop-blur-md border border-border rounded-xl p-3 shadow-md">
+                  <div className="text-xs font-bold text-primary">School & Laptop Bags</div>
+                  <div className="text-[11px] text-muted-foreground">Cash on delivery available</div>
                 </div>
               </div>
             </motion.div>
@@ -220,9 +220,9 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
       </section>
 
       {/* VALUE PROPOSITION STRIP */}
-      <section className="bg-white border-b border-[#E6E8EC]">
+      <section className="bg-card border-b border-border">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-[#E6E8EC]">
+          <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-border">
             {[
               { icon: Truck, title: "Shipping", subtitle: "Free over PKR 500" },
               {
@@ -238,14 +238,14 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
               { icon: RotateCcw, title: "Returns", subtitle: "Check policy and eligibility" },
             ].map((f, i) => (
               <div key={i} className="flex items-center gap-3.5 py-5 sm:py-6 px-3 sm:px-4">
-                <div className="h-10 w-10 rounded-lg bg-[#FAF9F6] border border-[#E6E8EC] flex items-center justify-center shrink-0 text-[#193B63]">
-                  <f.icon className="h-5 w-5 text-[#193B63]" />
+                <div className="h-10 w-10 rounded-lg bg-secondary border border-border flex items-center justify-center shrink-0 text-primary">
+                  <f.icon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <div className="text-xs sm:text-sm font-bold text-[#193B63] uppercase tracking-wide">
+                  <div className="text-xs sm:text-sm font-bold text-primary uppercase tracking-wide">
                     {f.title}
                   </div>
-                  <div className="text-[11px] sm:text-xs text-[#627184]">{f.subtitle}</div>
+                  <div className="text-[11px] sm:text-xs text-muted-foreground">{f.subtitle}</div>
                 </div>
               </div>
             ))}
@@ -272,7 +272,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
         <div className="mt-10 text-center">
           <Link
             to="/shop"
-            className="inline-flex items-center gap-2 bg-white text-[#193B63] border border-[#193B63] hover:bg-[#FAF9F6] px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
+            className="inline-flex items-center gap-2 bg-card text-primary border border-primary hover:bg-secondary px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
           >
             <span>View All Bags ({featured.length}+ Items)</span>
             <ArrowRight className="h-4 w-4" />
@@ -282,7 +282,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
 
       {/* CATEGORIES SECTION — Clear visual entry points */}
       {categories.length > 0 && (
-        <section className="bg-[#FAF9F6] border-y border-[#E6E8EC] py-12 sm:py-16">
+        <section className="bg-secondary border-y border-border py-12 sm:py-16">
           <div className="mx-auto max-w-7xl px-4 sm:px-6">
             <SectionHeading
               eyebrow="Find Your Style"
@@ -297,7 +297,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
                   <Link
                     key={c._id}
                     to={`/shop?category=${c._id}`}
-                    className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-[#E6E8EC] bg-white shadow-xs hover:shadow-lg transition-all"
+                    className="group relative aspect-[3/4] overflow-hidden rounded-xl border border-border bg-card shadow-xs hover:shadow-lg transition-all"
                   >
                     <img
                       src={imgUrl}
@@ -309,15 +309,14 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
                         if (!image.src.endsWith(fallbackImgUrl)) image.src = fallbackImgUrl;
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#102B4B]/95 via-[#193B63]/30 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-white">
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/30 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 text-primary-foreground">
                       <div
-                        className="font-display max-w-full break-words text-lg leading-tight font-bold drop-shadow-sm sm:text-xl"
-                        style={{ color: "#FFFFFF" }}
+                        className="font-display max-w-full break-words text-lg leading-tight font-bold text-primary-foreground drop-shadow-sm sm:text-xl"
                       >
                         {c.name}
                       </div>
-                      <div className="mt-2 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#F3C582] drop-shadow-sm transition-transform group-hover:translate-x-1">
+                      <div className="mt-2 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-gold-soft drop-shadow-sm transition-transform group-hover:translate-x-1">
                         <span>Explore Collection</span>
                         <ArrowRight className="h-3.5 w-3.5" />
                       </div>
@@ -349,22 +348,22 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
       </section>
 
       {/* BEST SELLERS & NEW ARRIVALS SPLIT */}
-      <section className="bg-[#FAF9F6] border-t border-[#E6E8EC] py-12 sm:py-16">
+      <section className="bg-secondary border-t border-border py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 space-y-12 sm:space-y-16">
           {bestSellers.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <div className="text-xs font-bold text-[#E3A34D] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-gold uppercase tracking-wider">
                     Top Rated
                   </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#193B63]">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-primary">
                     Best Sellers
                   </h3>
                 </div>
                 <Link
                   to="/shop"
-                  className="text-xs font-bold uppercase tracking-wider text-[#193B63] hover:text-[#E3A34D] flex items-center gap-1"
+                  className="text-xs font-bold uppercase tracking-wider text-primary hover:text-gold flex items-center gap-1"
                 >
                   See all <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
@@ -381,16 +380,16 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
             <div>
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <div className="text-xs font-bold text-[#E3A34D] uppercase tracking-wider">
+                  <div className="text-xs font-bold text-gold uppercase tracking-wider">
                     Just Landed
                   </div>
-                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#193B63]">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold text-primary">
                     New Arrivals
                   </h3>
                 </div>
                 <Link
                   to="/shop"
-                  className="text-xs font-bold uppercase tracking-wider text-[#193B63] hover:text-[#E3A34D] flex items-center gap-1"
+                  className="text-xs font-bold uppercase tracking-wider text-primary hover:text-gold flex items-center gap-1"
                 >
                   See all <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
@@ -407,7 +406,7 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
 
       {/* NEWSLETTER SECTION — Clean & non-intrusive */}
       <section className="mx-auto max-w-4xl px-4 sm:px-6 py-12 sm:py-16 text-center">
-        <div className="bg-[#FAF9F6] border border-[#E6E8EC] rounded-2xl p-6 sm:p-10">
+        <div className="bg-secondary border border-border rounded-2xl p-6 sm:p-10">
           <SectionHeading
             eyebrow="RizMart VIP Club"
             title="Get RizMart Updates"
@@ -426,13 +425,13 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="flex-1 bg-white border border-[#E6E8EC] rounded-lg px-4 py-3 focus:outline-none focus:border-[#193B63] text-sm text-[#263445] shadow-xs"
+              className="flex-1 bg-card border border-border rounded-lg px-4 py-3 focus:outline-none focus:border-primary text-sm text-foreground shadow-xs"
               placeholder="Enter your email address"
             />
             <button
               type="submit"
               disabled={subscribing}
-              className="bg-[#193B63] hover:bg-[#132D4C] text-white px-6 py-3 text-xs tracking-wider uppercase font-bold rounded-lg disabled:opacity-50 transition-colors shadow-sm"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 text-xs tracking-wider uppercase font-bold rounded-lg disabled:opacity-50 transition-colors shadow-sm"
             >
               {subscribing ? "Subscribing…" : "Get Discount"}
             </button>
@@ -441,9 +440,9 @@ export default function HomePage({ initialFeatured }: { initialFeatured?: ApiPro
             <p
               className={`mt-3 text-xs ${
                 status.type === "success"
-                  ? "text-[#193B63] font-semibold"
+                  ? "text-primary font-semibold"
                   : status.type === "info"
-                    ? "text-[#627184]"
+                    ? "text-muted-foreground"
                     : "text-red-500 font-semibold"
               }`}
             >

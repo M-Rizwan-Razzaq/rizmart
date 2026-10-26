@@ -67,21 +67,23 @@ export default function DashboardPage() {
           </div>
           <ResponsiveContainer width="100%" height={240}>
             <LineChart data={stats.revenueByMonth}>
-              <CartesianGrid stroke="oklch(0.28 0.008 70 / 40%)" strokeDasharray="3 3" />
-              <XAxis dataKey="month" stroke="oklch(0.68 0.015 80)" fontSize={12} />
-              <YAxis stroke="oklch(0.68 0.015 80)" fontSize={12} />
+              <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
+              <XAxis dataKey="month" stroke="var(--muted-foreground)" fontSize={12} />
+              <YAxis stroke="var(--muted-foreground)" fontSize={12} />
               <Tooltip
                 contentStyle={{
-                  background: "oklch(0.17 0.006 60)",
-                  border: "1px solid oklch(0.28 0.008 70)",
+                  background: "var(--popover)",
+                  color: "var(--popover-foreground)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
                 }}
               />
               <Line
                 type="monotone"
                 dataKey="revenue"
-                stroke="oklch(0.82 0.13 82)"
+                stroke="var(--gold)"
                 strokeWidth={2}
-                dot={{ fill: "oklch(0.82 0.13 82)" }}
+                dot={{ fill: "var(--gold)" }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -95,16 +97,18 @@ export default function DashboardPage() {
                 count,
               }))}
             >
-              <CartesianGrid stroke="oklch(0.28 0.008 70 / 40%)" strokeDasharray="3 3" />
-              <XAxis dataKey="status" stroke="oklch(0.68 0.015 80)" fontSize={10} />
-              <YAxis stroke="oklch(0.68 0.015 80)" fontSize={12} />
+              <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
+              <XAxis dataKey="status" stroke="var(--muted-foreground)" fontSize={10} />
+              <YAxis stroke="var(--muted-foreground)" fontSize={12} />
               <Tooltip
                 contentStyle={{
-                  background: "oklch(0.17 0.006 60)",
-                  border: "1px solid oklch(0.28 0.008 70)",
+                  background: "var(--popover)",
+                  color: "var(--popover-foreground)",
+                  border: "1px solid var(--border)",
+                  borderRadius: "var(--radius)",
                 }}
               />
-              <Bar dataKey="count" fill="oklch(0.82 0.13 82)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" fill="var(--gold)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
