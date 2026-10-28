@@ -53,6 +53,10 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const product = await getProduct(slug);
   if (!product) return notFound();
+  const description = truncateSeoDescription(
+    toPlainSeoText(product.description ?? "") ||
+      `${product.name}. View current price, availability and product details at RizMart.`,
+  );
 
   const price =
     product.discountPrice && product.discountPrice < product.price
