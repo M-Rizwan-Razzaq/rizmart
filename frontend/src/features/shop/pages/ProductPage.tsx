@@ -139,8 +139,8 @@ export default function ProductPage() {
   const whatsappUrl = `https://wa.me/${SOCIAL_LINKS.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
   return (
-    <div className="bg-secondary min-h-screen py-8 sm:py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <div className="bg-secondary min-h-screen py-5 sm:py-12">
+      <div className="mx-auto max-w-7xl min-w-0 px-3 sm:px-6">
         {/* Breadcrumb navigation */}
         <nav className="text-xs text-muted-foreground mb-6 flex items-center gap-1.5 flex-wrap">
           <Link to="/" className="hover:text-primary transition-colors">
@@ -161,11 +161,11 @@ export default function ProductPage() {
         </nav>
 
         {/* Product Main Container */}
-        <div className="bg-card rounded-2xl border border-border p-5 sm:p-8 lg:p-10 shadow-xs mb-12">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="bg-card rounded-2xl border border-border p-3 sm:p-8 lg:p-10 shadow-xs mb-12">
+          <div className="grid min-w-0 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
             {/* Gallery Section */}
-            <div className="space-y-4">
-              <div className="aspect-[4/5] sm:aspect-square bg-secondary rounded-xl border border-border overflow-hidden flex items-center justify-center p-4 relative">
+            <div className="min-w-0 w-full space-y-3 sm:space-y-4">
+              <div className="h-[min(72svh,36rem)] sm:h-auto sm:aspect-square bg-secondary rounded-xl border border-border overflow-hidden flex items-center justify-center p-3 sm:p-4 relative">
                 {currentImage && failedImage !== currentImage ? (
                   <img
                     src={getImageUrl(currentImage)}
@@ -173,7 +173,7 @@ export default function ProductPage() {
                     fetchPriority="high"
                     decoding="async"
                     onError={() => setFailedImage(currentImage)}
-                    className="max-h-full max-w-full object-contain"
+                    className="h-full w-full object-contain"
                   />
                 ) : (
                   <span className="text-sm text-muted-foreground">Product image unavailable</span>
@@ -187,7 +187,7 @@ export default function ProductPage() {
 
               {/* Thumbnails */}
               {productImages.length > 1 && (
-                <div className="flex gap-2.5 overflow-x-auto pb-1">
+                <div className="flex min-w-0 gap-2.5 overflow-x-auto overscroll-x-contain pb-1">
                   {productImages.map((img, i) => (
                     <button
                       key={i}
@@ -213,7 +213,7 @@ export default function ProductPage() {
             </div>
 
             {/* Details Section */}
-            <div className="flex flex-col justify-between space-y-6">
+            <div className="min-w-0 flex flex-col justify-between space-y-6">
               <div>
                 <div className="flex items-center gap-2 text-xs font-bold text-gold tracking-wider uppercase mb-2">
                   <span>{categoryName}</span>
