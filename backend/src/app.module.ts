@@ -20,6 +20,7 @@ import { BrandSettingsModule } from "./modules/brand-settings/brand-settings.mod
 import { SiteContentModule } from "./modules/site-content/site-content.module";
 import { SitemapModule } from "./modules/sitemap/sitemap.module";
 import { HealthModule } from "./modules/health/health.module";
+import { ChatbotModule } from "./modules/chatbot/chatbot.module";
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { HealthModule } from "./modules/health/health.module";
     MarketingModule,
     SitemapModule,
     HealthModule,
+    ChatbotModule,
   ],
 })
 export class AppModule {}

@@ -15,6 +15,10 @@ export default () => ({
   uploadDir: process.env.UPLOAD_DIR || "uploads",
   appUrl: process.env.APP_URL || "http://localhost:3001",
   siteUrl: process.env.SITE_URL || "http://localhost:3001",
+  openai: {
+    apiKey: process.env.OPENAI_API_KEY || "",
+    model: process.env.OPENAI_MODEL || "gpt-6-luna",
+  },
   corsOrigins: (process.env.CORS_ORIGINS || "")
     .split(",")
     .map((origin) => origin.trim())

@@ -74,6 +74,7 @@ async function bootstrap() {
     .addTag("Brand Settings", "Brand identity settings")
     .addTag("Site Content", "Public content pages")
     .addTag("Contact", "Contact form submissions")
+    .addTag("Storefront Chatbot", "AI-powered customer questions")
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
