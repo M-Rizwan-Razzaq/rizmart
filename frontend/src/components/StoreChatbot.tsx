@@ -42,7 +42,15 @@ export function StoreChatbot() {
     try {
       const { data } = await api.post<{ reply: string }>("/chatbot/ask", {
         question: text,
-        history: history.map(({ role, content }) => ({ role, content })),
+        history: history.map(({ role, content }) => ({
+          role,
+          content:
+            content.length <= 500
+              ? content
+              : role === "assistant"
+                ? `…${content.slice(-499)}`
+                : content.slice(0, 500),
+        })),
       });
       setMessages((current) => [...current, { role: "assistant", content: data.reply }]);
     } catch (error) {
